@@ -10,6 +10,7 @@ public class MusicVO {
 	private String albumname;
 	private int like;
 	private String lyrics;
+	//ll
 	public int getNo() {
 		return no;
 	}
