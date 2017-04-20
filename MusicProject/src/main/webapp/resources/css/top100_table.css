@@ -1,0 +1,26 @@
+table {
+/* 	border-top-color: #777;
+	border-top-style: solid;
+	border-top-width: 2px;
+	border-bottom-color: #777;
+	border-bottom-style: solid;
+	border-bottom-width: 2px; */
+}
+tr {
+	border-bottom-color: #777;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+th {
+	text-align: center;
+	height: 25px;
+	color :#fff;
+	background-color: #777
+}
+td {
+	text-align: center;	
+}
+.song{
+	text-align: left;
+	padding-left: 10px
+}
