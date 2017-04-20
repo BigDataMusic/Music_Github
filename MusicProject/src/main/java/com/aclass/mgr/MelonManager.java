@@ -15,14 +15,25 @@ public class MelonManager {
 		try {
 			Document doc=Jsoup.connect("http://www.melon.com/chart/index.htm").get();
 			
-			//Elements d1Elem=doc.select("div.wrap_song_info");
-			Elements d1Elem=doc.select("div.wrap_song_info strong a");
-			Elements d2Elem=doc.select("div.wrap_song_info div div.rank02");
-			Elements d3Elem=doc.select("div.wrap_song_info div div.rank03");
-			//Elements d2Elem=doc.select("div.rank02 span:eq(0)");
+			//Elements titleElem=doc.select("div.wrap_song_info");
+			Elements titleElem=doc.select("div.wrap_song_info strong a");
+			Elements artElem=doc.select("div.wrap_song_info div div.rank02");
+			Elements alElem=doc.select("div.wrap_song_info div div.rank03");
+			Elements pElem=doc.select("a.image_type15 img");
+			//Elements artElem=doc.select("div.rank02 span:eq(0)");
 			int i=0;
-			for(int j=6;j<d1Elem.size();j++){
-				System.out.println(j-5+"위 "+d1Elem.get(j).text()+"-"+d2Elem.get(j-6).text().substring(0,d2Elem.get(j-6).text().length()/2)+"-"+d3Elem.get(j-6).text());
+			for(int j=6;j<titleElem.size();j++){
+				//System.out.println(j-5+"위 "+titleElem.get(j).text()+"-"+artElem.get(j-6).text().substring(0,artElem.get(j-6).text().length()/2)+"-"+alElem.get(j-6).text());
+				//System.out.println(pElem.get(j-6).attr("src"));
+				
+				MusicVO vo = new MusicVO();
+				vo.setRank(j-5);
+				vo.setPoster(pElem.get(j-6).attr("src"));
+				vo.setTitle(titleElem.get(j).text());
+				vo.setArtist(artElem.get(j-6).text());
+				vo.setAlbumname(alElem.get(j-6).text());
+				
+				list.add(vo);
 			}
 			
 		} catch (Exception e) {
@@ -30,4 +41,5 @@ public class MelonManager {
 		}
 		return list;
 	}
+	
 }

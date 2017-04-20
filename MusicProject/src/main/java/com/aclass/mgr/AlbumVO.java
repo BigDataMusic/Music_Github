@@ -95,8 +95,4 @@ public class AlbumVO {
 		this.mList = mList;
 	}
 	
-	
-	
-	
-	
 }
