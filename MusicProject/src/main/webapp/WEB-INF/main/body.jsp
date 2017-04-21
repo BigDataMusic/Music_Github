@@ -63,7 +63,7 @@
 				</div>
 				<div class="news">
 					<span>Artist</span><br />
-					<img src="resources/images/pic5.jpg" alt="" width="183" height="97" />
+					<img src="resources/images/photo.jpg" alt="" width="183" height="97" />
 					<p>Proin nunc. Donec massa. Nulla pulvinar, nisl ac convallis
 						nonummy, tellus eros sodales enim, in tincidunt mauris in odio.
 						massa ac laoreet iaculipede nisl ullamcorpermassa,consectetuer</p>
