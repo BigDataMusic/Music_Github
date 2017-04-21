@@ -3,6 +3,7 @@ import java.util.*;
 public class AlbumVO {
 	private int alNo;
 	private int alRank;
+	private String alType;
 	private String alTitle;
 	private String alPoster;
 	private String alArtist;
@@ -16,6 +17,13 @@ public class AlbumVO {
 	List<MusicVO> mList= new ArrayList<MusicVO>();
 	
 	
+	
+	public String getAlType() {
+		return alType;
+	}
+	public void setAlType(String alType) {
+		this.alType = alType;
+	}
 	public int getAlRank() {
 		return alRank;
 	}
