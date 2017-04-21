@@ -45,7 +45,7 @@ public class BugsManager {
 				vo.setIncrement(in.text());
 				// list.add(vo);
 				
-				System.out.println(vo.getRank()+"위 "+vo.getTitle()+" - "+vo.getArtist());//+" - "+vo.getAlbumname()+" - "
+				System.out.println(vo.getRank()+"위 "+vo.getTitle()+" - "+vo.getArtist());
 				System.out.println("   "+vo.getPoster());
 				System.out.println("   "+vo.getIncrement());
 				System.out.println("   "+vo.getAlbumname());

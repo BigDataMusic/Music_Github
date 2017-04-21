@@ -14,9 +14,9 @@ public class AlbumVO {
 	private double alPoint;
 	private int alLike;
 	private String alInfo;
+	private String alIncrement;
+	
 	List<MusicVO> mList= new ArrayList<MusicVO>();
-	
-	
 	
 	public String getAlType() {
 		return alType;
@@ -101,6 +101,12 @@ public class AlbumVO {
 	}
 	public void setmList(List<MusicVO> mList) {
 		this.mList = mList;
+	}
+	public String getAlIncrement() {
+		return alIncrement;
+	}
+	public void setAlIncrement(String alIncrement) {
+		this.alIncrement = alIncrement;
 	}
 	
 }
