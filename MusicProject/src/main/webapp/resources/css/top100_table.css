@@ -1,26 +1,47 @@
-table {
+#table1 {
 /* 	border-top-color: #777;
 	border-top-style: solid;
-	border-top-width: 2px;
+	border-top-width: 2px;*/
 	border-bottom-color: #777;
 	border-bottom-style: solid;
-	border-bottom-width: 2px; */
+	border-bottom-width: 2px;
 }
-tr {
+#table1 tr {
 	border-bottom-color: #777;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 }
-th {
+#table1 th {
 	text-align: center;
 	height: 25px;
 	color :#fff;
 	background-color: #777
 }
-td {
-	text-align: center;	
+#table1 td {
+	height: 70px;
+	text-align: center;
+	border-top-color: #777;
+	border-top-style: dashed; 
+	border-top-width: 1px;	
 }
-.song{
+#table1 .song{
 	text-align: left;
 	padding-left: 10px
+}
+
+#chart_rank{
+	text-align: center;
+	vertical-align: middle;
+	height: 25px 
+}
+
+#chart_rank a{
+	color: #777;
+	text-decoration: none;
+}
+
+#chart_rank a:HOVER{
+	color: #E25822;
+	font-weight: bold;
+	text-decoration: underline;
 }

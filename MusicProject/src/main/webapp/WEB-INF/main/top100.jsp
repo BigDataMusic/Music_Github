@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="content_top100">
-	<table width="735">
+	<table id="table1" width="735">
 		<tr>
 			<th width="5%">순위</th>
 			<th width="10%">앨범자켓</th>
@@ -20,7 +20,7 @@
 			<th width="10%">장르</th>
 			<th width="15%">발매사</th>
 		</tr>	
-		<c:forEach var="i" begin="1" end="15">
+		<c:forEach var="i" begin="1" end="10">
 		<tr>
 			<td>100</td>
 			<td><a href="content.do"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg" class="jacket_thumb100" /></a></td>
@@ -31,6 +31,24 @@
 			<td>발매사발매사발매</td>
 		</tr>
 		</c:forEach>
+	</table>
+</div>
+<div id="content_top100" style="margin-top: 20px;margin-left: 198px;">
+	<table width="735">
+		<tr>
+			<td id="chart_rank">
+				<a href="#">[ 1~10 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 11~20 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 21~30 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 31~40 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 41~50 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 51~60 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 61~70 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 71~80 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 81~90 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="#">[ 91~100 ]</a>
+			</td>
+		</tr>
 	</table>
 </div>
 </body>
