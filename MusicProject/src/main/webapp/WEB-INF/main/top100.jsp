@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<center><h1 style="margin-bottom: 10px">[음악인] TOP 100</h1></center>
+<!-- <p id="title_ex" style="margin: 0px;padding: 10px 0;">[음악인] TOP 100</p> -->
 <div id="content_top100">
 	<table id="table1" width="735">
 		<tr>
@@ -33,7 +35,7 @@
 		</c:forEach>
 	</table>
 </div>
-<div id="content_top100" style="margin-top: 20px;margin-left: 198px;">
+<div id="content_top100" style="margin-top: 10px;margin-left: 198px;">
 	<table width="735">
 		<tr>
 			<td id="chart_rank">
