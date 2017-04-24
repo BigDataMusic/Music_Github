@@ -9,13 +9,12 @@
 <body>
 	<div id="footer">																																																																																																																																																												<div class="inner_copy"><a href="https://www.engadget.com/2015/12/04/top-10-website-builders-for-small-business/">best website builders for small business</a></div>																																																																																																																																																																																																							
 		<ul>
-			<li><a href="index.html">Home</a>|</li>
-			<li><a href="index2.html">음악인 Top100</a>|</li>
-			<li><a href="index2.html">New Tracks</a>|</li>
-			<li><a href="index2.html">음악추천</a>|</li>
-			<li><a href="index2.html">상세페이지 - 추후 이동</a></li>
+			<li><a href="main.do">Home</a>|</li>
+			<li><a href="top100.do">음악인 Top100</a>|</li>
+			<li><a href="#">New Tracks</a>|</li>
+			<li><a href="#">음악추천</a></li>
 		</ul>
-		<p>Copyright &copy;. All rights reserved. Design by <a href="http://www.bestfreetemplaes.info" target="_blank" title="Best Free Templates">BFT</a>  </p>
+		<p>Copyright &copy;. All rights reserved. Design by SIST Class A BDMT(BigData Music Team) </p>
 	</div>
 </body>
 </html>
