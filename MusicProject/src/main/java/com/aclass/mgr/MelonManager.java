@@ -8,9 +8,9 @@ import org.jsoup.select.Elements;
 public class MelonManager {
 	public static void main(String[] args){
 		MelonManager m = new MelonManager();
-		//m.getMelonTop100();
+		m.getMelonTop100();
 		//m.getAlbumData(m.getMaxIndex());
-		m.getAlbumData();
+		//m.print_list(m.getAlbumData());
 	}
 	public List<MusicVO> getMelonTop100(){
 		List<MusicVO> list= new ArrayList<MusicVO>();
@@ -21,13 +21,27 @@ public class MelonManager {
 			Elements artElem=doc.select("div.wrap_song_info div div.rank02");
 			Elements alElem=doc.select("div.wrap_song_info div div.rank03");
 			Elements pElem=doc.select("a.image_type15 img");
+			Elements increElem=doc.select("span.wrap_rank");
 			int i=0;
 			for(int j=6;j<titleElem.size();j++){
-				System.out.println(j-5+"위 "+titleElem.get(j).text()+"-"+artElem.get(j-6).text().substring(0,artElem.get(j-6).text().length()/2)+"-"+alElem.get(j-6).text());
+				System.out.println("====================================================================");
+				//System.out.println(increElem.get(j-6).text());
+				String temp=increElem.get(j-6).text();
+				String up_down="";
+				if(temp.substring(3, 5).contains("상승")){
+					up_down="+";
+				}
+				else if(temp.substring(3, 5).contains("하락")){
+					up_down="-";
+				}
+				String increment=up_down+temp.substring(temp.length()-1);
+				System.out.println(increment);
+				System.out.println(j-5+"위 "+titleElem.get(j).text()+" - "+artElem.get(j-6).text().substring(0,artElem.get(j-6).text().length()/2)+"-"+alElem.get(j-6).text());
 				System.out.println(pElem.get(j-6).attr("src"));
 				
 				MusicVO vo = new MusicVO();
 				vo.setRank(j-5);
+				vo.setIncrement(increment);
 				vo.setPoster(pElem.get(j-6).attr("src"));
 				vo.setTitle(titleElem.get(j).text());
 				vo.setArtist(artElem.get(j-6).text());
@@ -63,6 +77,9 @@ public class MelonManager {
 	public List<AlbumVO> getAlbumData(){
 		List<AlbumVO> list = new ArrayList<AlbumVO>();
 		int alIndex=10052334;
+		for(int z=0;z<10;z++){
+			
+		
 		try {
 			//while(true){
 				Document doc = Jsoup.connect("http://www.melon.com/album/detail.htm?albumId=" + alIndex).get();
@@ -86,22 +103,36 @@ public class MelonManager {
 						System.out.println(musicElement.get(k).text());
 					}*/
 					Elements musicElement = doc.select("td.t_left");
-					String mt="";
-					String tt="";
+					
+					AlbumVO vo = new AlbumVO();
+					List<MusicVO> mList= new ArrayList<MusicVO>();
 					for(int k=0;k<musicElement.size();k+=3){
+						String mt=""; //곡제목
+						String tt=""; //title곡 판단변수
+						MusicVO mvo = new MusicVO();
 						//System.out.println(k+"-"+musicElement.get(k).text());
 						String temp2=musicElement.get(k).text();
 						//System.out.println(temp2.substring(6, temp2.indexOf(" 상세정보 페이지 이동")));
 						mt=temp2.substring(6, temp2.indexOf(" 상세정보 페이지 이동"));
-						System.out.println("mt="+mt);
+						
+						//앨범 속 곡제목
+						//System.out.println("m"+mt);
+						mvo.setTitle(mt);
 						String temp3=temp2.substring(temp2.indexOf("페이지 이동")+7);
-						System.out.println("t3="+temp3+"\n");
+						//System.out.println(temp3);
 						if(temp3.length()>mt.length()){
-							System.out.println("a");
 							//int len=temp3.length()-temp2.length();
 							tt=temp3.substring(0,temp3.indexOf(" "));
-							System.out.println("------"+tt+"---------");
+							//System.out.print(tt);
+							//System.out.println("------"+tt+"---------\n");
 						}
+						//타이틀곡 판단
+						if(tt.equalsIgnoreCase("title")){
+							mvo.setTit_music(true);
+						}
+						else mvo.setTit_music(false);
+						mList.add(mvo);
+						vo.setmList(mList);
 					}
 	
 					/*// 앨범종류
@@ -121,7 +152,6 @@ public class MelonManager {
 					
 					
 					
-					AlbumVO vo = new AlbumVO();
 					vo.setAlNo(alIndex);
 					vo.setAlArtist(temp.get(0).text());
 					vo.setAlRegdate(temp.get(1).text());
@@ -134,7 +164,8 @@ public class MelonManager {
 					vo.setAlPoint(Double.parseDouble(pointElement.text()));
 					vo.setAlLike(Integer.parseInt(likeElement.text()));
 					vo.setAlInfo(alInfo);
-					MusicVO mvo = new MusicVO();
+					
+					list.add(vo);
 					alIndex++;
 				}
 				else alIndex++;
@@ -143,9 +174,38 @@ public class MelonManager {
 			// TODO: handle exception
 			System.out.println("getAlbumData "+e.getMessage());
 		}
+		}
 		
 		
 		return list;
+	}
+	
+	public void print_list(List<AlbumVO> list){
+		
+		for(int i=0;i<list.size();i++){
+			System.out.println("==========================");
+			System.out.println("앨범번호:"+list.get(i).getAlNo());
+			System.out.println("앨범타입:"+list.get(i).getAlType());
+			System.out.println("앨범제목:"+list.get(i).getAlTitle());
+			System.out.println("앨범포스터:"+list.get(i).getAlPoster());
+			System.out.println("아티스트:"+list.get(i).getAlArtist());
+			System.out.println("발매일:"+list.get(i).getAlRegdate());
+			System.out.println("발매사:"+list.get(i).getSaleCo());
+			System.out.println("기획사:"+list.get(i).getEntertainment());
+			System.out.println("장르:"+list.get(i).getAlGenre());
+			System.out.println("평점:"+list.get(i).getAlPoint());
+			System.out.println("좋아요:"+list.get(i).getAlLike());
+			for(int k=0;k<list.get(i).getmList().size();k++){
+				if(list.get(i).getmList().get(k).getTit_music()==true){
+					System.out.print("Title - ");
+				}
+				System.out.println(list.get(i).getmList().get(k).getTitle());
+				
+			}
+			System.out.println("앨범정보:"+list.get(i).getAlInfo());
+		}
+		
+		
 	}
 	
 }

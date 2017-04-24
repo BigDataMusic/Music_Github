@@ -10,7 +10,15 @@ public class MusicVO {
 	private String albumname;
 	private int like;
 	private String lyrics;
+	private boolean tit_music;
 	
+	
+	public boolean getTit_music() {
+		return tit_music;
+	}
+	public void setTit_music(boolean tit_music) {
+		this.tit_music = tit_music;
+	}
 	public int getNo() {
 		return no;
 	}
