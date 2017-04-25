@@ -26,7 +26,7 @@
 			<li><a href="main.do">Home</a></li>
 			<li><a href="top100.do">음악인 Top100</a></li>
 			<li><a href="#">New Tracks</a></li>
-			<li><a href="#">음악추천</a></li>
+			<li><a href="recommand.do">음악추천</a></li>
 		</ul>
 	</div>
 </body>

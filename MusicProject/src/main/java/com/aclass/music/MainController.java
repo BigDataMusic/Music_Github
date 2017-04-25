@@ -20,4 +20,9 @@ public class MainController {
 	{
 		return "top100";
 	}
+	@RequestMapping("recommand.do")
+	public String main_recommand()
+	{
+		return "recommand";
+	}
 }

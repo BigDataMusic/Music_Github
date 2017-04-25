@@ -49,23 +49,14 @@
 			<img src="http://sstatic.naver.net/people/portrait/201704/20170417141627678.jpg" alt="" width="200" height="270"/>			
 			<p class="info">
 			아이유 (이지은)<br>
-			25세 (만 23세) 황소자리 닭띠<br> 
-			출생 : 1993년 5월 16일 <br>
 			소속사 : <br> 
 			로엔엔터테인먼트, 페이브엔터테인먼트<br> 
-			신체 : 161.8cm, 44kg, A형 <br>
 			데뷔 : 2008년 미니 앨범 [Lost and Found]</p>
 			<a href="#" class="button">more info</a>
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
 			<img src="resources/images/chart.jpg" alt="" width="200" height="200" />
-			<p id="title_ex" style="margin: 0px; padding: 10px 0;">같이 듣기 좋은 음악</p>
-			<ul id="navigation2">
-				<li><a href="#">Illum secundum</a></li>
-				<li><a href="#">Illum secundum</a></li>
-				<li><a href="#">Illum secundum</a></li>
-				<li><a href="#">Illum secundum</a></li>
-				<li><a href="#">Illum secundum</a></li>
-			</ul>
+			<div style="height: 10px"></div>
+			<img src="resources/images/chart.jpg" alt="" width="200" height="200" />
 		</div>
 	</div>
 </body>
