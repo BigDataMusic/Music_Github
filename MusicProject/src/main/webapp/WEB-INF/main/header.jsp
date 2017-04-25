@@ -25,8 +25,15 @@
 		<ul id="menu">
 			<li><a href="main.do">Home</a></li>
 			<li><a href="top100.do">음악인 Top100</a></li>
-			<li><a href="#">New Tracks</a></li>
+			<li><a href="newtracks.do">New Tracks</a></li>
 			<li><a href="recommand.do">음악추천</a></li>
+			<li><a href="issue.do">이슈&피플</a></li>
+			<li><a href="board.do">게시판</a></li>
+			<li><a href="issue.do" style="color: #f6d155">라이브챗</a></li>
+		</ul>
+		<ul id="menu1">
+			<input type="text" id="searchbox" align="middle"/>
+			<input type="submit" id="searchicon" value="검색" onclick="main.do" align="middle"/>
 		</ul>
 	</div>
 </body>

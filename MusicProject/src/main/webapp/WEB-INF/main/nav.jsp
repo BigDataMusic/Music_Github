@@ -35,7 +35,7 @@
 		<br />
 		<p id="title_ex">오늘의 추천음악</p>
 		<br />
-		<p class="color" align="right" style="padding-right: 25px;'">오늘의 날씨 : ㅋㅋㅋ</p>
+		<p class="color" align="right" style="padding-right: 40px;'">오늘의 날씨 : ㅋㅋㅋ</p>
 		<br />
 		<ul id="nav">		
 			<li><a href="#">Illum secundum</a></li>

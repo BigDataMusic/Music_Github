@@ -12,7 +12,10 @@
 			<li><a href="main.do">Home</a>|</li>
 			<li><a href="top100.do">음악인 Top100</a>|</li>
 			<li><a href="#">New Tracks</a>|</li>
-			<li><a href="#">음악추천</a></li>
+			<li><a href="recommand.do">음악추천</a>|</li>
+			<li><a href="#">이슈&피플</a>|</li>
+			<li><a href="board.do">게시판</a>|</li>
+			<li><a href="#">라이브챗</a></li>
 		</ul>
 		<p>Copyright &copy;. All rights reserved. Design by SIST Class A BDMT(BigData Music Team) </p>
 	</div>

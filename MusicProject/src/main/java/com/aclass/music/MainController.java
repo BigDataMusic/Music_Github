@@ -25,4 +25,9 @@ public class MainController {
 	{
 		return "recommand";
 	}
+	@RequestMapping("board.do")
+	public String main_board()
+	{
+		return "board";
+	}
 }

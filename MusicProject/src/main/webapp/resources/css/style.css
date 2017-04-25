@@ -21,6 +21,7 @@ padding:14px 0 0 0;
 font-family:Arial, Helvetica, sans-serif;
 font-size:12px;
 color:#D8DCE0;
+vertical-align: middle;
 }
 .input{
 width:112px;
@@ -60,9 +61,15 @@ text-decoration:underline
 padding:0 0 0 409px;
 }
 #menu{
-padding:0px 0 20px 245px;
+padding:0px 0 20px 30px;
 float:left;
 list-style-type:none;
+}
+#menu1{
+padding:0px 40px 20px 50px;
+float:right;
+list-style-type:none;
+vertical-align: middle;
 }
 #menu li{
 display:inline;
@@ -91,8 +98,6 @@ font-size:11px;
 width:198px;
 float:left;
 }
-
-
 
 .slogan{
 color:#FFFFFF;
@@ -470,6 +475,29 @@ margin:40px 0 0 0;
 display:block;
 float:left;
 }
+/*-----------------------------------------------------------------------------------------------------------*/
+
+#searchbox {
+	border-top-left-radius : 20px;
+	border-bottom-left-radius : 20px;
+	vertical-align: middle;
+	width: 150px;
+	height: 18px;
+	float: left;
+	margin-right: 5px;
+	padding-left: 10px;
+}
+#searchicon {
+	border-top-right-radius : 20px;
+	border-bottom-right-radius : 20px;
+	vertical-align: middle;
+	width: 40px;
+	height: 22px;
+	float: right;
+	font-size: 10pt;
+	padding-right: 5px;
+	margin-top: 1px;
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 
@@ -502,6 +530,7 @@ float:left;
 
 /* 서브메뉴 스타일 */
 #accordian ul ul li a {
+	background-color:#555;
 	color: white;
 	text-decoration: none;
 	font-size: 11px;
