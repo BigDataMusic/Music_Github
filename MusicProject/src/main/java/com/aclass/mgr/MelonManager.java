@@ -11,7 +11,8 @@ public class MelonManager {
 		//m.getMelonTop100();
 		//m.getAlbumData(10057734);
 		//m.print_list(m.getAlbumData(m.getMaxIndex()));
-		m.getAlbumData(m.getMaxIndex());
+		//m.getAlbumData(m.getMaxIndex());
+		m.getArtistData();
 	}
 	public List<MusicVO> getMelonTop100(){
 		List<MusicVO> list= new ArrayList<MusicVO>();
@@ -200,6 +201,17 @@ public class MelonManager {
 		
 		
 		return list;
+	}
+	public void getArtistData(){
+		try {
+			Document doc = Jsoup.connect("http://www.melon.com/artist/detail.htm?artistId=4263").get();	
+			Element test = doc.select("div.section_atistinfo04").first();
+			System.out.println(test);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
 	}
 	
 	public void print_list(List<AlbumVO> list){
