@@ -36,15 +36,29 @@ public class NaverManager {
                Element art = artElem.get(i);
                //Element al = alElem.get(i);
                Element in = iElem.get(i);
-   
+               String incre=in.text().trim();
+               
                MusicVO vo = new MusicVO();
+               
+               if(incre.contains("변동없음")){
+					incre=incre.replace("변동없음", "");
+					vo.setIncrement(incre);
+				}else if(incre.contains("상승")){
+					incre=incre.replace("상승", "").trim();
+					incre="+"+incre;
+					vo.setIncrement(incre);
+				}else if(incre.contains("하락")){
+					incre=incre.replace("하락", "").trim();
+					incre="-"+incre;
+					vo.setIncrement(incre);
+				}
+               
                vo.setRank(rank);
                vo.setTitle(t.text().trim());
                vo.setPoster(poster.trim());
                vo.setArtist(art.text().trim());
                //vo.setAlbumname(al.text().trim());
-               vo.setIncrement(in.text());
-               // list.add(vo);
+               vo.setIncrement(incre);
                
                System.out.println(vo.getRank()+"위 "+vo.getTitle()+" - "+vo.getArtist());
                System.out.println("   "+vo.getPoster());

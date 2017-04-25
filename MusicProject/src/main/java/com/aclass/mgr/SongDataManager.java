@@ -7,13 +7,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class SongManager {
+public class SongDataManager {
 
 	List<AlbumVO> alist = new ArrayList<AlbumVO>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SongManager sm = new SongManager();
+		SongDataManager sm = new SongDataManager();
 		sm.songYearData();
 	}
 
