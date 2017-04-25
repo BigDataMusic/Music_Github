@@ -8,9 +8,9 @@ import org.jsoup.select.Elements;
 public class MelonManager {
 	public static void main(String[] args){
 		MelonManager m = new MelonManager();
-		m.getMelonTop100();
+		//m.getMelonTop100();
 		//m.getAlbumData(m.getMaxIndex());
-		//m.print_list(m.getAlbumData());
+		m.print_list(m.getAlbumData(m.getMaxIndex()));
 	}
 	public List<MusicVO> getMelonTop100(){
 		List<MusicVO> list= new ArrayList<MusicVO>();
@@ -68,16 +68,16 @@ public class MelonManager {
 			}
 			//System.out.println("최대:"+max);
 		} catch (Exception e) {
-			System.out.println("getMaxIndex"+e.getMessage());
+			System.out.println("getMaxIndex "+e.getMessage());
 		}
 		return max;
 	}
 
 	//public List<AlbumVO> getAlbumData(int max){
-	public List<AlbumVO> getAlbumData(){
+	public List<AlbumVO> getAlbumData(int max){
 		List<AlbumVO> list = new ArrayList<AlbumVO>();
 		int alIndex=10052334;
-		for(int z=0;z<10;z++){
+		for(int z=0;z<max;z++){
 			
 		
 		try {
@@ -103,8 +103,22 @@ public class MelonManager {
 						System.out.println(musicElement.get(k).text());
 					}*/
 					Elements musicElement = doc.select("td.t_left");
+
+					// 앨범종류
+					System.out.println(aTypeElement.text());
+					// 앨범명
+					System.out.println(aTitleElement.text().substring(aTypeElement.text().length() + 5).trim());
+					// 포스터
+					System.out.println(posterElement.attr("src"));
+					// 발매일,발매사,기획사
+					System.out.println(temp.get(0).text());// 0~4
+					// 평점
+					System.out.println(pointElement.text());
+					// 좋아요
+					System.out.println(likeElement.text());
 					
 					AlbumVO vo = new AlbumVO();
+					//곡정보
 					List<MusicVO> mList= new ArrayList<MusicVO>();
 					for(int k=0;k<musicElement.size();k+=3){
 						String mt=""; //곡제목
@@ -116,7 +130,7 @@ public class MelonManager {
 						mt=temp2.substring(6, temp2.indexOf(" 상세정보 페이지 이동"));
 						
 						//앨범 속 곡제목
-						//System.out.println("m"+mt);
+						System.out.println(mt);
 						mvo.setTitle(mt);
 						String temp3=temp2.substring(temp2.indexOf("페이지 이동")+7);
 						//System.out.println(temp3);
@@ -135,22 +149,9 @@ public class MelonManager {
 						vo.setmList(mList);
 					}
 	
-					/*// 앨범종류
-					System.out.println(aTypeElement.text());
-					// 앨범명
-					System.out.println(aTitleElement.text().substring(aTypeElement.text().length() + 5).trim());
-					// 포스터
-					System.out.println(posterElement.attr("src"));
-					// 발매일,발매사,기획사
-					System.out.println(temp.get(0).text());// 0~4
-					// 평점
-					System.out.println(pointElement.text());
-					// 좋아요
-					System.out.println(likeElement.text());
+
 					// 상세정보
-					System.out.println(alInfo);*/
-					
-					
+					System.out.println(alInfo);
 					
 					vo.setAlNo(alIndex);
 					vo.setAlArtist(temp.get(0).text());
