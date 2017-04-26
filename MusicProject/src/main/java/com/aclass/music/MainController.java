@@ -45,4 +45,14 @@ public class MainController {
 	{
 		return "recommand";
 	}
+	@RequestMapping("newtracks.do")
+	public String main_newtracks()
+	{
+		return "newtracks";
+	}
+	@RequestMapping("issue.do")
+	public String main_issue()
+	{
+		return "issue";
+	}
 }

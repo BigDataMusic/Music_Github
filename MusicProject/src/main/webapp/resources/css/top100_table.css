@@ -5,24 +5,31 @@
 	border-bottom-color: #777;
 	border-bottom-style: solid;
 	border-bottom-width: 2px;
+	border-right-width:0px;
+	border-left-width:0px;
 }
 #table1 tr {
 	border-bottom-color: #777;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
+	border-right-width:0px;
+	border-left-width:0px;
 }
 #table1 th {
 	text-align: center;
 	height: 25px;
 	color :#fff;
 	background-color: #777
+	
 }
 #table1 td {
 	height: 70px;
 	text-align: center;
 	border-top-color: #777;
 	border-top-style: dashed; 
-	border-top-width: 1px;	
+	border-top-width: 1px;
+	border-right-width:0px;
+	border-left-width:0px;	
 }
 
 #table1 .song{
@@ -36,6 +43,8 @@
 	border-bottom-color: #777;
 	border-bottom-style: solid;
 	border-bottom-width: 2px;
+	border-right-width:0px;
+	border-left-width:0px;
 }
 
 #table2 th {
@@ -54,6 +63,8 @@
 	border-top-color: #777;
 	border-top-style: dashed; 
 	border-top-width: 1px;	
+	border-right-width:0px;
+	border-left-width:0px;
 }
 #table2 tr {
 	border-bottom-color: #777;
@@ -80,4 +91,22 @@
 	color: #E25822;
 	font-weight: bold;
 	text-decoration: underline;
+}
+
+.dataTr {
+	
+}
+
+.dataTr:HOVER {
+	background-color: #ccccff
+}
+
+.issueArtist {
+	background-color: #eee;
+	width:365px ;
+	height: 100px;
+	display: inline-block;
+	float: left;
+	margin:0px 5px 5px 0;
+	vertical-align: middle;
 }

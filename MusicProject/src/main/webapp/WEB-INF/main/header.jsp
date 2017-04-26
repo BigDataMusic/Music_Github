@@ -29,7 +29,7 @@
 			<li><a href="recommand.do">음악추천</a></li>
 			<li><a href="issue.do">이슈&피플</a></li>
 			<li><a href="board.do">게시판</a></li>
-			<li><a href="issue.do" style="color: #f6d155">라이브챗</a></li>
+			<li><a href="#" style="color: #f6d155">라이브챗</a></li>
 		</ul>
 		<ul id="menu1">
 			<input type="text" id="searchbox" align="middle"/>
