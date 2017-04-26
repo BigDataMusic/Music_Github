@@ -23,8 +23,8 @@
 			<th width="15%">발매사</th>
 		</tr>	
 		<c:forEach var="i" begin="1" end="10">
-		<tr>
-			<td>100</td>
+		<tr class="dataTr">
+			<td>${i }</td>
 			<td><a href="content.do"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg" class="jacket_thumb100" /></a></td>
 			<td class="song">곡명</td>
 			<td>아티스트</td>
