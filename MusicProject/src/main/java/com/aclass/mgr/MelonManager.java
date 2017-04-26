@@ -9,10 +9,10 @@ public class MelonManager {
 	public static void main(String[] args){
 		MelonManager m = new MelonManager();
 		//m.getMelonTop100();
-		//m.getAlbumData(10057734);
-		//m.print_list(m.getAlbumData(m.getMaxIndex()));
 		//m.getAlbumData(m.getMaxIndex());
-		m.getArtistData();
+		
+		//System.out.println(m.getMaxIndex());
+		m.print_list(m.getAlbumData(m.getMaxIndex()));
 	}
 	public List<MusicVO> getMelonTop100(){
 		List<MusicVO> list= new ArrayList<MusicVO>();
@@ -78,13 +78,13 @@ public class MelonManager {
 	//public List<AlbumVO> getAlbumData(int max){
 	public List<AlbumVO> getAlbumData(int max){
 		List<AlbumVO> list = new ArrayList<AlbumVO>();
-		//int alIndex=10057734;
-		for(int z=1;z<=max;z++){
+		int alIndex=10052334;
+		for(int z=0;z<max;z++){
 			
 		
 		try {
 			//while(true){
-				Document doc = Jsoup.connect("http://www.melon.com/album/detail.htm?albumId=" + z).get();
+				Document doc = Jsoup.connect("http://www.melon.com/album/detail.htm?albumId=" + alIndex).get();
 				if (doc.select("p.albumname").first() != null) {
 					Element aTypeElement = doc.select("span.gubun").first();
 					Element aTitleElement = doc.select("p.albumname").first();
@@ -105,7 +105,7 @@ public class MelonManager {
 						System.out.println(musicElement.get(k).text());
 					}*/
 					Elements musicElement = doc.select("td.t_left");
-
+					System.out.println("===============================================================");
 					// 앨범종류
 					System.out.println(aTypeElement.text());
 					// 앨범명
@@ -122,40 +122,18 @@ public class MelonManager {
 					AlbumVO vo = new AlbumVO();
 					//곡정보
 					List<MusicVO> mList= new ArrayList<MusicVO>();
-					Elements mnoElems= doc.select("tr td div input");
-					/*for(Element l : lyElems){ 곡번호 출력확인
-						System.out.println(l.attr("value"));
-					}*/
 					for(int k=0;k<musicElement.size();k+=3){
-						
 						String mt=""; //곡제목
 						String tt=""; //title곡 판단변수
-						String ly=""; //곡 편집 변수
-						//System.out.println(mnoElems.get(k/3).attr("value")); //글번호
 						MusicVO mvo = new MusicVO();
-					
 						//System.out.println(k+"-"+musicElement.get(k).text());
 						String temp2=musicElement.get(k).text();
 						//System.out.println(temp2.substring(6, temp2.indexOf(" 상세정보 페이지 이동")));
 						mt=temp2.substring(6, temp2.indexOf(" 상세정보 페이지 이동"));
 						
 						//앨범 속 곡제목
-						System.out.println("곡제목 "+mt);
+						System.out.println(mt);
 						mvo.setTitle(mt);
-						//가사
-						Document ddoc=Jsoup.connect("http://www.melon.com/song/detail.htm?songId="+mnoElems.get(k/3).attr("value")).get();
-						if (ddoc.select("div.section_lyric div.lyric").first() != null) {
-							Element lyElem=ddoc.select("div.section_lyric div.lyric").first();
-							ly=lyElem.toString();
-							System.out.println("가사\n"+ly.substring(ly.indexOf("--> ")+4, ly.lastIndexOf("<br>")).replaceAll("<br>",""));
-							mvo.setLyrics(ly.substring(ly.indexOf("--> ")+4, ly.lastIndexOf("<br>")).replaceAll("<br>",""));
-						}
-						else{
-							mvo.setLyrics("가사정보없음");
-							System.out.println("가사정보없음");
-						}
-						
-						
 						String temp3=temp2.substring(temp2.indexOf("페이지 이동")+7);
 						//System.out.println(temp3);
 						if(temp3.length()>mt.length()){
@@ -169,6 +147,8 @@ public class MelonManager {
 							mvo.setTit_music(true);
 						}
 						else mvo.setTit_music(false);
+						
+						//mvo.setLyrics(lyrics);
 						mList.add(mvo);
 						vo.setmList(mList);
 					}
@@ -177,7 +157,7 @@ public class MelonManager {
 					// 상세정보
 					System.out.println(alInfo);
 					
-					vo.setAlNo(z);
+					vo.setAlNo(alIndex);
 					vo.setAlArtist(temp.get(0).text());
 					vo.setAlRegdate(temp.get(1).text());
 					vo.setSaleCo(temp.get(2).text());
@@ -191,7 +171,9 @@ public class MelonManager {
 					vo.setAlInfo(alInfo);
 					
 					list.add(vo);
+					alIndex++;
 				}
+				else alIndex++;
 			//}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -201,17 +183,6 @@ public class MelonManager {
 		
 		
 		return list;
-	}
-	public void getArtistData(){
-		try {
-			Document doc = Jsoup.connect("http://www.melon.com/artist/detail.htm?artistId=4263").get();	
-			Element test = doc.select("div.section_atistinfo04").first();
-			System.out.println(test);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		
 	}
 	
 	public void print_list(List<AlbumVO> list){

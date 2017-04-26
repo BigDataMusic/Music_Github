@@ -11,67 +11,69 @@ import org.springframework.stereotype.Component;
 @Component
 public class NaverManager {
 
-   public static void main(String[] args) {
-      // TODO Auto-generated method stub
-      NaverManager nm = new NaverManager();
-      nm.naverRankData();
-   }
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		NaverManager nm = new NaverManager();
+		nm.naverRankData();
+	}
 
-   public List<MusicVO> naverRankData() {
-      List<MusicVO> nList = new ArrayList<MusicVO>();
-      try {
-         int rank=1;
-         for(int j=1;j<=2;j++){
-            Document doc = Jsoup.connect("http://music.naver.com/listen/top100.nhn?domain=TOTAL&page="+Integer.toString(j)).get();
-            Elements tElem = doc.select("a._title span.ellipsis");
-            Elements pElem = doc.select("td.name a.thumb img");
-            Elements artElem = doc.select("td._artist a");
-            //Elements alElem = doc.select("td.left a.album");
-            Elements iElem = doc.select("td.change");
-            
-            for (int i = 0; i < 50; i++) {
-               Element t = tElem.get(i);
-               Element pos = pElem.get(i);
-               String poster = pos.attr("src");
-               Element art = artElem.get(i);
-               //Element al = alElem.get(i);
-               Element in = iElem.get(i);
-               String incre=in.text().trim();
-               
-               MusicVO vo = new MusicVO();
-               
-               if(incre.contains("변동없음")){
-					incre=incre.replace("변동없음", "");
+	public List<MusicVO> naverRankData() {
+		List<MusicVO> nList = new ArrayList<MusicVO>();
+		try {
+			int rank = 1;
+			for (int j = 1; j <= 2; j++) {
+				Document doc = Jsoup
+						.connect("http://music.naver.com/listen/top100.nhn?domain=TOTAL&page=" + Integer.toString(j))
+						.get();
+				Elements tElem = doc.select("a._title span.ellipsis");
+				Elements pElem = doc.select("td.name a.thumb img");
+				Elements artElem = doc.select("td._artist a");
+				// Elements alElem = doc.select("td.left a.album");
+				Elements iElem = doc.select("td.change");
+
+				for (int i = 0; i < 50; i++) {
+					Element t = tElem.get(i);
+					Element pos = pElem.get(i);
+					String poster = pos.attr("src");
+					Element art = artElem.get(i);
+					// Element al = alElem.get(i);
+					Element in = iElem.get(i);
+					String incre = in.text().trim();
+
+					MusicVO vo = new MusicVO();
+
+					if (incre.contains("변동없음")) {
+						incre = incre.replace("변동없음", "");
+						vo.setIncrement(incre);
+					} else if (incre.contains("상승")) {
+						incre = incre.replace("상승", "").trim();
+						incre = "+" + incre;
+						vo.setIncrement(incre);
+					} else if (incre.contains("하락")) {
+						incre = incre.replace("하락", "").trim();
+						incre = "-" + incre;
+						vo.setIncrement(incre);
+					}
+
+					vo.setRank(rank);
+					vo.setTitle(t.text().trim());
+					vo.setPoster(poster.trim());
+					vo.setArtist(art.text().trim());
+					// vo.setAlbumname(al.text().trim());
 					vo.setIncrement(incre);
-				}else if(incre.contains("상승")){
-					incre=incre.replace("상승", "").trim();
-					incre="+"+incre;
-					vo.setIncrement(incre);
-				}else if(incre.contains("하락")){
-					incre=incre.replace("하락", "").trim();
-					incre="-"+incre;
-					vo.setIncrement(incre);
+
+					System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
+					System.out.println("   " + vo.getPoster());
+					System.out.println("   " + vo.getIncrement());
+					// System.out.println(" "+vo.getAlbumname());
+
+					rank++;
 				}
-               
-               vo.setRank(rank);
-               vo.setTitle(t.text().trim());
-               vo.setPoster(poster.trim());
-               vo.setArtist(art.text().trim());
-               //vo.setAlbumname(al.text().trim());
-               vo.setIncrement(incre);
-               
-               System.out.println(vo.getRank()+"위 "+vo.getTitle()+" - "+vo.getArtist());
-               System.out.println("   "+vo.getPoster());
-               System.out.println("   "+vo.getIncrement());
-               //System.out.println("   "+vo.getAlbumname());
-               
-               rank++;
-            }
-         }
+			}
 
-      } catch (Exception ex) {
-         System.out.println("naverRankData " + ex.getMessage());
-      }
-      return nList;
-   }
+		} catch (Exception ex) {
+			System.out.println("naverRankData " + ex.getMessage());
+		}
+		return nList;
+	}
 }

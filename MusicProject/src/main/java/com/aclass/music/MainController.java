@@ -1,13 +1,33 @@
 package com.aclass.music;
 
+import java.util.List;
+
+import org.apache.hadoop.conf.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.hadoop.mapreduce.JobRunner;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.aclass.mgr.BugsManager;
+import com.aclass.mgr.MusicVO;
+import com.aclass.mongodb.MusicDAO;
 
 @Controller
 public class MainController {
+	@Autowired
+	private MusicDAO dao;
+	@Autowired
+	private BugsManager bmgr;
+	@Autowired
+	private Configuration conf;
+	@Autowired
+	private JobRunner jr;
 	@RequestMapping("main.do")
-	public String main_page()
+	public String main_page(Model model)
 	{
+		List<MusicVO> bList = bmgr.bugsRankData();
+		model.addAttribute("bList", bList);
 		return "main";
 	}
 	@RequestMapping("content.do")
@@ -24,10 +44,5 @@ public class MainController {
 	public String main_recommand()
 	{
 		return "recommand";
-	}
-	@RequestMapping("board.do")
-	public String main_board()
-	{
-		return "board";
 	}
 }
