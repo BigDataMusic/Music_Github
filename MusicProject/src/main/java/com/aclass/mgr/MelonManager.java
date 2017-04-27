@@ -202,16 +202,69 @@ public class MelonManager {
 		
 		return list;
 	}
-	public void getArtistData(){
+	public List<ArtistVO> getArtistData(){
+		List<ArtistVO> list = new ArrayList<ArtistVO>();
 		try {
-			Document doc = Jsoup.connect("http://www.melon.com/artist/detail.htm?artistId=4263").get();	
-			Element test = doc.select("div.section_atistinfo04").first();
-			System.out.println(test);
+			Document doc = Jsoup.connect("http://www.melon.com/artist/detail.htm?artistId=261143").get();
+			
+			ArtistVO vo = new ArtistVO();
+			
+			//이름
+			Element nameElem=doc.select("p.title_atist").first();
+			vo.setAtName(nameElem.text().replace("아티스트명", ""));
+			
+			//프로필사진
+			Element ppElem=doc.select("span#artistImgArea img").first();
+			vo.setAtPoster(ppElem.attr("src"));
+			//신상정보
+			if (doc.select("div.section_atistinfo04").first() != null) {
+				Element atinfoElem = doc.select("div.section_atistinfo04").first();
+				String ai="";
+				ai=atinfoElem.text().replace("신상정보", "");
+				if(ai.contains(" 본명 ")) ai=ai.replace(" 본명 ", "\n본명 ");
+				if(ai.contains(" 별명 ")) ai=ai.replace(" 별명 ", "\n별명 ");
+				if(ai.contains(" 국적 ")) ai=ai.replace(" 국적 ", "\n국적 ");
+				if(ai.contains(" 생일 ")) ai=ai.replace(" 생일 ", "\n생일 ");
+				if(ai.contains(" 키/몸무게 ")) ai=ai.replace("키/몸무게", "\n키/몸무게 ");
+				if(ai.contains(" 별자리 ")) ai=ai.replace("별자리", "\n별자리 ");
+				if(ai.contains(" 혈액형 ")) ai=ai.replace("혈액형", "\n혈액형 ");
+				ai=ai.substring(1,ai.length());
+				vo.setAtInfo(ai);
+			}
+			else vo.setAtInfo("정보없음");
+			
+			//소개
+			if (doc.select("div.section_atistinfo02 div.atist_insdc")!= null) {
+				Element introElem = doc.select("div.section_atistinfo02 div.atist_insdc").first();
+				vo.setAtIntroduce(introElem.text());
+			}
+			else vo.setAtIntroduce("정보없음");
+			
+			//활동정보
+			if (doc.select("div.section_atistinfo03 dl").first()!= null) {
+				Element acinfoElem= doc.select("div.section_atistinfo03 dl").first();
+				String ac=acinfoElem.text();
+				if(ac.contains("활동년대")) ac=ac.replace("활동년대", "\n활동년대");
+				if(ac.contains("유형")) ac=ac.replace("유형", "\n유형");
+				if(ac.contains("장르")) ac=ac.replace("장르", "\n장르");
+				if(ac.contains("소속사명")) ac=ac.replace("소속사명", "\n소속사명");
+				if(ac.contains("소속그룹")) ac=ac.replace("소속그룹", "\n소속그룹");
+				vo.setAtActiveInfo(ac);
+			}
+			else vo.setAtActiveInfo("정보없음");
+			
+			//System.out.println(nameElem.text().replace("아티스트명", ""));
+			//System.out.println(ppElem.attr("src"));
+			//System.out.println(introElem.text());
+			//System.out.println(ac);
+			//System.out.println(ai);
+			//System.out.println(atinfoElem.text());
+			list.add(vo);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
-		
+		return list;
 	}
 	
 	public void print_list(List<AlbumVO> list){
