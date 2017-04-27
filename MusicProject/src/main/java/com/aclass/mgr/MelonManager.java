@@ -12,7 +12,10 @@ public class MelonManager {
 		//m.getAlbumData(10057734);
 		//m.print_list(m.getAlbumData(m.getMaxIndex()));
 		//m.getAlbumData(m.getMaxIndex());
-		m.getArtistData();
+		for(int i=100; i<500;i++){
+			m.getArtistData(i);
+		}
+		
 	}
 	public List<MusicVO> getMelonTop100(){
 		List<MusicVO> list= new ArrayList<MusicVO>();
@@ -176,7 +179,6 @@ public class MelonManager {
 
 					// 상세정보
 					System.out.println(alInfo);
-					
 					vo.setAlNo(z);
 					vo.setAlArtist(temp.get(0).text());
 					vo.setAlRegdate(temp.get(1).text());
@@ -202,97 +204,77 @@ public class MelonManager {
 		
 		return list;
 	}
-	public List<ArtistVO> getArtistData(){
+	public List<ArtistVO> getArtistData(int index){
 		List<ArtistVO> list = new ArrayList<ArtistVO>();
 		try {
-			Document doc = Jsoup.connect("http://www.melon.com/artist/detail.htm?artistId=261143").get();
-			
-			ArtistVO vo = new ArtistVO();
-			
-			//이름
-			Element nameElem=doc.select("p.title_atist").first();
-			vo.setAtName(nameElem.text().replace("아티스트명", ""));
-			
-			//프로필사진
-			Element ppElem=doc.select("span#artistImgArea img").first();
-			vo.setAtPoster(ppElem.attr("src"));
-			//신상정보
-			if (doc.select("div.section_atistinfo04").first() != null) {
+			Document doc = Jsoup.connect("http://www.melon.com/artist/detail.htm?artistId="+index).get();
+			if(doc.select("p.title_atist").first()!=null){
+				ArtistVO vo = new ArtistVO();
+				
+				//이름
+				Element nameElem=doc.select("p.title_atist").first();
+				vo.setAtName(nameElem.text().replace("아티스트명", ""));
+				
+				//프로필사진
+				Element ppElem=doc.select("span#artistImgArea img").first();
+				if(ppElem.attr("src").equals("http://cdnimg.melon.co.kr")) vo.setAtPoster("정보없음"); 
+				else vo.setAtPoster(ppElem.attr("src"));
+				
+				//신상정보
 				Element atinfoElem = doc.select("div.section_atistinfo04").first();
-				String ai="";
-				ai=atinfoElem.text().replace("신상정보", "");
-				if(ai.contains(" 본명 ")) ai=ai.replace(" 본명 ", "\n본명 ");
-				if(ai.contains(" 별명 ")) ai=ai.replace(" 별명 ", "\n별명 ");
-				if(ai.contains(" 국적 ")) ai=ai.replace(" 국적 ", "\n국적 ");
-				if(ai.contains(" 생일 ")) ai=ai.replace(" 생일 ", "\n생일 ");
-				if(ai.contains(" 키/몸무게 ")) ai=ai.replace("키/몸무게", "\n키/몸무게 ");
-				if(ai.contains(" 별자리 ")) ai=ai.replace("별자리", "\n별자리 ");
-				if(ai.contains(" 혈액형 ")) ai=ai.replace("혈액형", "\n혈액형 ");
-				ai=ai.substring(1,ai.length());
-				vo.setAtInfo(ai);
+				if (!atinfoElem.text().trim().equals("신상정보")) {
+					String ai=atinfoElem.text().replace("신상정보", "");
+					if(ai.contains(" 본명 ")) ai=ai.replace(" 본명 ", "\n본명 ");
+					if(ai.contains(" 별명 ")) ai=ai.replace(" 별명 ", "\n별명 ");
+					if(ai.contains(" 국적 ")) ai=ai.replace(" 국적 ", "\n국적 ");
+					if(ai.contains(" 생일 ")) ai=ai.replace(" 생일 ", "\n생일 ");
+					if(ai.contains(" 키/몸무게 ")) ai=ai.replace("키/몸무게", "\n키/몸무게 ");
+					if(ai.contains(" 별자리 ")) ai=ai.replace("별자리", "\n별자리 ");
+					if(ai.contains(" 혈액형 ")) ai=ai.replace("혈액형", "\n혈액형 ");
+					ai=ai.substring(1,ai.length());
+					System.out.println(ai);
+					vo.setAtInfo(ai);
+				}
+				else vo.setAtInfo("정보없음");
+				/*
+				//소개
+				if (doc.select("div.section_atistinfo02 div.atist_insdc")!= null) {
+					Element introElem = doc.select("div.section_atistinfo02 div.atist_insdc").first();
+					vo.setAtIntroduce(introElem.text());
+				}
+				else vo.setAtIntroduce("정보없음");*/
+				
+				//활동정보
+				if (doc.select("div.section_atistinfo03 dl").first()!= null) {
+					Element acinfoElem= doc.select("div.section_atistinfo03 dl").first();
+					String ac=acinfoElem.text();
+					if(ac.contains("활동년대")) ac=ac.replace("활동년대", "\n활동년대");
+					if(ac.contains("유형")) ac=ac.replace("유형", "\n유형");
+					if(ac.contains("장르")) ac=ac.replace("장르", "\n장르");
+					if(ac.contains("소속사명")) ac=ac.replace("소속사명", "\n소속사명");
+					if(ac.contains("소속그룹")) ac=ac.replace("소속그룹", "\n소속그룹");
+					vo.setAtActiveInfo(ac);
+				}
+				else vo.setAtActiveInfo("정보없음");
+				
+				System.out.println(nameElem.text().replace("아티스트명", ""));
+				System.out.println(vo.getAtPoster());
+				//System.out.println(introElem.text());
+				//System.out.println(ac);
+				//System.out.println(ai);
+				//System.out.println(atinfoElem.text());
+				list.add(vo);
+				System.out.println("======================================================================");
 			}
-			else vo.setAtInfo("정보없음");
 			
-			//소개
-			if (doc.select("div.section_atistinfo02 div.atist_insdc")!= null) {
-				Element introElem = doc.select("div.section_atistinfo02 div.atist_insdc").first();
-				vo.setAtIntroduce(introElem.text());
-			}
-			else vo.setAtIntroduce("정보없음");
-			
-			//활동정보
-			if (doc.select("div.section_atistinfo03 dl").first()!= null) {
-				Element acinfoElem= doc.select("div.section_atistinfo03 dl").first();
-				String ac=acinfoElem.text();
-				if(ac.contains("활동년대")) ac=ac.replace("활동년대", "\n활동년대");
-				if(ac.contains("유형")) ac=ac.replace("유형", "\n유형");
-				if(ac.contains("장르")) ac=ac.replace("장르", "\n장르");
-				if(ac.contains("소속사명")) ac=ac.replace("소속사명", "\n소속사명");
-				if(ac.contains("소속그룹")) ac=ac.replace("소속그룹", "\n소속그룹");
-				vo.setAtActiveInfo(ac);
-			}
-			else vo.setAtActiveInfo("정보없음");
-			
-			//System.out.println(nameElem.text().replace("아티스트명", ""));
-			//System.out.println(ppElem.attr("src"));
-			//System.out.println(introElem.text());
-			//System.out.println(ac);
-			//System.out.println(ai);
-			//System.out.println(atinfoElem.text());
-			list.add(vo);
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("getArtistData "+e.getMessage());
 		}
 		
 		return list;
 	}
 	
-	public void print_list(List<AlbumVO> list){
-		
-		for(int i=0;i<list.size();i++){
-			System.out.println("==========================");
-			System.out.println("앨범번호:"+list.get(i).getAlNo());
-			System.out.println("앨범타입:"+list.get(i).getAlType());
-			System.out.println("앨범제목:"+list.get(i).getAlTitle());
-			System.out.println("앨범포스터:"+list.get(i).getAlPoster());
-			System.out.println("아티스트:"+list.get(i).getAlArtist());
-			System.out.println("발매일:"+list.get(i).getAlRegdate());
-			System.out.println("발매사:"+list.get(i).getSaleCo());
-			System.out.println("기획사:"+list.get(i).getEntertainment());
-			System.out.println("장르:"+list.get(i).getAlGenre());
-			System.out.println("평점:"+list.get(i).getAlPoint());
-			System.out.println("좋아요:"+list.get(i).getAlLike());
-			for(int k=0;k<list.get(i).getmList().size();k++){
-				if(list.get(i).getmList().get(k).getTit_music()==true){
-					System.out.print("Title - ");
-				}
-				System.out.println(list.get(i).getmList().get(k).getTitle());
-				
-			}
-			System.out.println("앨범정보:"+list.get(i).getAlInfo());
-		}
-		
-		
-	}
+
 	
 }
