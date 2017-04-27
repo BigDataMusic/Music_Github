@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MusicVO;
 import com.aclass.mongodb.MusicDAO;
+//import com.sist.news.*;
 
 @Controller
 public class MainController {
+	/*@Autowired
+	private NewsManager nmgr;*/
 	@Autowired
 	private MusicDAO dao;
 	@Autowired
@@ -24,9 +27,16 @@ public class MainController {
 	@Autowired
 	private JobRunner jr;
 	@RequestMapping("main.do")
-	public String main_page(Model model)
+	public String main_page(String data,Model model)
 	{
 		List<MusicVO> bList = bmgr.bugsRankData();
+		
+		// 뉴스
+		/*if(data==null)
+    		data="새뉴스";
+    	List<Item> nList=nmgr.naverNewsData(data);
+    	model.addAttribute("nList", nList);*/
+    	
 		model.addAttribute("bList", bList);
 		return "main";
 	}
