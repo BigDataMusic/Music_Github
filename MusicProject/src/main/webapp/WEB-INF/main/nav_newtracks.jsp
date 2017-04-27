@@ -29,85 +29,24 @@
 				하고<br> 3. 위아래 메뉴들 정해야 하고...<br> &nbsp;&nbsp;&nbsp;흠냐...
 			</p>
 		</div>
-		<div id="accordian">
-			<ul>
-				<li class="active">
-					<h3>장르별 추천</h3>
-					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>날씨별 추천</h3>
-					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>장소별 추천</h3>
-					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>상황별 추천</h3>
-					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>감정별 추천</h3>
-					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+		<p id="title_ex">신곡(장르별)</p>
+		<br />
+		<img src="resources/images/chart.jpg" alt="" width="180" height="200" />
+		<br />
+		<br />
+		<br />
+		<p id="title_ex">신곡출시가수</p>
+		<br />
+		<ul id="navigation" style="padding-top: 0px">
+			<li class="color"><a href="#">가수 1호</a></li>
+			<li><a href="#">가수 2호</a></li>
+			<li class="color"><a href="#">가수 3호</a></li>
+			<li><a href="#">가수 4호</a></li>
+			<li class="color"><a href="#">가수 5호</a></li>
+			<li><a href="#">가수 6호</a></li>
+			<li class="color"><a href="#">가수 7호</a></li>
+			<li><a href="#">가수 8호</a></li>
+		</ul>	
 	</div>	
 </body>
 </html>
