@@ -17,9 +17,9 @@ public class BugsManager {
 		// TODO Auto-generated method stub
 		BugsManager bm = new BugsManager();
 		bm.bugsRankData();
-		System.out.println("==================== 곡 완료 =====================");
+		//System.out.println("==================== 곡 완료 =====================");
 		bm.bugsAlbumRankData();
-		System.out.println("==================== 앨범 완료 =====================");
+		//System.out.println("==================== 앨범 완료 =====================");
 	}
 	
 	// 곡
@@ -66,10 +66,10 @@ public class BugsManager {
 				
 				bList.add(vo);
 				
-				System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
+				/*System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
 				System.out.println("   " + vo.getPoster());
 				System.out.println("   " + vo.getIncrement());
-				System.out.println("   " + vo.getAlbumname());
+				System.out.println("   " + vo.getAlbumname());*/
 			}
 
 		} catch (Exception ex) {

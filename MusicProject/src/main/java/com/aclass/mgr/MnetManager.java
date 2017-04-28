@@ -49,9 +49,9 @@ public class MnetManager {
 					//String incre=in.text().trim();
 					//vo.setIncrement(incre);
 					
-					System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
+					/*System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
 					System.out.println("   " + vo.getPoster());
-					System.out.println("   " + vo.getAlbumname());
+					System.out.println("   " + vo.getAlbumname());*/
 					//System.out.println("   "+vo.getIncrement());
 					rank++;
 				}

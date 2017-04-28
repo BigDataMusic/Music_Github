@@ -62,9 +62,9 @@ public class NaverManager {
 					// vo.setAlbumname(al.text().trim());
 					vo.setIncrement(incre);
 
-					System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
+					/*System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
 					System.out.println("   " + vo.getPoster());
-					System.out.println("   " + vo.getIncrement());
+					System.out.println("   " + vo.getIncrement());*/
 					// System.out.println(" "+vo.getAlbumname());
 
 					rank++;

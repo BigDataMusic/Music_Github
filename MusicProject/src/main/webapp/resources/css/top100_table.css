@@ -57,6 +57,11 @@
 	border-bottom-width: 1px;
 }
 
+#table2 a {
+	text-decoration : none;
+	color: #000
+}
+
 #table2 td {
 	height: 25px;
 	text-align: center;
