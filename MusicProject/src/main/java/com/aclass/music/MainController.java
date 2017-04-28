@@ -71,6 +71,11 @@ public class MainController {
 	{
 		return "newtracks";
 	}
+	@RequestMapping("board.do")
+	public String main_board()
+	{
+		return "board";
+	}
 	@RequestMapping("issue.do")
 	public String main_issue(String data,Model model)
 	{
