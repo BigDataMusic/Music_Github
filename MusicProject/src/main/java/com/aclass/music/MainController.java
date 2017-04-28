@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.xerces.xs.ItemPSVI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ import com.aclass.news.*;
 public class MainController {
 	@Autowired
 	private NewsManager nmgr;
-	@Autowired
+	@Autowired//@Resource(name = "musicDAO")
 	private MusicDAO dao;
 	@Autowired
 	private BugsManager bmgr;
@@ -57,8 +59,10 @@ public class MainController {
 		return "content";
 	}
 	@RequestMapping("top100.do")
-	public String main_top100()
+	public String main_top100(Model model)
 	{
+		List<MusicVO> bList=bmgr.bugsRankData();
+		model.addAttribute("bList", bList);
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
