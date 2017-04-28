@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,12 +55,10 @@
 				<p id="title_ex" style="margin: 0px;padding: 0;">HOT ISSUE</p>
 				<div class="news">
 					<span>NEWS</span><br />
-					<p>Lorem ipsum dolor sit amet, sectetu adip scing varius
-						interdum incid unt quis, libero. Aenean mturpis. Maecenas
-						hendrerit masa laoreet iaculipede mnisl ulamcorper. Tellus er
-						sodales enim, in tincidunt mauris in odio. Massa ac laoreet
-						iaculipede nisl.</p>
-					<a href="#" class="more">more info</a>
+					<c:forEach var="vo" items="${nList }">
+					  <p><a href="${vo.link }">${vo.title }</a></p>
+					</c:forEach>
+					<a href="issue.do" class="more">more info</a>
 				</div>
 				<div class="news">
 					<span>Artist</span><br />

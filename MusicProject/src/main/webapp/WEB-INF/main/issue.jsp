@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,19 +20,19 @@
 	</table>
 	<table id="table2" width="735">
 		<tr>
-			<th width="10%">글번호</th>
-			<th width="45%">제목</th>
-			<th width="15%">글쓴이</th>
-			<th width="20%">게시일</th>
-			<th width="10%">조회수</th>
+			<th width="15%">카테고리</th>
+			<th width="55%">제목</th>
+			<th width="15%">언론사</th>
+			<th width="30%">게시일</th>
+			<!-- <th width="10%">조회수</th> -->
 		</tr>	
-		<c:forEach var="i" begin="1" end="15">
+		<c:forEach var="vo" items="${nList }">
 		<tr class="dataTr">
-			<td>${i}</td>
-			<td class="song"><a href="#">뉴스 제목이 들어가는자리입니다.</a></td>
-			<td>아티스트</td>
-			<td>2017.12.31.</td>
-			<td>1000</td>
+			<td>${vo.category }</td>
+			<td class="song"><a href="${vo.link }">${vo.title }</a></td>
+			<td>${vo.author }</td>
+			<td>${vo.pubDate }</td>
+			<td><fmt:formatDate value="${dateFmt}" pattern="yyyy-MM-dd"/></td>
 		</tr>
 		</c:forEach>
 	</table>
