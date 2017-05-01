@@ -72,11 +72,12 @@ public class NewsManager {
 			JAXBContext jc = JAXBContext.newInstance(Rss.class);
 			Unmarshaller un = jc.createUnmarshaller();
 			Rss rss = (Rss) un.unmarshal(url);
-			List<Item> temp = rss.getChannel().getItem();
+			list = rss.getChannel().getItem();
+			/*List<Item> temp = rss.getChannel().getItem();
 			for (int i = 0; i < 15; i++) {
 				Item item = temp.get(i);
 				list.add(item);
-			}
+			}*/
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
