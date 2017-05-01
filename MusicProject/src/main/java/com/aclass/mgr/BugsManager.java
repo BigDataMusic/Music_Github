@@ -16,10 +16,36 @@ public class BugsManager {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		BugsManager bm = new BugsManager();
-		bm.bugsRankData();
+		//bm.bugsRankData();
 		//System.out.println("==================== 곡 완료 =====================");
-		bm.bugsAlbumRankData();
+		//bm.bugsAlbumRankData();
 		//System.out.println("==================== 앨범 완료 =====================");
+		bm.init();
+	}
+	
+	public void init(){
+		List<MusicVO> bList=bugsRankData();
+		try{
+			String data="";
+			for(MusicVO vo:bList){
+				data+=vo.getRank()+"|"
+						+vo.getTitle()+"|"
+						+vo.getArtist()+"|"
+						+vo.getAlbumname()+"|"
+						+vo.getPoster()+"\n";
+			}
+			data = data.substring(0, data.lastIndexOf("\n"));
+			File file = new File("/home/sist/bugsMusicTop100.csv");
+			if (file.exists()) {
+				file.delete();
+			}
+			FileWriter fw = new FileWriter("/home/sist/bugsMusicTop100.csv");
+			fw.write(data);
+			fw.close();
+			System.out.println("bugs music 생성 완료");
+		}catch(Exception ex){
+			System.out.println("init: "+ex.getMessage());
+		}
 	}
 	
 	// 곡
@@ -120,10 +146,10 @@ public class BugsManager {
 				vo.setAlArtist(art.text().trim());
 				
 				//bAlList.get(vo);
-				System.out.println(vo.getAlRank() + "위 " + vo.getAlTitle());
+				/*System.out.println(vo.getAlRank() + "위 " + vo.getAlTitle());
 				System.out.println("   " + vo.getAlArtist());
 				System.out.println("   " + vo.getAlPoster());
-				System.out.println("   " + vo.getAlIncrement());
+				System.out.println("   " + vo.getAlIncrement());*/
 			}
 		} catch (Exception ex) {
 			System.out.println("bugsAlbumRankData " + ex.getMessage());
