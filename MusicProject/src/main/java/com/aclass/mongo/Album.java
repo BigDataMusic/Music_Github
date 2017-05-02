@@ -53,8 +53,8 @@ public class Album {
 				obj.put("alIncrement", vo.getAlIncrement());
 //				obj.put("mList", vo.getmList());
 				for(int i=1; i<vo.getmList().size()+1; i++){
-					obj.put("mTitle"+i, vo.getmList().get(i).getTitle());
-					obj.put("mLyrics"+i, vo.getmList().get(i).getLyrics());
+					obj.put("mTitle"+i, vo.getmList().get(i-1).getTitle());
+					obj.put("mLyrics"+i, vo.getmList().get(i-1).getLyrics());					
 				}
 				mdbc.insert(obj);
 			}

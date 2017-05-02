@@ -1,14 +1,8 @@
 package com.aclass.music;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.Resource;
+import java.util.*;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.xerces.xs.ItemPSVI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.hadoop.mapreduce.JobRunner;
 import org.springframework.stereotype.Controller;
@@ -19,6 +13,7 @@ import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MusicVO;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
+import com.aclass.mongodb.*;
 
 @Controller
 public class MainController {
@@ -81,13 +76,13 @@ public class MainController {
 		return "board";
 	}
 	@RequestMapping("issue.do")
-	public String main_issue(String data,Model model)
+	public String main_issue(String page,String data,Model model)
 	{
 		// 뉴스
 		if (data == null)
 			data = "오늘 음악";
 		List<Item> nList = nmgr.naverNewsAllData(data);
-		
+		List<NewsVO> nvoList=new ArrayList<NewsVO>();
 		String date="";
 		String title="";
 		for(Item n:nList){
@@ -106,6 +101,22 @@ public class MainController {
 	    	System.out.println(sampleDate.toString());*/
 			n.setPubDate(date);
     	}
+		
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int i=0;
+		int j=0;
+		int pagecnt=(curpage*10)-10;
+		List<NewsVO> rList=new ArrayList<NewsVO>();
+		for (NewsVO vo : nvoList) {
+			if (i < 10 && j >= pagecnt) {
+				rList.add(vo);
+				i++;
+			}
+			j++;
+		}
+		model.addAttribute("curpage", curpage);
     	model.addAttribute("nList", nList);
 		return "issue";
 	}
