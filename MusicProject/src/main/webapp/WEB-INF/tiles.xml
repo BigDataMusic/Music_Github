@@ -15,6 +15,11 @@
 		<put-attribute name="body" value="/WEB-INF/main/{1}.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="board/*" extends="main">
+		<put-attribute name="nav" value="/WEB-INF/main/board/nav_board.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/main/board/{1}.jsp"></put-attribute>
+	</definition>
+	
 	<definition name="*/*" extends="main">
 		<put-attribute name="nav" value="/WEB-INF/main/{1}/nav_{2}.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/main/{1}/{2}.jsp"></put-attribute>
@@ -24,5 +29,7 @@
 		<put-attribute name="nav" value="/WEB-INF/main/{1}/{2}/nav_{3}.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/main/{1}/{2}/{3}.jsp"></put-attribute>
 	</definition>
+	
+	
 </tiles-definitions>
  

@@ -78,7 +78,22 @@ public class MainController {
 	@RequestMapping("board.do")
 	public String main_board()
 	{
-		return "../board/board";
+		return "board/board";
+	}
+	@RequestMapping("board_content.do")
+	public String main_board_content()
+	{
+		return "board/board_content";
+	}
+	@RequestMapping("board_insert.do")
+	public String main_board_insert()
+	{
+		return "board/board_insert";
+	}
+	@RequestMapping("board_update.do")
+	public String main_board_update()
+	{
+		return "board/board_update";
 	}
 	@RequestMapping("issue.do")
 	public String main_issue(String data,Model model)
