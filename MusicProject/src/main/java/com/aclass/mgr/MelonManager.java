@@ -92,10 +92,10 @@ public class MelonManager {
 	}
 
 	//public List<AlbumVO> getAlbumData(int max){
-	public List<AlbumVO> getAlbumData(int max){
+	public List<AlbumVO> getAlbumData(int z){
 		List<AlbumVO> list = new ArrayList<AlbumVO>();
 		//int alIndex=10057734;
-		for(int z=max;z>=max-100;z--){
+		//for(int z=max;z>=max-100;z--){
 		try {
 				Document doc = Jsoup.connect("http://www.melon.com/album/detail.htm?albumId=" + z).get();
 				if (doc.select("p.albumname").first() != null) {
@@ -204,10 +204,12 @@ public class MelonManager {
 					
 					list.add(vo);
 				}
+
+				Thread.sleep(5000);
 		} catch (Exception e) {
 			System.out.println("getAlbumData "+e.getMessage());
 		}
-		}
+		//}
 		
 		
 		return list;
@@ -274,7 +276,6 @@ public class MelonManager {
 				list.add(vo);
 				System.out.println("======================================================================");
 			}
-			Thread.sleep(10000);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("getArtistData "+e.getMessage());
