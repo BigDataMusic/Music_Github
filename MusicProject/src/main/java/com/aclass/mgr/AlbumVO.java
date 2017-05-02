@@ -3,22 +3,21 @@ package com.aclass.mgr;
 import java.util.*;
 
 public class AlbumVO {
-	private int alNo;
+	private int alNo;//
 	private int alRank;
-	private String alType;
-	private String alTitle;
-	private String alPoster;
-	private String alArtist;
-	private String alRegdate;
-	private String alGenre;
-	private String saleCo;
-	private String entertainment;
-	private double alPoint;
-	private int alLike;
-	private String alInfo;
-	private String alIncrement;
-
-	List<MusicVO> mList = new ArrayList<MusicVO>();
+	private String alType;//
+	private String alTitle;//
+	private String alPoster;//
+	private String alArtist;//
+	private String alRegdate;//
+	private String alGenre;//
+	private String saleCo;//
+	private String entertainment;//
+	private double alPoint;//
+	private int alLike;//
+	private String alInfo;//
+	private String alIncrement;//
+	List<MusicVO> mList = new ArrayList<MusicVO>();//
 
 	public String getAlType() {
 		return alType;

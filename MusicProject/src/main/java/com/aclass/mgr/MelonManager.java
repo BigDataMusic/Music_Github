@@ -11,10 +11,8 @@ public class MelonManager {
 		//m.getMelonTop100();
 		//m.getAlbumData(10057734);
 		//m.print_list(m.getAlbumData(m.getMaxIndex()));
-		//m.getAlbumData(m.getMaxIndex());
-		for(int i=100; i<500;i++){
-			m.getArtistData(i);
-		}
+		m.getAlbumData(m.getMaxIndex());
+		
 		
 	}
 	public List<MusicVO> getMelonTop100(){
@@ -83,8 +81,6 @@ public class MelonManager {
 		List<AlbumVO> list = new ArrayList<AlbumVO>();
 		//int alIndex=10057734;
 		for(int z=1;z<=max;z++){
-			
-		
 		try {
 			//while(true){
 				Document doc = Jsoup.connect("http://www.melon.com/album/detail.htm?albumId=" + z).get();
