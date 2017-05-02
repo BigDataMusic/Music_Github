@@ -35,7 +35,7 @@ public class Album {
 			mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38", 27017)));
 	    	   db=mc.getDB("mydb");
 	    	   mdbc=db.getCollection("MusicAlbum");
-			List<AlbumVO> list = mm.getAlbumData(100);
+			List<AlbumVO> list = mm.getAlbumData(3);
 			for(AlbumVO vo : list){
 				BasicDBObject obj = new BasicDBObject();
 				obj.put("alNo", vo.getAlNo());
@@ -51,6 +51,11 @@ public class Album {
 				obj.put("alLike", vo.getAlLike());
 				obj.put("alInfo", vo.getAlInfo());
 				obj.put("alIncrement", vo.getAlIncrement());
+//				obj.put("mList", vo.getmList());
+				for(int i=1; i<vo.getmList().size()+1; i++){
+					obj.put("mTitle"+i, vo.getmList().get(i).getTitle());
+					obj.put("mLyrics"+i, vo.getmList().get(i).getLyrics());
+				}
 				mdbc.insert(obj);
 			}
 		} catch (Exception e) {
