@@ -31,38 +31,43 @@ public class Album {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MelonManager mm = new MelonManager();
+		List<String> ano = mm.getAlno100();
+		
 		try {
 			mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38", 27017)));
-	    	   db=mc.getDB("mydb");
-	    	   mdbc=db.getCollection("MusicAlbum");
-			List<AlbumVO> list = mm.getAlbumData(10059324);
-			for(AlbumVO vo : list){
-				System.out.println("=====================");
-				System.out.println("======"+vo.getAlTitle()+"========");
-				BasicDBObject obj = new BasicDBObject();
-				obj.put("alNo", vo.getAlNo());
-				obj.put("alType", vo.getAlType());
-				obj.put("alTitle", vo.getAlTitle());
-				obj.put("alPoster", vo.getAlPoster());
-				obj.put("alArtist", vo.getAlArtist());
-				obj.put("alRegdate", vo.getAlRegdate());
-				obj.put("alGenre", vo.getAlGenre());
-				obj.put("saleCo", vo.getSaleCo());
-				obj.put("entertainment", vo.getEntertainment());
-				obj.put("alPoint", vo.getAlPoint());
-				obj.put("alLike", vo.getAlLike());
-				obj.put("alInfo", vo.getAlInfo());
-				obj.put("alIncrement", vo.getAlIncrement());
-				
-				for(int i=1; i<vo.getmList().size()+1; i++){
-					obj.put("mTitle"+i, vo.getmList().get(i-1).getTitle());
-					System.out.println("mTitle"+Integer.toString(i)+" - "+ vo.getmList().get(i-1).getTitle());
-					obj.put("mLyrics"+i, vo.getmList().get(i-1).getLyrics());
+	    	db=mc.getDB("mydb");
+	    	mdbc=db.getCollection("MusicAlbum");
+	    	for(int k=0;k<100;k++){
+				List<AlbumVO> list = mm.getAlbumData(Integer.parseInt(ano.get(k)));
+				for(AlbumVO vo : list){
+					System.out.println("=====================");
+					System.out.println("======"+vo.getAlTitle()+"========");
+					BasicDBObject obj = new BasicDBObject();
+					obj.put("alNo", vo.getAlNo());
+					obj.put("alType", vo.getAlType());
+					obj.put("alTitle", vo.getAlTitle());
+					obj.put("alPoster", vo.getAlPoster());
+					obj.put("alArtist", vo.getAlArtist());
+					obj.put("alRegdate", vo.getAlRegdate());
+					obj.put("alGenre", vo.getAlGenre());
+					obj.put("saleCo", vo.getSaleCo());
+					obj.put("entertainment", vo.getEntertainment());
+					obj.put("alPoint", vo.getAlPoint());
+					obj.put("alLike", vo.getAlLike());
+					obj.put("alInfo", vo.getAlInfo());
+					obj.put("alIncrement", vo.getAlIncrement());
+					
+					for(int i=1; i<vo.getmList().size()+1; i++){
+						obj.put("mTitle"+i, vo.getmList().get(i-1).getTitle());
+						System.out.println("mTitle"+Integer.toString(i)+" - "+ vo.getmList().get(i-1).getTitle());
+						obj.put("mLyrics"+i, vo.getmList().get(i-1).getLyrics());
+					}
+					
+					
+					mdbc.insert(obj);
 				}
-				
-				
-				mdbc.insert(obj);
-			}
+				//Thread.sleep(20000);
+	    	}
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());

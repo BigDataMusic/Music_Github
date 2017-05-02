@@ -14,7 +14,7 @@
 <div id="content_top100">
 	<table width="735">
 		<tr>
-			<td align="right" valign="middle"><input type="button" value="write"/></td>
+			<td align="right" valign="middle"><a href="board_insert.do"><input type="button" value="write"/></a></td>
 		</tr>
 	</table>
 	<table id="table2" width="735">
@@ -28,7 +28,7 @@
 		<c:forEach var="i" begin="1" end="25">
 		<tr class="dataTr">
 			<td>${i}</td>
-			<td class="song"><a href="#">게시물 제목이 들어가는 자리입니다.</a></td>
+			<td class="song"><a href="board_content.do">게시물 제목이 들어가는 자리입니다.</a></td>
 			<td>아티스트</td>
 			<td>2017.12.31.</td>
 			<td>1000</td>
