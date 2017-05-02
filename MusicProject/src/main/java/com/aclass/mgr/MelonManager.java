@@ -10,11 +10,26 @@ public class MelonManager {
 		MelonManager m = new MelonManager();
 		//m.getMelonTop100();
 		//m.getAlbumData(10057734);
-		//m.print_list(m.getAlbumData(m.getMaxIndex()));
-		m.getAlbumData(m.getMaxIndex());
-		
-		
+		//m.getAlbumData(10);
+		System.out.println(m.getMaxIndex());
+		//m.getAlno100();
 	}
+	public List<String> getAlno100(){
+		List<String> list = new ArrayList<String>();
+		try {
+			Document doc=Jsoup.connect("http://www.melon.com/chart/index.htm").get();
+			Elements alno=doc.select("span.bg_album_frame");
+			
+			for(Element no : alno){
+				//System.out.println(no.attr("onclick").substring(no.attr("onclick").indexOf("'")+1,no.attr("onclick").lastIndexOf("'")));
+				list.add(no.attr("onclick").substring(no.attr("onclick").indexOf("'")+1,no.attr("onclick").lastIndexOf("'")));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return list;
+	}
+	
 	public List<MusicVO> getMelonTop100(){
 		List<MusicVO> list= new ArrayList<MusicVO>();
 		try {
@@ -80,7 +95,7 @@ public class MelonManager {
 	public List<AlbumVO> getAlbumData(int max){
 		List<AlbumVO> list = new ArrayList<AlbumVO>();
 		//int alIndex=10057734;
-		for(int z=1;z<=max;z++){
+		for(int z=max;z>=max-500;z--){
 		try {
 			//while(true){
 				Document doc = Jsoup.connect("http://www.melon.com/album/detail.htm?albumId=" + z).get();
@@ -146,12 +161,12 @@ public class MelonManager {
 						if (ddoc.select("div.section_lyric div.lyric").first() != null) {
 							Element lyElem=ddoc.select("div.section_lyric div.lyric").first();
 							ly=lyElem.toString();
-							System.out.println("가사\n"+ly.substring(ly.indexOf("--> ")+4, ly.lastIndexOf("<br>")).replaceAll("<br>",""));
+							//System.out.println("가사\n"+ly.substring(ly.indexOf("--> ")+4, ly.lastIndexOf("<br>")).replaceAll("<br>",""));
 							mvo.setLyrics(ly.substring(ly.indexOf("--> ")+4, ly.lastIndexOf("<br>")).replaceAll("<br>",""));
 						}
 						else{
 							mvo.setLyrics("가사정보없음");
-							System.out.println("가사정보없음");
+							//System.out.println("가사정보없음");
 						}
 						
 						
