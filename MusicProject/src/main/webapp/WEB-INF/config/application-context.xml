@@ -17,9 +17,32 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 	<context:annotation-config/>
 	<context:component-scan base-package="com.aclass.*"/>
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"
-		p:requestContextAttribute="requestContext" p:viewClass="org.springframework.web.servlet.view.tiles2.TilesView"/>
+	<!-- class="org.springframework.web.servlet.view.InternalResourceViewResolver" -->
+	<bean id="viewResolver" 
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		p:requestContextAttribute="requestContext" 
+		p:viewClass="org.springframework.web.servlet.view.tiles2.TilesView"
+	/>
 	<!-- 설정파일 읽기 -->
-	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
-		p:definitions="/WEB-INF/tiles.xml"/>
+	<bean id="tilesConfigurer" 
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
+		p:definitions="/WEB-INF/tiles.xml"
+	/>
+	<!-- hadoop -->
+    <hadoop:configuration id="hadoopConf">
+      fs.default.name=hdfs://NameNode:9000
+    </hadoop:configuration>
+    <!-- Job job=Job.get(conf) -->
+    <hadoop:job id="musicJob"
+        configuration-ref="hadoopConf"
+       input-path="/music_input/"
+       output-path="/music_output/"
+       mapper="com.aclass.mapred.MusicMapper"
+       reducer="com.aclass.mapred.MusicReducer"
+       scope="prototype"
+     />
+     <hadoop:job-runner id="jobRunner" 
+        job-ref="musicJob"
+        run-at-startup="false"
+      />
 </beans>

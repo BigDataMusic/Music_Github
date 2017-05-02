@@ -66,9 +66,9 @@ public class GenieManager {
 					vo.setAlbumname(al.text().trim());
 					// list.add(vo);
 					
-					System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
+					/*System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
 					System.out.println("   " + vo.getPoster());
-					System.out.println("   " + vo.getAlbumname());
+					System.out.println("   " + vo.getAlbumname());*/
 					
 					rank++;
 				}

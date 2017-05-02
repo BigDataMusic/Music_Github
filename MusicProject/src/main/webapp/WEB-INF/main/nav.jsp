@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +10,7 @@
 <body>
 	<div id="sidebar">
 		<div class="logo_block">
-			<a href="#"><img src="resources/images/logo.jpg" alt="setalpm" width="198" height="156"/></a><br />
+			<a href="#"><img src="resources/images/nav_main.png" alt="setalpm" width="198" height="156"/></a><br />
 				<span class="slogan">음악의 모든건<br>음악인으로 통한다!</span>
 			<p class="text1">1. 상단 로고 변경<br>
 			2. 여기에 걸맞는 내용을<br>&nbsp;&nbsp;&nbsp; 넣어야 하고<br>
@@ -19,16 +20,11 @@
 		<p id="title_ex">음악인 차트</p>
 		<br />
 		<ul id="nav">
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
+		  <c:forEach var="vo" items="${bList }">
+		    <c:if test="${vo.rank <=10}">
+             <li><a href="#">${vo.title }</a></li>
+           </c:if>
+		  </c:forEach>
 		</ul>
 		<br />
 		<br />

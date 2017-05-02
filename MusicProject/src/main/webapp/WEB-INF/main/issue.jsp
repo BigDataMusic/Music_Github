@@ -1,12 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/css/top100_table.css" />
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+var i=0;
+$(function() {
+	$(".dataTr").click(function() {
+		var no=$(this).attr("value");
+		if(i==0)
+		{
+			$("#m"+no).show();
+			i=1;
+		}
+		else
+		{
+			$("#m"+no).hide();
+			i=0
+		}
+	});
+});
+</script>
 </head>
 <body>
 <center><h1 style="margin-bottom: 10px">Issue Topic</h1></center>
@@ -14,24 +34,31 @@
 <div id="content_top100">
 	<table width="735">
 		<tr>
-			<td align="right" valign="middle"><input type="text"/><input type="button" value="News Search"/></td>
+			<form method="post" action="issue.do">
+			<td align="right" valign="middle"><input type="text" value="${data }"/><input type="button" value="News Search"/></td>
+			</form>
 		</tr>
 	</table>
 	<table id="table2" width="735">
 		<tr>
-			<th width="10%">글번호</th>
-			<th width="45%">제목</th>
-			<th width="15%">글쓴이</th>
-			<th width="20%">게시일</th>
-			<th width="10%">조회수</th>
+			<th width="15%">카테고리</th>
+			<th width="55%">제목</th>
+			<th width="15%">언론사</th>
+			<th width="30%">게시일</th>
+			<!-- <th width="10%">조회수</th> -->
 		</tr>	
-		<c:forEach var="i" begin="1" end="15">
-		<tr class="dataTr">
-			<td>${i}</td>
-			<td class="song"><a href="#">뉴스 제목이 들어가는자리입니다.</a></td>
-			<td>아티스트</td>
-			<td>2017.12.31.</td>
-			<td>1000</td>
+		<c:forEach var="vo" items="${nList }" varStatus="s">
+		<tr class="dataTr" value="${s.index }">
+			<td>${vo.category }</td>
+			<td class="song">${vo.title }</td>
+			<td>${vo.author }</td>
+			<td>${vo.pubDate }</td>
+			<td><fmt:formatDate value="${dateFmt}" pattern="yyyy-MM-dd"/></td>
+		</tr>
+		<tr style="display: none;" id="m${s.index }">
+			<td align="left" colspan="4">
+				<a href="${vo.link}" target="_blank">${vo.description }</a>
+			</td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -47,7 +74,9 @@
 		</tr>
 	</table>
 </div>
+<div style="display: block;">
 <center><h1 style="margin-bottom: 10px">Issue People</h1></center>
+</div>
 <div id="content_top100">
 	<div class="issueArtist">
 		<img alt="" src="http://music.phinf.naver.net/20170425_198/1493098719862kXihY_JPEG/PC_%B8%AE%BD%BA%C6%AE_190x118.jpg" width="150" height="100">

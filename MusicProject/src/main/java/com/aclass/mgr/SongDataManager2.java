@@ -7,20 +7,20 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class SongDataManager {
+public class SongDataManager2 {
 
 	List<AlbumVO> alist = new ArrayList<AlbumVO>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SongDataManager sm = new SongDataManager();
+		SongDataManager2 sm = new SongDataManager2();
 		sm.songYearData();
 	}
 
 	public List<AlbumVO> songYearData() {
 		String data="";
 		try {
-			String[] genre = { "kpop", "pop", "fost", "dramaost" };
+			String[] genre = { "kpop", "fost", "dramaost" };// "pop", 
 			for (int i = 0; i < genre.length; i++) {
 				Document doc = Jsoup.connect("http://music.bugs.co.kr/years/" + genre[i]).get();
 				Elements yearElem = doc.select("section.sectionPadding div.innerContainer ul li figcaption.info a.title");
@@ -35,14 +35,15 @@ public class SongDataManager {
 					Elements tElem = doc2.select("td.check input");
 					for (int k = 0; k < tElem.size(); k++) {
 						Element artist = aElem.get(k);
+						String art=artist.text().replace(",", "");
 						Element title = tElem.get(k);
-						String tit=title.attr("title");
+						String tit=title.attr("title").replace("", "");
 
-						data+=tit.trim()+" "+artist.text().trim()+",\n";
-						System.out.println(tit.trim()+","+artist.text().trim());
+						data+="@t@i@t@l@e@"+tit.trim()+"@a@r@t@i@s@t@"+artist.text().trim()+"\n";
+						System.out.println("@t@i@t@l@e@"+tit.trim()+"@a@r@t@i@s@t@"+artist.text().trim());
 					}
-					data+="========================================"+ yearInfo.text() + "========================================";
-					// ? ! , / @
+					data+="\n"+"=============="+ yearInfo.text() + "============="+"\n";
+					
 				}
 			}
 			System.out.println("완료");
