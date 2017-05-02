@@ -21,7 +21,7 @@
 	<div id="sidebar">
 		<div class="logo_block">
 			<a href="#"><img src="resources/images/nav_recommand.png" alt="setalpm"
-				width="198" height="156" /></a><br /> <span class="slogan">음악의
+				width="190" height="156" /></a><br /> <span class="slogan">음악의
 				모든건<br>음악인으로 통한다!
 			</span>
 			<p class="text1">

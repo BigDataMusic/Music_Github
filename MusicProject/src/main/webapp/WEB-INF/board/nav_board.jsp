@@ -9,7 +9,7 @@
 <body>
 	<div id="sidebar">
 		<div class="logo_block" style="margin-bottom: 10px">
-			<a href="#"><img src="resources/images/nav_board.png" alt="setalpm" width="198" height="156"/></a><br />
+			<a href="#"><img src="resources/images/nav_board.png" alt="setalpm" width="190" height="156"/></a><br />
 				<span class="slogan">음악의 모든건<br>음악인으로 통한다!</span>
 			<p class="text1">1. 상단 로고 변경<br>
 			2. 여기에 걸맞는 내용을<br>&nbsp;&nbsp;&nbsp; 넣어야 하고<br>

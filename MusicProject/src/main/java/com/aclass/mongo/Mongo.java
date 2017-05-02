@@ -15,7 +15,7 @@ public class Mongo {
 
 	public static void main(String[] arg) {
 		try {
-			dbc.drop();
+			//dbc.drop();
 			List<AlbumVO> alList = new ArrayList<AlbumVO>();
 			MelonManager mm = new MelonManager();
 			alList = mm.getAlbumData(10);
@@ -23,7 +23,9 @@ public class Mongo {
 			mc = new MongoClient("localhost");
 			db = mc.getDB("aclass");
 			dbc = db.getCollection("musicAlbum");
-
+			for (AlbumVO vo : alList){
+				System.out.println(vo.getAlTitle());
+			}
 			for (AlbumVO vo : alList) {
 				BasicDBObject obj = new BasicDBObject();
 				obj.put("alNo", vo.getAlNo());
@@ -32,7 +34,7 @@ public class Mongo {
 			}
 
 		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
+			System.out.println("main "+ex.getMessage());
 		}
 	}
 
