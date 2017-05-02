@@ -66,7 +66,7 @@ public class Album {
 					
 					mdbc.insert(obj);
 				}
-				Thread.sleep(20000);
+				//Thread.sleep(20000);
 	    	}
 		} catch (Exception e) {
 			// TODO: handle exception

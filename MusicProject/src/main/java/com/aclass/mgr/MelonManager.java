@@ -199,7 +199,7 @@ public class MelonManager {
 					vo.setAlTitle(aTitleElement.text().substring(aTypeElement.text().length() + 5).trim());
 					vo.setAlPoster(posterElement.attr("src"));
 					vo.setAlPoint(Double.parseDouble(pointElement.text()));
-					vo.setAlLike(Integer.parseInt(likeElement.text()));
+					vo.setAlLike(Integer.parseInt(likeElement.text().replace(",", "")));
 					vo.setAlInfo(alInfo);
 					
 					list.add(vo);
