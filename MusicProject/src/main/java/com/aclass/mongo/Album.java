@@ -36,38 +36,37 @@ public class Album {
 		try {
 			mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38", 27017)));
 	    	db=mc.getDB("mydb");
-	    	mdbc=db.getCollection("MusicAlbum");
+	    	mdbc=db.getCollection("MusicAlbum2");
 	    	for(int k=0;k<100;k++){
-	    		
+	    		//List<AlbumVO> list = new ArrayList<AlbumVO>();
 				List<AlbumVO> list = mm.getAlbumData(Integer.parseInt(ano.get(k)));
-				//for(AlbumVO vo : list){
+				for(AlbumVO vo : list){
 					System.out.println("=====================");
-					System.out.println("======"+list.get(0).getAlTitle()+"========");
+					System.out.println("======"+vo.getAlTitle()+"========");
 					BasicDBObject obj = new BasicDBObject();
-					obj.put("alNo", list.get(0).getAlNo());
-					obj.put("alType", list.get(0).getAlType());
-					obj.put("alTitle", list.get(0).getAlTitle());
-					obj.put("alPoster", list.get(0).getAlPoster());
-					obj.put("alArtist", list.get(0).getAlArtist());
-					obj.put("alRegdate", list.get(0).getAlRegdate());
-					obj.put("alGenre", list.get(0).getAlGenre());
-					obj.put("saleCo", list.get(0).getSaleCo());
-					obj.put("entertainment", list.get(0).getEntertainment());
-					obj.put("alPoint", list.get(0).getAlPoint());
-					obj.put("alLike", list.get(0).getAlLike());
-					obj.put("alInfo", list.get(0).getAlInfo());
-					obj.put("alIncrement", list.get(0).getAlIncrement());
+					obj.put("alNo", vo.getAlNo());
+					obj.put("alType", vo.getAlType());
+					obj.put("alTitle", vo.getAlTitle());
+					obj.put("alPoster", vo.getAlPoster());
+					obj.put("alArtist", vo.getAlArtist());
+					obj.put("alRegdate", vo.getAlRegdate());
+					obj.put("alGenre", vo.getAlGenre());
+					obj.put("saleCo", vo.getSaleCo());
+					obj.put("entertainment", vo.getEntertainment());
+					obj.put("alPoint", vo.getAlPoint());
+					obj.put("alLike", vo.getAlLike());
+					obj.put("alInfo", vo.getAlInfo());
+					obj.put("alIncrement", vo.getAlIncrement());
 					
-					for(int i=1; i<list.get(0).getmList().size()+1; i++){
-						obj.put("mTitle"+i, list.get(0).getmList().get(i-1).getTitle());
-						System.out.println("mTitle"+Integer.toString(i)+" - "+ list.get(0).getmList().get(i-1).getTitle());
-						obj.put("mLyrics"+i, list.get(0).getmList().get(i-1).getLyrics());
+					for(int i=1; i<vo.getmList().size()+1; i++){
+						obj.put("mTitle"+i, vo.getmList().get(i-1).getTitle());
+						System.out.println("mTitle"+Integer.toString(i)+" - "+ vo.getmList().get(i-1).getTitle());
+						obj.put("mLyrics"+i, vo.getmList().get(i-1).getLyrics());
 					}
 					
 					
 					mdbc.insert(obj);
-					System.out.println("mongodb 입력 완료");
-				//}
+				}
 				//Thread.sleep(20000);
 	    	}
 		} catch (Exception e) {
