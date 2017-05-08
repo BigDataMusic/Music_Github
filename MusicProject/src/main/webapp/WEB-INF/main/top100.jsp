@@ -15,22 +15,20 @@
 	<table id="table1" width="735">
 		<tr>
 			<th width="5%">순위</th>
+			<th width="10%">순위변동</th>
 			<th width="10%">앨범자켓</th>
-			<th width="30%">곡명</th>
+			<th width="45%">곡명</th>
 			<th width="15%">아티스트</th>
-			<th width="15%">발매일</th>
-			<th width="10%">장르</th>
-			<th width="15%">발매사</th>
+			<th width="15%">앨범</th>
 		</tr>	
 		<c:forEach var="vo" items="${bList }">
 		<tr class="dataTr">
-			<td>${vo.rank }</td>
+			<td>${vo.rank}</td>
+			<td>${vo.increment}</td>
 			<td><a href="content.do"><img src="${vo.poster }" class="jacket_thumb100" /></a></td>
 			<td class="song">${vo.title }</td>
 			<td>${vo.artist }</td>
-			<td>2017.12.31.</td>
-			<td>장르</td>
-			<td>발매사발매사발매</td>
+			<td>${vo.albumname }</td>
 		</tr>
 		</c:forEach>
 	</table>

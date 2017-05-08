@@ -1,14 +1,8 @@
 package com.aclass.music;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.Resource;
+import java.util.*;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.xerces.xs.ItemPSVI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.hadoop.mapreduce.JobRunner;
 import org.springframework.stereotype.Controller;
@@ -19,6 +13,7 @@ import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MusicVO;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
+import com.aclass.mongodb.*;
 
 @Controller
 public class MainController {
@@ -96,32 +91,62 @@ public class MainController {
 		return "board/board_update";
 	}
 	@RequestMapping("issue.do")
-	public String main_issue(String data,Model model)
+	public String main_issue(String page,String data,Model model)
 	{
 		// 뉴스
 		if (data == null)
 			data = "오늘 음악";
-		List<Item> nList = nmgr.naverNewsAllData(data);
-		
+		List<Item> list = nmgr.naverNewsAllData(data);
+		List<NewsVO> nList=new ArrayList<NewsVO>();
 		String date="";
 		String title="";
-		for(Item n:nList){
-			date=n.getPubDate().substring(n.getPubDate().indexOf(",")+2,16);
+		for(Item n:list){
+			NewsVO vo=new NewsVO();
 			if(n.getTitle().length()>40){
 				title=n.getTitle().substring(0,40)+"..";
         		n.setTitle(title);
+        		vo.setTitle(n.getTitle());
+			}
+			else{
+				vo.setTitle(n.getTitle());
 			}
 			if(n.getCategory().trim().equals("섹션없음")){
 				n.setCategory("   -   ");
-				System.out.println(n.getCategory());
+				vo.setCategory(n.getCategory());
 			}
-			/*SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-	    	ParsePosition pos=new ParsePosition(i);
-			Date sampleDate=sdf.parse(date,pos);
-	    	System.out.println(sampleDate.toString());*/
+			else{
+				vo.setCategory(n.getCategory());
+			}
+			
+			vo.setAuthor(n.getAuthor());
+			vo.setDescription(n.getDescription());
+			vo.setLink(n.getLink());
+			
+			date=n.getPubDate().substring(n.getPubDate().indexOf(",")+2,16);
 			n.setPubDate(date);
+			vo.setPubDate(n.getPubDate());
+			
+			nList.add(vo);
     	}
-    	model.addAttribute("nList", nList);
+		
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int i=0;
+		int j=0;
+		int pagecnt=(curpage*10)-10;
+		List<NewsVO> rList=new ArrayList<NewsVO>();
+		for (NewsVO vo:nList) {
+			if (i < 10 && j >= pagecnt) {
+				rList.add(vo);
+				i++;
+			}
+			j++;
+		}		
+		
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("data", data);
+		model.addAttribute("rList", rList);
 		return "issue";
 	}
 }

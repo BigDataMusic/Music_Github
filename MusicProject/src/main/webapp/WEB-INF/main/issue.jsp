@@ -47,7 +47,7 @@ $(function() {
 			<th width="30%">게시일</th>
 			<!-- <th width="10%">조회수</th> -->
 		</tr>	
-		<c:forEach var="vo" items="${nList }" varStatus="s">
+		<c:forEach var="vo" items="${rList }" varStatus="s">
 		<tr class="dataTr" value="${s.index }">
 			<td>${vo.category }</td>
 			<td class="song">${vo.title }</td>
@@ -66,10 +66,10 @@ $(function() {
 <div id="content_top100" style="margin-top: 10px;margin-bottom:20px">
 	<table width="735">
 		<tr>
-			<td id="chart_rank">
-			&lt;prev&nbsp;&nbsp;&nbsp;
-				current&nbsp;page&nbsp;/&nbsp;total&nbsp;pages
-			&nbsp;&nbsp;&nbsp;next&gt;
+			<td id="chart_rank">&lt;
+			  <a href="issue.do?page=${curpage>1?curpage-1:curpage}">prev</a>&nbsp;&nbsp;&nbsp;
+				${curpage }&nbsp;page&nbsp;/&nbsp;${total }&nbsp;pages&nbsp;&nbsp;&nbsp;
+			  <a href="issue.do?page=${curpage<totalpage?curpage+1:curpage}">next</a>&gt;
 			</td>
 		</tr>
 	</table>
