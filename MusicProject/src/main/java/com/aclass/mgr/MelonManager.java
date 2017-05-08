@@ -8,10 +8,10 @@ import org.jsoup.select.Elements;
 public class MelonManager {
 	public static void main(String[] args){
 		MelonManager m = new MelonManager();
-		//m.getMelonTop100();
+		m.getMelonTop100();
 		//m.getAlbumData(10057734);
 		//m.getAlbumData(10);
-		System.out.println(m.getMaxIndex());
+		//System.out.println(m.getMaxIndex());
 		//m.getAlno100();
 	}
 	public List<String> getAlno100(){
@@ -41,18 +41,22 @@ public class MelonManager {
 			Elements pElem=doc.select("a.image_type15 img");
 			Elements increElem=doc.select("span.wrap_rank");
 			int i=0;
-			for(int j=6;j<titleElem.size();j++){
+			for(int j=6;j<=titleElem.size();j++){
 				System.out.println("====================================================================");
-				//System.out.println(increElem.get(j-6).text());
+				System.out.println(increElem.get(j-6).text());
 				String temp=increElem.get(j-6).text();
 				String up_down="";
-				if(temp.substring(3, 5).contains("상승")){
+				if(temp.contains("상승")){
 					up_down="+";
 				}
-				else if(temp.substring(3, 5).contains("하락")){
+				else if(temp.contains("하락")){
 					up_down="-";
 				}
-				String increment=up_down+temp.substring(temp.length()-1);
+				String increment="";
+				if(temp.contains("N")) 
+					increment="0";
+				else increment=up_down+temp.substring(6).trim();
+				
 				System.out.println(increment);
 				System.out.println(j-5+"위 "+titleElem.get(j).text()+" - "+artElem.get(j-6).text().substring(0,artElem.get(j-6).text().length()/2)+"-"+alElem.get(j-6).text());
 				System.out.println(pElem.get(j-6).attr("src"));

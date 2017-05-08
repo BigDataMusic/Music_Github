@@ -78,35 +78,4 @@ public class Album {
 	}
 
 }
-/*
- * public BoardVO boardGetData(int type,int no){
-		BoardVO vo = new BoardVO();
-		try {
-			BasicDBObject where = new BasicDBObject();
-			where.put("no", no);
-			//where no = 10
-			// where.put("no",new BasicDBObject("$lt",no))  
-			//no<10
-			//$lt, $gt / $le,$ge
-			//$set(update), $regex(like), $in(in)
-			if(type==0){
-				BasicDBObject obj=(BasicDBObject)dbc.findOne(where);
-				BasicDBObject updateObj = new BasicDBObject();
-				updateObj.put("hit", obj.getInt("hit")+1);
-				dbc.update(where, new BasicDBObject("$set",updateObj)); // $set을 줘서 update ,아무것도 안주면 insert
-			}
-			BasicDBObject data = (BasicDBObject)dbc.findOne(where);
-			vo.setNo(data.getInt("no"));
-			vo.setName(data.getString("name"));
-			vo.setSubject(data.getString("subject"));
-			vo.setContent(data.getString("content"));
-			vo.setRegdate(data.getString("regdate"));
-			vo.setHit(data.getInt("name"));
-			
-			
-		} catch (Exception e) {
-			System.out.println("boardGetData "+e.getMessage());
-		}
-		return vo;
-	}
-	*/
+
