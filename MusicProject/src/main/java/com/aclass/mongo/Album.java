@@ -36,7 +36,7 @@ public class Album {
 		try {
 			mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38", 27017)));
 	    	db=mc.getDB("mydb");
-	    	mdbc=db.getCollection("MusicAlbum2");
+	    	mdbc=db.getCollection("MusicAlbum");
 	    	for(int k=0;k<100;k++){
 	    		//List<AlbumVO> list = new ArrayList<AlbumVO>();
 				List<AlbumVO> list = mm.getAlbumData(Integer.parseInt(ano.get(k)));
