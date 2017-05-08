@@ -11,8 +11,14 @@ public class MusicVO {
 	private int like;
 	private String lyrics;
 	private boolean tit_music;
+	private String alno;
 	
-	
+	public String getAlno() {
+		return alno;
+	}
+	public void setAlno(String alno) {
+		this.alno = alno;
+	}
 	public boolean getTit_music() {
 		return tit_music;
 	}
