@@ -60,10 +60,29 @@ public class MainController {
 		return "content";
 	}
 	@RequestMapping("top100.do")
-	public String main_top100(Model model)
+	public String main_top100(String page,Model model)
 	{
+		if(page==null)
+			page="1";
+		int start=Integer.parseInt(page)*10-10;
+		int end=Integer.parseInt(page)*10;
+		
 		List<MusicVO> bList=bmgr.bugsRankData();
-		model.addAttribute("bList", bList);
+		List<MusicVO> vList=new ArrayList<MusicVO>();
+		
+		for(int i=start;i<end;i++)
+		{
+			MusicVO nvo=new MusicVO();
+			nvo.setRank(bList.get(i).getRank());
+			nvo.setIncrement(bList.get(i).getIncrement());
+			nvo.setPoster(bList.get(i).getPoster());
+			nvo.setTitle(bList.get(i).getTitle());
+			nvo.setArtist(bList.get(i).getArtist());
+			nvo.setAlbumname(bList.get(i).getAlbumname());
+			vList.add(nvo);
+		}
+			
+		model.addAttribute("vList", vList);
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
