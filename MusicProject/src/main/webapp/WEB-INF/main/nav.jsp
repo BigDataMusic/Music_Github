@@ -20,8 +20,8 @@
 		<p id="title_ex">음악인 차트</p>
 		<br />
 		<ul id="nav">
-		  <c:forEach var="vo" items="${bList }">
-		    <c:if test="${vo.rank <=10}">
+		  <c:forEach var="vo" items="${bList }" varStatus="i">
+		    <c:if test="${i.index<10}">
              <li><a href="#">${vo.title }</a></li>
            </c:if>
 		  </c:forEach>

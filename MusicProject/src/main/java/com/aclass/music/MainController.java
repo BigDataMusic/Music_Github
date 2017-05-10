@@ -46,12 +46,20 @@ public class MainController{
 	public String main_page(String data,Model model)
 	{
 		// 음악인차트
-		List<MusicVO> bList = bmgr.bugsRankData();
+		/*List<MusicVO> bList = bmgr.bugsRankData();
 		String mTitle="";
 		for(MusicVO b:bList){
 			if(b.getTitle().length()>15){
 				mTitle=b.getTitle().substring(0,15)+"..";
         		b.setTitle(mTitle);
+			}
+		}*/
+		List<MusicVO> bList = dao.bugsMusicData();
+		String mTitle="";
+		for(MusicVO b:bList){
+			if(b.getTitle().length()>15){
+				mTitle=b.getTitle().substring(0,15)+"..";
+				b.setTitle(mTitle);
 			}
 		}
 		// 뉴스

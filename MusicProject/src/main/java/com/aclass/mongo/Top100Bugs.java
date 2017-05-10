@@ -3,6 +3,8 @@ package com.aclass.mongo;
 import java.net.InetSocketAddress;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MusicVO;
 import com.mongodb.BasicDBObject;
@@ -10,7 +12,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
-
+@Component
 public class Top100Bugs {
 	static MongoClient mc;
 	static DB db;
@@ -18,7 +20,6 @@ public class Top100Bugs {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		BugsManager bm = new BugsManager();
-		
 		
 		try {
 			mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38", 27017)));

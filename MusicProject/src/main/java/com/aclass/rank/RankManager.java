@@ -102,8 +102,8 @@ public class RankManager {
 				vo.setUrl("http://music.naver.com"+url.trim());
 				niList.add(vo);
 				
-				System.out.println(vo.getTitle()+"-"+vo.getPoster());
-				System.out.println(vo.getUrl());
+				//System.out.println(vo.getTitle()+"-"+vo.getPoster());
+				//System.out.println(vo.getUrl());
 			}
 		} catch (Exception ex) {
 			System.out.println("naverIssuData " + ex.getMessage());
