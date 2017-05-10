@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,18 +18,11 @@
 			&nbsp;&nbsp;&nbsp;흠냐...</p>
 		</div>
 		<p id="title_ex">NAVER 실시간 검색</p>
-		<br />
+		<br/>
 		<ul id="navigation" style="padding-top: 0px;list-style-type: decimal;">
-			<li class="color"><a href="#">첫번째 노래</a></li>
-			<li><a href="#">두번째 노래</a></li>
-			<li class="color"><a href="#">세번째 노래</a></li>
-			<li><a href="#">네번째 노래</a></li>
-			<li class="color"><a href="#">다섯번째 노래</a></li>
-			<li><a href="#">여섯번째 노래</a></li>
-			<li class="color"><a href="#">일곱번째 노래</a></li>
-			<li><a href="#">여덟첫번째 노래</a></li>
-			<li class="color"><a href="#">아홉번째 노래</a></li>
-			<li><a href="#">열번째 노래</a></li>
+		<c:forEach var="vo" items="${nrList }">
+			<li class="color">${vo.rank }&nbsp;&nbsp;&nbsp;&nbsp;<a href="${vo.url }">${vo.title }</a></li>
+		</c:forEach>
 		</ul>
 		<br />
 		<br />
@@ -36,16 +30,9 @@
 		<p id="title_ex">DAUM 실시간 검색</p>
 		<br />
 		<ul id="navigation" style="padding-top: 0px;list-style-type: decimal;">
-			<li class="color"><a href="#">첫번째 노래</a></li>
-			<li><a href="#">두번째 노래</a></li>
-			<li class="color"><a href="#">세번째 노래</a></li>
-			<li><a href="#">네번째 노래</a></li>
-			<li class="color"><a href="#">다섯번째 노래</a></li>
-			<li><a href="#">여섯번째 노래</a></li>
-			<li class="color"><a href="#">일곱번째 노래</a></li>
-			<li><a href="#">여덟첫번째 노래</a></li>
-			<li class="color"><a href="#">아홉번째 노래</a></li>
-			<li><a href="#">열번째 노래</a></li>
+		<c:forEach var="vo" items="${drList }">
+			<li class="color">${vo.rank }&nbsp;&nbsp;&nbsp;&nbsp;<a href="${vo.url }">${vo.title }</a></li>
+		</c:forEach>
 		</ul>		
 	</div>
 </body>
