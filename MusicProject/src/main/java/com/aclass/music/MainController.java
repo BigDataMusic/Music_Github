@@ -23,7 +23,7 @@ import com.aclass.review.naver.RManager;
 import com.aclass.mongodb.*;
 
 @Controller
-public class MainController {
+public class MainController{
 	@Autowired
 	private RankManager rmgr;
 	@Autowired
@@ -31,10 +31,9 @@ public class MainController {
 	@Autowired//@Resource(name = "musicDAO")
 	private MusicDAO dao;
 	@Autowired
-	private MelonManager mmgr;
-	
-	@Autowired
 	private BugsManager bmgr;
+	@Autowired
+	private MelonManager mmgr;
 	@Autowired
 	private Configuration conf;
 	@Autowired
