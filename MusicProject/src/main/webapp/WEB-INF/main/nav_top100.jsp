@@ -20,15 +20,11 @@
 		<br />
 		<ul id="navigation">
 			<li class="color"><a href="#">음악인 차트</a></li>
-			<li><a href="#">가온 차트</a></li>
-			<li class="color"><a href="#">멜론 차트</a></li>
+			<li><a href="#">멜론 차트</a></li>
+			<li class="color"><a href="#">벅스 차트</a></li>
 			<li><a href="#">지니 차트</a></li>
-			<li class="color"><a href="#">소리바다 차트</a></li>
-			<li><a href="#">벅스 차트</a></li>
-			<li class="color"><a href="#">네이버 뮤직 차트</a></li>
-			<li><a href="#">1111</a></li>
-			<li class="color"><a href="#">1111</a></li>
-			<li><a href="#">1111</a></li>
+			<li class="color"><a href="#">엠넷 차트</a></li>
+			<li><a href="#">네이버 뮤직 차트</a></li>
 		</ul>
 		<br />
 		<br />
