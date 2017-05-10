@@ -12,18 +12,20 @@ public void rGraph()
 {
 	   try
 	   {
-		   String song = "좋다고 말해";
+		   String song = "널 사랑하지 않아";
 		   
 		   RConnection rc=new RConnection();
-		   rc.voidEval("library(rJava)");
-		   rc.voidEval("library(KoNLP)");
-		   rc.voidEval("library(RMongo)");
 		   rc.voidEval("library(wordcloud)");
+		   rc.voidEval("library(KoNLP)");
+		   rc.voidEval("library(rJava)");
+		  
+		   rc.voidEval("library(RMongo)");
+		 
 		   rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 		
 		   rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
 
-		   rc.voidEval("data<-dbGetQuery(mongo,\"naverAPI\",\"{song:"+song+"}\")"); 
+		   rc.voidEval("data<-dbGetQuery(mongo,\"naverAPI\",\"{song:'"+song+"'}\")"); 
 		
 		   rc.voidEval("news<-data");
 		   //rc.voidEval("news<-data$review"); 이거쓰니까 데이터 줄어버려 
