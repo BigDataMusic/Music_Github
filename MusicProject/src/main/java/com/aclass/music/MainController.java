@@ -2,6 +2,8 @@ package com.aclass.music;
 
 import java.util.*;
 
+import javax.annotation.Resource;
+
 import org.apache.hadoop.conf.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.hadoop.mapreduce.JobRunner;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.aclass.mgr.AlbumVO;
 import com.aclass.mgr.BugsManager;
+import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
@@ -19,7 +23,7 @@ import com.aclass.review.naver.RManager;
 import com.aclass.mongodb.*;
 
 @Controller
-public class MainController {
+public class MainController{
 	@Autowired
 	private RankManager rmgr;
 	@Autowired
@@ -28,6 +32,8 @@ public class MainController {
 	private MusicDAO dao;
 	@Autowired
 	private BugsManager bmgr;
+	@Autowired
+	private MelonManager mmgr;
 	@Autowired
 	private Configuration conf;
 	@Autowired
@@ -75,10 +81,29 @@ public class MainController {
 		return "content";
 	}
 	@RequestMapping("top100.do")
-	public String main_top100(Model model)
+	public String main_top100(String page,Model model)
 	{
+		if(page==null)
+			page="1";
+		int start=Integer.parseInt(page)*10-10;
+		int end=Integer.parseInt(page)*10;
+		
 		List<MusicVO> bList=bmgr.bugsRankData();
-		model.addAttribute("bList", bList);
+		List<MusicVO> vList=new ArrayList<MusicVO>();
+		
+		for(int i=start;i<end;i++)
+		{
+			MusicVO nvo=new MusicVO();
+			nvo.setRank(bList.get(i).getRank());
+			nvo.setIncrement(bList.get(i).getIncrement());
+			nvo.setPoster(bList.get(i).getPoster());
+			nvo.setTitle(bList.get(i).getTitle());
+			nvo.setArtist(bList.get(i).getArtist());
+			nvo.setAlbumname(bList.get(i).getAlbumname());
+			vList.add(nvo);
+		}
+			
+		model.addAttribute("vList", vList);
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
@@ -87,8 +112,32 @@ public class MainController {
 		return "recommand";
 	}
 	@RequestMapping("newtracks.do")
-	public String main_newtracks()
+	public String main_newtracks(Model model)
 	{
+		boolean Check=false;
+		List<MusicVO> nlist = dao.newMusicData();
+		List<AlbumVO> alist = dao.AlbumData();
+		List<AlbumVO> malist = new ArrayList<AlbumVO>();
+		for(int i=0;i<5;i++){
+			System.out.println(nlist.get(i).getAlno());
+			for(int j=0;j<alist.size();j++){
+				System.out.println(j+" 비교");
+				if(nlist.get(i).getAlno().equals(Integer.toString(alist.get(j).getAlNo()))){	
+					System.out.println("있는 앨범정보");
+					malist.add(alist.get(j));
+					Check=true;
+					break;
+				}
+				else if(j==alist.size()-1){
+					System.out.println("없는 앨범정보");
+					dao.albumInsert(Integer.parseInt(nlist.get(i).getAlno()));
+					malist.add(mmgr.getAlbumData(Integer.parseInt(nlist.get(i).getAlno())));
+					//dao.getAlbumData(nlist.get(i).getAlno());
+				}
+			}
+		}
+		model.addAttribute("malist",malist);
+		model.addAttribute("nlist",nlist);
 		return "newtracks";
 	}
 	@RequestMapping("board.do")
