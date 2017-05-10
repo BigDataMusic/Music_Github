@@ -14,20 +14,17 @@
 		</div> -->
 		<div class="bg">
 			<div class="column3">
-				<img src="resources/images/graph1.jpg" alt="" width="480" height="270" />
+				<img src="resources/images/graph1.jpg" alt="" width="480" height="200" />
 			</div>
 			<div class="column4">
 				<p id="title_ex" style="margin: 0px;padding: 0;">종합 순위 차트</p>
 				<ul id="navigation1">
 					<li class="color"><a href="#">음악인 차트</a></li>
-					<li><a href="#">가온 차트</a></li>
-					<li class="color"><a href="#">멜론 차트</a></li>
-					<li><a href="#">소리바다 차트</a></li>
+					<li><a href="#">멜론 차트</a></li>
 					<li class="color"><a href="#">벅스 차트</a></li>
 					<li><a href="#">지니 차트</a></li>
 					<li class="color"><a href="#">엠넷 차트</a></li>
-					<li><a href="#">KT뮤직 차트</a></li>
-					<li class="color"><a href="#">네이버 뮤직 차트</a></li>
+					<li><a href="#">네이버 뮤직 차트</a></li>
 				</ul>
 			</div>
 		</div>
@@ -58,15 +55,19 @@
 					<c:forEach var="vo" items="${nList }">
 					  <p><a href="${vo.link }">${vo.title }</a></p>
 					</c:forEach>
-					<a href="issue.do" class="more">more info</a>
+					<a href="${vo.url }" class="more">more info</a>
 				</div>
 				<div class="news">
 					<span>Artist</span><br />
-					<img src="resources/images/photo.jpg" alt="" width="183" height="97" />
-					<p>Proin nunc. Donec massa. Nulla pulvinar, nisl ac convallis
-						nonummy, tellus eros sodales enim, in tincidunt mauris in odio.
-						massa ac laoreet iaculipede nisl ullamcorpermassa,consectetuer</p>
-					<a href="#" class="more">more info</a>
+					<c:forEach var="vo" items="${niList }" varStatus="status">
+					<c:if test="${status.count<='2'}">
+					  <a href=${vo.url }>
+					    <img src="${vo.poster }" alt="" width="183" height="110" />
+					    <p>${vo.title }</p>
+					  </a>
+					</c:if>
+					</c:forEach>
+					<a href="${vo.url }" class="more">more info</a>
 				</div>
 			</div>
 		</div>

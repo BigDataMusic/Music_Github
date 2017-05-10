@@ -13,11 +13,15 @@ import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MusicVO;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
+import com.aclass.rank.*;
+import com.aclass.rank.RankVO;
 import com.aclass.review.naver.RManager;
 import com.aclass.mongodb.*;
 
 @Controller
 public class MainController {
+	@Autowired
+	private RankManager rmgr;
 	@Autowired
 	private NewsManager nmgr;
 	@Autowired//@Resource(name = "musicDAO")
@@ -35,8 +39,15 @@ public class MainController {
 	@RequestMapping("main.do")
 	public String main_page(String data,Model model)
 	{
+		// 음악인차트
 		List<MusicVO> bList = bmgr.bugsRankData();
-		
+		String mTitle="";
+		for(MusicVO b:bList){
+			if(b.getTitle().length()>15){
+				mTitle=b.getTitle().substring(0,15)+"..";
+        		b.setTitle(mTitle);
+			}
+		}
 		// 뉴스
 		if(data==null)
     		data="오늘 음악";
@@ -49,6 +60,10 @@ public class MainController {
         		n.setTitle(title);
         	}    		
     	}
+    	// Artist
+    	List<IssueVO> niList=rmgr.naverIssuData();
+    	
+    	model.addAttribute("niList", niList);
     	model.addAttribute("nList", nList);
 		model.addAttribute("bList", bList);
 		return "main";
@@ -140,16 +155,23 @@ public class MainController {
 		int curpage=Integer.parseInt(page);
 		int i=0;
 		int j=0;
-		int pagecnt=(curpage*10)-10;
+		int pagecnt=(curpage*14)-14;
 		List<NewsVO> rList=new ArrayList<NewsVO>();
 		for (NewsVO vo:nList) {
-			if (i < 10 && j >= pagecnt) {
+			if (i < 14 && j >= pagecnt) {
 				rList.add(vo);
 				i++;
 			}
 			j++;
 		}		
 		
+    	List<RankVO> nrList=rmgr.naverRankData();
+    	List<RankVO> drList=rmgr.naverRankData();
+    	List<IssueVO> niList=rmgr.naverIssuData();
+    	
+    	model.addAttribute("niList", niList);
+    	model.addAttribute("nrList", nrList);
+    	model.addAttribute("drList", drList);
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("data", data);
 		model.addAttribute("rList", rList);
