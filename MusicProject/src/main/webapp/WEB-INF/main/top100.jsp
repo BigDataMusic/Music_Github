@@ -21,7 +21,7 @@
 			<th width="15%">아티스트</th>
 			<th width="15%">앨범</th>
 		</tr>	
-		<c:forEach var="vo" items="${bList }">
+		<c:forEach var="vo" items="${vList }">
 		<tr class="dataTr">
 			<td>${vo.rank}</td>
 			<td>${vo.increment}</td>
