@@ -82,8 +82,12 @@ $(function() {
 	<div class="issueArtist">
 		<img alt="" src="${vo.poster }" width="150" height="100">
 		<div style="width: 205px; padding:3px 5px 3px 5px;float: right;display: inline-block; vertical-align: middle;">
-			<p><span><h3><a href="${vo.url}">${vo.title }</a></h3></span>
-		</div>
+			<div style="height: 60px">
+			<span><h3 style="text-decoration: none;color:#555;">${vo.title }</h3></span>
+			</div>
+			<a href="${vo.url}" style="text-decoration: none;color:#555;">
+			<input type="button" value="상세보기" style="margin-left:130px;"></a>
+		</div>		
 	</div>
 	</c:forEach>
 </div>
