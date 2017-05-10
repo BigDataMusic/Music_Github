@@ -13,6 +13,7 @@ import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MusicVO;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
+import com.aclass.review.naver.RManager;
 import com.aclass.mongodb.*;
 
 @Controller
@@ -27,6 +28,10 @@ public class MainController {
 	private Configuration conf;
 	@Autowired
 	private JobRunner jr;
+	
+	@Autowired
+	private RManager rmanager;
+	
 	@RequestMapping("main.do")
 	public String main_page(String data,Model model)
 	{
@@ -51,6 +56,7 @@ public class MainController {
 	@RequestMapping("content.do")
 	public String main_content_page()
 	{
+		rmanager.rGraph();
 		return "content";
 	}
 	@RequestMapping("top100.do")

@@ -54,7 +54,7 @@
 			데뷔 : 2008년 미니 앨범 [Lost and Found]</p>
 			<a href="#" class="button">more info</a>
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
-			<img src="resources/images/chart.jpg" alt="" width="200" height="200" />
+			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" />
 			<div style="height: 10px"></div>
 			<img src="resources/images/chart.jpg" alt="" width="200" height="200" />
 		</div>
