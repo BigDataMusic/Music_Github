@@ -1,4 +1,4 @@
-package com.aclass.mongo;
+/*package com.aclass.mongo;
 
 import com.aclass.mgr.*;
 import com.mongodb.BasicDBObject;
@@ -39,3 +39,4 @@ public class Mongo {
 	}
 
 }
+*/
