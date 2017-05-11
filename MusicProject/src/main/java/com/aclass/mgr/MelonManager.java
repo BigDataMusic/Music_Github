@@ -1,17 +1,19 @@
 package com.aclass.mgr;
 import java.util.*;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MelonManager {
 	public static void main(String[] args){
 		MelonManager m = new MelonManager();
-		m.getMelonTop100(); //TOP100
+		//m.getMelonTop100(); //TOP100
 		//m.getAlbumData(10060030); //앨범정보
 		//m.getAlno100(); //top100에 있는 앨범번호
-		//m.getMelonNewMusic(); //최신앨범(적용전)
+		m.getMelonNewMusic(); //최신앨범(적용전)
 	}
 	public List<String> getAlno100(){
 		List<String> list = new ArrayList<String>();
@@ -80,47 +82,62 @@ public class MelonManager {
 	//최신곡
 	public List<MusicVO> getMelonNewMusic(){
 		List<MusicVO> list= new ArrayList<MusicVO>();
-		String[] newMusic ={//1~200까지
-			"1","51"/*,"101","151"*/	
-		};
-				
 		try {	
-			//for(int k=0;k<newMusic.length;k++){	
-				Document doc=Jsoup.connect("http://www.melon.com/new/index.htm#params%5BareaFlg%5D=I&po=pageObj&startIndex=51").get();
+			Document doc=Jsoup.connect("http://www.melon.com/new/index.htm#params%5BareaFlg%5D=I&po=pageObj&startIndex=51").get();
+			
+			Elements titleElem=doc.select("div.wrap_song_info strong a");
+			Elements artElem=doc.select("div.wrap_song_info div div.rank02");
+			Elements alElem=doc.select("div.wrap_song_info div div.rank03");
+			Elements pElem=doc.select("a.image_type15 img");
+			Elements alnoElem=doc.select("div.rank03 a");
+			Elements mnoElem=doc.select("td.t_left div.right_none button.btn_icon");
+			int i=0;
+			for(int j=0;j<titleElem.size();j++){
+				System.out.println(j+"====================================================================");
+				System.out.println("제목 : "+titleElem.get(j).text());
+				System.out.println("가수 : "+artElem.get(j).text().substring(0, artElem.get(j).text().length()/2));
+				System.out.println("앨범 : "+alElem.get(j).text());
+				System.out.println("곡번호 : "+mnoElem.get(j).attr("data-song-no"));
 				
-				Elements titleElem=doc.select("div.wrap_song_info strong a");
-				Elements artElem=doc.select("div.wrap_song_info div div.rank02");
-				Elements alElem=doc.select("div.wrap_song_info div div.rank03");
-				Elements pElem=doc.select("a.image_type15 img");
-				Elements alnoElem=doc.select("div.rank03 a");
+				String alno=alnoElem.get(j).attr("href");
+				alno=alno.substring(alno.indexOf("'")+1, alno.lastIndexOf("'"));
+				System.out.println("앨범번호 : "+alno);
 				
-				int i=0;
-				for(int j=0;j<titleElem.size();j++){
-					System.out.println(j+"====================================================================");
-					System.out.println("제목 : "+titleElem.get(j).text());
-					System.out.println("가수 : "+artElem.get(j).text());
-					System.out.println("앨범 : "+alElem.get(j).text());
-					String alno=alnoElem.attr("href");
-					alno=alno.substring(alno.indexOf("'")+1, alno.lastIndexOf("'"));
-					System.out.println("앨범번호 : "+alno);
+				System.out.println(pElem.get(j).attr("src"));
+				
+
+				MusicVO vo = new MusicVO();
+				Document ddoc=Jsoup.connect("http://www.melon.com/song/detail.htm?songId="+mnoElem.get(j).attr("data-song-no")).get();
+				String ly="";
+				if (ddoc.select("div.section_lyric div.lyric").first() != null) {
+					Element lyElem=ddoc.select("div.section_lyric div.lyric").first();
+					ly=lyElem.toString();
+					//System.out.println("가사\n"+ly.substring(ly.indexOf("--> ")+4, ly.lastIndexOf("<br>")).replaceAll("<br>",""));
 					
-					System.out.println(pElem.get(j).attr("src"));
-					
-					MusicVO vo = new MusicVO();
-					vo.setPoster(pElem.get(j).attr("src"));
-					vo.setTitle(titleElem.get(j).text());
-					vo.setArtist(artElem.get(j).text());
-					vo.setAlbumname(alElem.get(j).text());
-					vo.setAlno(alno);
-					list.add(vo);
+					vo.setLyrics(ly.substring(ly.indexOf("--> ")+4, ly.lastIndexOf("<br>")).replaceAll("<br>",""));
 				}
-			//}
+				else{
+					vo.setLyrics("가사정보없음");
+					
+					//System.out.println("가사정보없음");
+				}
+				
+				System.out.println(artElem.get(j).text());
+				vo.setNo(Integer.parseInt(mnoElem.get(j).attr("data-song-no").trim()));
+				vo.setPoster(pElem.get(j).attr("src"));
+				vo.setTitle(titleElem.get(j).text());
+				vo.setArtist(artElem.get(j).text().substring(0, artElem.get(j).text().length()/2));
+				vo.setAlbumname(alElem.get(j).text());
+				vo.setAlno(alno);
+				list.add(vo);
+			}
 			
 		} catch (Exception e) {
 			System.out.println("getMelonTop100 "+e.getMessage());
 		}
 		return list;
 	}
+
 	public int getMaxIndex(){
 		int max=0;
 		try {
@@ -139,10 +156,11 @@ public class MelonManager {
 		return max;
 	}
 
-	public List<AlbumVO> getAlbumData(int z){
-		List<AlbumVO> list = new ArrayList<AlbumVO>();
+	public AlbumVO getAlbumData(int z){
+		//List<AlbumVO> list = new ArrayList<AlbumVO>();
 		//int alIndex=10057734;
 		//for(int z=max;z>=max-100;z--){
+		AlbumVO vo = new AlbumVO();
 		try {
 				Document doc = Jsoup.connect("http://www.melon.com/album/detail.htm?albumId=" + z).get();
 				if (doc.select("p.albumname").first() != null) {
@@ -179,7 +197,6 @@ public class MelonManager {
 					// 좋아요
 					System.out.println(likeElement.text());
 					
-					AlbumVO vo = new AlbumVO();
 					//곡정보
 					List<MusicVO> mList= new ArrayList<MusicVO>();
 					Elements mnoElems= doc.select("tr td div input");
@@ -249,16 +266,12 @@ public class MelonManager {
 					vo.setAlLike(Integer.parseInt(likeElement.text().replace(",", "")));
 					vo.setAlInfo(alInfo);
 					
-					list.add(vo);
+					//list.add(vo);
 				}
-
 		} catch (Exception e) {
 			System.out.println("getAlbumData "+e.getMessage());
 		}
-		//}
-		
-		
-		return list;
+		return vo;
 	}
 	public List<ArtistVO> getArtistData(int index){
 		List<ArtistVO> list = new ArrayList<ArtistVO>();

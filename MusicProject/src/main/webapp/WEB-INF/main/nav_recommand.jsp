@@ -49,16 +49,18 @@
 				<li>
 					<h3>날씨별 추천</h3>
 					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
+						<li><a href="#">봄</a></li>
+						<li><a href="#">여름</a></li>
+						<li><a href="#">가을</a></li>
+						<li><a href="#">겨울</a></li>
+						<li><a href="#">화창한날</a></li>
+						<li><a href="#">아침</a></li>
+						<li><a href="#">오후</a></li>
+						<li><a href="#">저녁</a></li>
+						<li><a href="#">밤/새벽</a></li>
+						<li><a href="#">비/흐림</a></li>
+						<!-- <li><a href="#">크리스마스</a></li> -->
+						<li><a href="#">눈오는 날</a></li>
 					</ul>
 				</li>
 				<li>
@@ -94,16 +96,12 @@
 				<li>
 					<h3>감정별 추천</h3>
 					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
+						<li><a href="#">사랑/기쁨</a></li>
+						<li><a href="#">이별/슬픔</a></li>
+						<li><a href="#">스트레스/짜증</a></li>
+						<li><a href="#">우울할때</a></li>
+						<li><a href="#">멘붕/불안</a></li>
+						<li><a href="#">외로울때</a></li>
 					</ul>
 				</li>
 			</ul>

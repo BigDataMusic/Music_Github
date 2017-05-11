@@ -11,24 +11,22 @@
 		<div class="logo_block">
 			<a href="#"><img src="resources/images/nav_top100.png" alt="setalpm" width="190" height="156"/></a><br />
 				<span class="slogan">음악의 모든건<br>음악인으로 통한다!</span>
-			<p class="text1">1. 상단 로고 변경<br>
-			2. 여기에 걸맞는 내용을<br>&nbsp;&nbsp;&nbsp; 넣어야 하고<br>
-			3. 위아래 메뉴들 정해야 하고...<br>
-			&nbsp;&nbsp;&nbsp;흠냐...</p>
+			<p class="text1">
+			국내 유수의 차트를 정리하고<br>
+			음악인만의 포인트를 부여하여<br>
+			음악인만의 랭킹을 <br>
+			한땀한땀 정성들여 만듭니다.<br>
+			Music is Life~!!</p>
 		</div>
 		<p id="title_ex">음원 차트</p>
 		<br />
 		<ul id="navigation">
 			<li class="color"><a href="#">음악인 차트</a></li>
-			<li><a href="#">가온 차트</a></li>
-			<li class="color"><a href="#">멜론 차트</a></li>
+			<li><a href="#">멜론 차트</a></li>
+			<li class="color"><a href="#">벅스 차트</a></li>
 			<li><a href="#">지니 차트</a></li>
-			<li class="color"><a href="#">소리바다 차트</a></li>
-			<li><a href="#">벅스 차트</a></li>
-			<li class="color"><a href="#">네이버 뮤직 차트</a></li>
-			<li><a href="#">1111</a></li>
-			<li class="color"><a href="#">1111</a></li>
-			<li><a href="#">1111</a></li>
+			<li class="color"><a href="#">엠넷 차트</a></li>
+			<li><a href="#">네이버 뮤직 차트</a></li>
 		</ul>
 		<br />
 		<br />

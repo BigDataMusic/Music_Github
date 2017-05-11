@@ -39,8 +39,7 @@ public class Album {
 	    	mdbc=db.getCollection("MusicAlbum");
 	    	for(int k=0;k<100;k++){
 	    		//List<AlbumVO> list = new ArrayList<AlbumVO>();
-				List<AlbumVO> list = mm.getAlbumData(Integer.parseInt(ano.get(k)));
-				for(AlbumVO vo : list){
+				AlbumVO vo = mm.getAlbumData(Integer.parseInt(ano.get(k)));
 					System.out.println("=====================");
 					System.out.println("======"+vo.getAlTitle()+"========");
 					BasicDBObject obj = new BasicDBObject();
@@ -66,7 +65,7 @@ public class Album {
 					
 					
 					mdbc.insert(obj);
-				}
+				
 				//Thread.sleep(20000);
 	    	}
 		} catch (Exception e) {
