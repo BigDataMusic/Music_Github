@@ -78,34 +78,18 @@ $(function() {
 <center><h1 style="margin-bottom: 10px">Issue People</h1></center>
 </div>
 <div id="content_top100">
+	<c:forEach var="vo" items="${niList }">
 	<div class="issueArtist">
-		<img alt="" src="http://music.phinf.naver.net/20170425_198/1493098719862kXihY_JPEG/PC_%B8%AE%BD%BA%C6%AE_190x118.jpg" width="150" height="100">
+		<img alt="" src="${vo.poster }" width="150" height="100">
 		<div style="width: 205px; padding:3px 5px 3px 5px;float: right;display: inline-block; vertical-align: middle;">
-			<p><span><h3>앨범 발매 프로젝트 노래의 탄생</h3></span><br>
-			뮤지션의 창작 활동 지원을 위한 앨범 발매 프로젝트! 시즌1에서 최종 선정된 최재만의 데모곡과 발매곡을 비교 감상해보세요.</p>
-		</div>
+			<div style="height: 60px">
+			<span><h3 style="text-decoration: none;color:#555;">${vo.title }</h3></span>
+			</div>
+			<a href="${vo.url}" style="text-decoration: none;color:#555;">
+			<input type="button" value="상세보기" style="margin-left:130px;"></a>
+		</div>		
 	</div>
-	<div class="issueArtist">
-		<img alt="" src="http://music.phinf.naver.net/20170425_198/1493098719862kXihY_JPEG/PC_%B8%AE%BD%BA%C6%AE_190x118.jpg" width="150" height="100">
-		<div style="width: 205px; padding:3px 5px 3px 5px;float: right;display: inline-block; vertical-align: middle;">
-			<p><span><h3>앨범 발매 프로젝트 노래의 탄생</h3></span><br>
-			뮤지션의 창작 활동 지원을 위한 앨범 발매 프로젝트! 시즌1에서 최종 선정된 최재만의 데모곡과 발매곡을 비교 감상해보세요.</p>
-		</div>
-	</div>
-	<div class="issueArtist">
-		<img alt="" src="http://music.phinf.naver.net/20170425_198/1493098719862kXihY_JPEG/PC_%B8%AE%BD%BA%C6%AE_190x118.jpg" width="150" height="100">
-		<div style="width: 205px; padding:3px 5px 3px 5px;float: right;display: inline-block; vertical-align: middle;">
-			<p><span><h3>앨범 발매 프로젝트 노래의 탄생</h3></span><br>
-			뮤지션의 창작 활동 지원을 위한 앨범 발매 프로젝트! 시즌1에서 최종 선정된 최재만의 데모곡과 발매곡을 비교 감상해보세요.</p>
-		</div>
-	</div>
-	<div class="issueArtist">
-		<img alt="" src="http://music.phinf.naver.net/20170425_198/1493098719862kXihY_JPEG/PC_%B8%AE%BD%BA%C6%AE_190x118.jpg" width="150" height="100">
-		<div style="width: 205px; padding:3px 5px 3px 5px;float: right;display: inline-block; vertical-align: middle;">
-			<p><span><h3>앨범 발매 프로젝트 노래의 탄생</h3></span><br>
-			뮤지션의 창작 활동 지원을 위한 앨범 발매 프로젝트! 시즌1에서 최종 선정된 최재만의 데모곡과 발매곡을 비교 감상해보세요.</p>
-		</div>
-	</div>
+	</c:forEach>
 </div>
 </body>
 </html>

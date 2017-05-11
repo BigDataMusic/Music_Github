@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"	href="resources/css/top100_table.css" />
 <title>Insert title here</title>
-<script type="text/javascript" src="resources/smarteditor2/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<!-- <script type="text/javascript" src="resources/smarteditor2/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script> -->
 </head>
 <body>
 	<center>
@@ -16,20 +16,30 @@
 		<table width="735" id="table2">
 			<tr>
 				<th width="20%" style="border-radius: 15px;">제목</th>
-				<td width="80%" style="text-align: left; padding-left: 10px"><input
-					type="text" size="64" align="left"></td>
+				<td width="40%" style="text-align: left; padding-left: 10px">
+					<label>제목이 들어갑니다.</label>
+				</td>
+				<th width="20%" style="border-radius: 15px;">작성일</th>
+				<td width="20%" style="text-align: center; padding-left: 10px">
+					<label>2017-05-09</label>
+				</td>
 			</tr>
 			<tr>
 				<th width="20%" style="border-radius: 15px;">작성자</th>
-				<td width="42%" style="text-align: left; padding-left: 10px"><input
-					type="text" size="25" align="left"></td>
+				<td width="30%" style="text-align: left; padding-left: 10px">
+					<label>작성자 이름이 들어갑니다.</label>
+				</td>
+				<th width="20%" style="border-radius: 15px;">조회수</th>
+				<td width="30%" style="text-align: right; padding-right: 30px">
+					<label>1000</label>
+				</td>
 			</tr>
 			<tr>
 				<th colspan="4" style="border-radius: 15px;">본문내용</th>
 			</tr>
 			<tr>
 				<td colspan="4" style="padding: 10px 0">
-					<textarea name="content" id="content" style="width: 728px; height: 540px"></textarea>
+					<textarea name="content" id="content" style="width: 728px; height: 580px"></textarea>
 				</td>
 			</tr>
 		</table>
@@ -45,7 +55,7 @@
 			</tr>
 		</table>
 	</div>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		var oEditors = [];
 		nhn.husky.EZCreator
 				.createInIFrame({
@@ -54,6 +64,6 @@
 					sSkinURI : "resources/smarteditor2/workspace/SmartEditor2Skin.html",
 					fCreator : "createSEditor2"
 				});
-	</script>
+	</script> -->
 </body>
 </html>

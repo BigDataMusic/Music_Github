@@ -21,7 +21,7 @@
 			<th width="15%">아티스트</th>
 			<th width="15%">앨범</th>
 		</tr>	
-		<c:forEach var="vo" items="${bList }">
+		<c:forEach var="vo" items="${vList }">
 		<tr class="dataTr">
 			<td>${vo.rank}</td>
 			<td>${vo.increment}</td>
@@ -37,16 +37,16 @@
 	<table width="735">
 		<tr>
 			<td id="chart_rank">
-				<a href="#">[ 1~10 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 11~20 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 21~30 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 31~40 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 41~50 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 51~60 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 61~70 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 71~80 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 81~90 ]</a>&nbsp;&nbsp;&nbsp;
-				<a href="#">[ 91~100 ]</a>
+				<a href="top100.do?page=1">[ 1~10 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=2">[ 11~20 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=3">[ 21~30 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=4">[ 31~40 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=5">[ 41~50 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=6">[ 51~60 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=7">[ 61~70 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=8">[ 71~80 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=9">[ 81~90 ]</a>&nbsp;&nbsp;&nbsp;
+				<a href="top100.do?page=10">[ 91~100 ]</a>
 			</td>
 		</tr>
 	</table>

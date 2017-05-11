@@ -26,62 +26,36 @@ $(function(){
 	<p id="title_ex" style="margin: 0px;padding: 10px 0;">[2017.04.30. ~ 2017.05.06.]</p>
 </center>
 <div id="content_top100" style="margin: 10px auto;">			
-	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 앨범</p>
+	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 앨범 BEST 5</p>
 	<div class="section01 section_nav">
-		<div class="cont on">					
-			<span class="bg"><a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/51/659/10051659_500.jpg" alt=""/></a></span>															
-			<span class="layer"></span>
-		</div>
-		<div class="cont">					
-			<span class="bg"><a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/53/651/10053651_500.jpg" alt=""/></a></span>	                    									
-			<span class="layer"></span>
-		</div>
-		<div class="cont">					
-			<span class="bg"><a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/51/659/10051659_500.jpg" alt=""/></a></span>	                    				
-			<span class="layer"></span>
-		</div>
-		<div class="cont">										
-			<span class="bg"><a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/47/890/10047890_500.jpg" alt=""/></a></span>	                    			
-			<span class="layer"></span>						
-		</div>
-		<div class="cont">										
-			<span class="bg"><a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/51/659/10051659_500.jpg" alt=""/></a></span>	                    					
-			<span class="layer"></span>
-		</div>
+		<c:forEach var="vo" items="${malist }">
+			<div class="cont on">					
+				<span class="bg"><a href="content.do"><img src="${vo.alPoster }" alt=""/></a></span>															
+				<span class="layer"></span>
+			</div>
+		</c:forEach>
 	</div>
 </div>	
-<div id="content_top100">
-	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 싱글</p>
+<div id="content_top100"  style="margin-top: 10px;">
+	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 싱글 BEST 5</p>
 	<table id="table2" width="735">
 		<tr>
-			<th width="20%">발매일</th>
-			<th width="40%">곡명</th>
+			<th width="10%">No</th>
+			<th colspan="2">곡명</th>
 			<th width="15%">아티스트</th>
-			<th width="10%">장르</th>
-			<th width="15%">발매사</th>
+			<th width="15%">가사보기</th>
 		</tr>	
-		<c:forEach var="i" begin="1" end="10">
+		<c:forEach var="vo" items="${nlist }" varStatus="i">
+		<c:if test="${i.index<5 }">
 		<tr class="dataTr">
-			<td>2017.12.31.</td>
-			<td class="song"><a href="#">노래제목이 들어가는 자리입니다.</a></td>
-			<td>아티스트</td>			
-			<td>장르</td>
-			<td>발매사발매사발매</td>
+			<td>${vo.n }</td>	
+			<td><img src="${vo.poster }"></td>
+			<td class="song"><a href="${vo.alno }">${vo.title }</a></td>
+			<td>${vo.artist }</td>		
+			<td><img src="resources/images/ly.png"></td>
 		</tr>
+		</c:if>
 		</c:forEach>
-	</table>
-</div>
-<div id="content_top100" style="margin-top: 10px;">
-	<table width="735">
-		<tr>
-			<td id="chart_rank">
-			&lt;&lt;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;
-				<c:forEach var="i" begin="1" end="10">
-					<a href="#">[ ${i} ]</a>&nbsp;
-				</c:forEach>
-			&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&gt;&gt;
-			</td>
-		</tr>
 	</table>
 </div>
 </body>

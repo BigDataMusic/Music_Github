@@ -12,16 +12,17 @@
 		<div class="logo_block">
 			<a href="#"><img src="resources/images/nav_main.png" alt="setalpm" width="190" height="156"/></a><br />
 				<span class="slogan">음악의 모든건<br>음악인으로 통한다!</span>
-			<p class="text1">1. 상단 로고 변경<br>
-			2. 여기에 걸맞는 내용을<br>&nbsp;&nbsp;&nbsp; 넣어야 하고<br>
-			3. 위아래 메뉴들 정해야 하고...<br>
-			&nbsp;&nbsp;&nbsp;흠냐...</p>
+			<p class="text1">음악이 멈추었다...<br>
+			 그러자 세상이 멈추었다...<br>
+			 <br>
+			나를 움직이게 하는 힘 !<br>
+			Music makes me high !</p>
 		</div>
 		<p id="title_ex">음악인 차트</p>
 		<br />
 		<ul id="nav">
-		  <c:forEach var="vo" items="${bList }">
-		    <c:if test="${vo.rank <=10}">
+		  <c:forEach var="vo" items="${bList }" varStatus="i">
+		    <c:if test="${i.index<10}">
              <li><a href="#">${vo.title }</a></li>
            </c:if>
 		  </c:forEach>

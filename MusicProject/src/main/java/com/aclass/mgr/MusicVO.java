@@ -1,6 +1,7 @@
 package com.aclass.mgr;
 
 public class MusicVO {
+	private int n;
 	private int no;
 	private int rank;
 	private String increment;
@@ -13,6 +14,13 @@ public class MusicVO {
 	private boolean tit_music;
 	private String alno;
 	
+	
+	public int getN() {
+		return n;
+	}
+	public void setN(int n) {
+		this.n = n;
+	}
 	public String getAlno() {
 		return alno;
 	}
