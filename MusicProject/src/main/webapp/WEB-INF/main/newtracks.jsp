@@ -26,18 +26,18 @@ $(function(){
 	<p id="title_ex" style="margin: 0px;padding: 10px 0;">[2017.04.30. ~ 2017.05.06.]</p>
 </center>
 <div id="content_top100" style="margin: 10px auto;">			
-	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 앨범</p>
+	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 앨범 BEST 5</p>
 	<div class="section01 section_nav">
 		<c:forEach var="vo" items="${malist }">
 			<div class="cont on">					
-				<span class="bg"><a href="#"><img src="${vo.alPoster }" alt=""/></a></span>															
+				<span class="bg"><a href="content.do"><img src="${vo.alPoster }" alt=""/></a></span>															
 				<span class="layer"></span>
 			</div>
 		</c:forEach>
 	</div>
 </div>	
 <div id="content_top100"  style="margin-top: 10px;">
-	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 싱글</p>
+	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 싱글 BEST 5</p>
 	<table id="table2" width="735">
 		<tr>
 			<th width="10%">No</th>
@@ -46,6 +46,7 @@ $(function(){
 			<th width="15%">가사보기</th>
 		</tr>	
 		<c:forEach var="vo" items="${nlist }" varStatus="i">
+		<c:if test="${i.index<5 }">
 		<tr class="dataTr">
 			<td>${vo.n }</td>	
 			<td><img src="${vo.poster }"></td>
@@ -53,6 +54,7 @@ $(function(){
 			<td>${vo.artist }</td>		
 			<td><img src="resources/images/ly.png"></td>
 		</tr>
+		</c:if>
 		</c:forEach>
 	</table>
 </div>
