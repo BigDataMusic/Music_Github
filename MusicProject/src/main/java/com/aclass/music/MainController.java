@@ -14,6 +14,9 @@ import com.aclass.mgr.MusicVO;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
 import com.aclass.review.naver.RManager;
+import com.aclass.review.naver.ReviewDAO;
+import com.aclass.review.naver.ReviewManager;
+import com.aclass.review.naver.SongVO;
 import com.aclass.mongodb.*;
 
 @Controller
@@ -31,6 +34,10 @@ public class MainController {
 	
 	@Autowired
 	private RManager rmanager;
+	@Autowired
+	private ReviewManager reviewmanager;
+	@Autowired
+	private ReviewDAO reviewdao;
 	
 	@RequestMapping("main.do")
 	public String main_page(String data,Model model)
@@ -54,9 +61,11 @@ public class MainController {
 		return "main";
 	}
 	@RequestMapping("content.do")
-	public String main_content_page()
+	public String main_content_page(String song,String singer)
 	{
-		rmanager.rGraph();
+		reviewdao.naverReviewData(song,singer);
+		reviewdao.naverReviewData2(song,singer);
+		rmanager.rGraph(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")
@@ -67,8 +76,10 @@ public class MainController {
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
-	public String main_recommand()
+	public String main_recommand(Model model)
 	{
+		List<SongVO> list = reviewmanager.songData();
+		model.addAttribute("list", list);
 		return "recommand";
 	}
 	@RequestMapping("newtracks.do")

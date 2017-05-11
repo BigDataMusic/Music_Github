@@ -25,7 +25,7 @@
 		<tr class="dataTr">
 			<td>${vo.rank}</td>
 			<td>${vo.increment}</td>
-			<td><a href="content.do"><img src="${vo.poster }" class="jacket_thumb100" /></a></td>
+			<td><a href="content.do?song=${vo.title }&singer=${vo.artist}"><img src="${vo.poster }" class="jacket_thumb100" /></a></td>
 			<td class="song">${vo.title }</td>
 			<td>${vo.artist }</td>
 			<td>${vo.albumname }</td>

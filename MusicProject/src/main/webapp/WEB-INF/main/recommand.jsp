@@ -22,7 +22,7 @@
 					<th width="10%">장르</th>
 					<th width="15%">발매사</th>
 				</tr>
-				<c:forEach var="i" begin="1" end="10">
+			 	<c:forEach var="i" begin="1" end="10">
 					<tr>
 						<td>${i}</td>
 						<td><a href="content.do"><img
@@ -34,7 +34,9 @@
 						<td>장르</td>
 						<td>발매사발매사발매</td>
 					</tr>
-				</c:forEach>
+					</c:forEach>
+			
+				
 			</table>
 		</div>
 	</div>
