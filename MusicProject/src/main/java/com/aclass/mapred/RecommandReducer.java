@@ -6,7 +6,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class TwitterReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+public class RecommandReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
    private IntWritable val=new IntWritable();
 
 	@Override
@@ -22,8 +22,3 @@ public class TwitterReducer extends Reducer<Text, IntWritable, Text, IntWritable
 	}
    
 }
-
-
-
-
-

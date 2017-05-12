@@ -130,6 +130,8 @@ public class MainController{
 	public String main_recommand(Model model)
 	{
 		List<SongVO> list = reviewmanager.songData();
+		
+	 	model.addAttribute("main_jsp", "recommand.jsp");
 		model.addAttribute("list", list);
 		return "recommand";
 	}

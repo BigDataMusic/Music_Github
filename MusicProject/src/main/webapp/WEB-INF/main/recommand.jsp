@@ -35,8 +35,6 @@
 						<td>발매사발매사발매</td>
 					</tr>
 					</c:forEach>
-			
-				
 			</table>
 		</div>
 	</div>
