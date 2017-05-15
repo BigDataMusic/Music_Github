@@ -32,65 +32,20 @@
 		<div id="accordian">
 			<ul>
 				<li class="active">
-					<h3>장르별 추천</h3>
+				<h3>날씨별 추천</h3>
 					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>날씨별 추천</h3>
-					<ul>
-						<li><a href="#">봄</a></li>
-						<li><a href="#">여름</a></li>
-						<li><a href="#">가을</a></li>
-						<li><a href="#">겨울</a></li>
-						<li><a href="#">화창한날</a></li>
-						<li><a href="#">아침</a></li>
-						<li><a href="#">오후</a></li>
-						<li><a href="#">저녁</a></li>
-						<li><a href="#">밤/새벽</a></li>
-						<li><a href="#">비/흐림</a></li>
+						<li><a href="recommand.do?no=1">봄</a></li>
+						<li><a href="recommand.do?no=2">여름</a></li>
+						<li><a href="recommand.do?no=3">가을</a></li>
+						<li><a href="recommand.do?no=4">겨울</a></li>
+						<li><a href="recommand.do?no=5">화창한날</a></li>
+						<li><a href="recommand.do?no=6">아침</a></li>
+						<li><a href="recommand.do?no=7">오후</a></li>
+						<li><a href="recommand.do?no=8">저녁</a></li>
+						<li><a href="recommand.do?no=9">밤/새벽</a></li>
+						<li><a href="recommand.do?no=10">비/흐림</a></li>
 						<!-- <li><a href="#">크리스마스</a></li> -->
-						<li><a href="#">눈오는 날</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>장소별 추천</h3>
-					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>상황별 추천</h3>
-					<ul>
-						<li><a href="#">menu01</a></li>
-						<li><a href="#">menu02</a></li>
-						<li><a href="#">menu03</a></li>
-						<li><a href="#">menu04</a></li>
-						<li><a href="#">menu05</a></li>
-						<li><a href="#">menu06</a></li>
-						<li><a href="#">menu07</a></li>
-						<li><a href="#">menu08</a></li>
-						<li><a href="#">menu09</a></li>
-						<li><a href="#">menu10</a></li>
+						<li><a href="recommand.do?no=11">눈오는 날</a></li>
 					</ul>
 				</li>
 				<li>
