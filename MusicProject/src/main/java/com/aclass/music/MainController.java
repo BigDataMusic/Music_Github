@@ -92,6 +92,9 @@ public class MainController{
 	@RequestMapping("content.do")
 	public String main_content_page(String song,String singer)
 	{
+		
+		
+		
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
 		rmanager.rGraph(song);
