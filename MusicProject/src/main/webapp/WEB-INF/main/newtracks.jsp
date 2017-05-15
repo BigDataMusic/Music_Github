@@ -46,7 +46,6 @@ $(function(){
 			<th width="15%">가사보기</th>
 		</tr>	
 		<c:forEach var="vo" items="${nlist }" varStatus="i">
-		<c:if test="${i.index<5 }">
 		<tr class="dataTr">
 			<td>${vo.n }</td>	
 			<td><img src="${vo.poster }"></td>
@@ -54,7 +53,6 @@ $(function(){
 			<td>${vo.artist }</td>		
 			<td><img src="resources/images/ly.png"></td>
 		</tr>
-		</c:if>
 		</c:forEach>
 	</table>
 </div>

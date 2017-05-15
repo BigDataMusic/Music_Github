@@ -43,7 +43,7 @@ private Text result=new Text();
 		 FileReader fr=new FileReader(file);
 		 String data="";
 		 int k=0;
-		 while((k=fr.read())!=-1)
+		 while((k=fr.read())!=-1) //EOF End Of File
 		 {
 			 data+=String.valueOf((char)k);
 		 }
