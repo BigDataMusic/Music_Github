@@ -17,6 +17,8 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 
+import au.com.bytecode.opencsv.CSVWriter;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
@@ -25,7 +27,7 @@ import java.net.URLEncoder;
 
 
 @Component
-public class SongWhether {
+public class SongWhether implements Serializable{
 	
 	private MongoClient mc;
 	private DB db;
@@ -34,9 +36,9 @@ public class SongWhether {
 	 //실행기 
 	public static void main(String[] args){
 		
-		String song = "팔레트 (Feat. G-DRAGON)";
+		String song = "맞지?";
 		SongWhether rm = new SongWhether();
-		//rm.SongWhether(song);
+		rm.feelData(song);
 	}
 	
 	 public List<SongVO> songData(String song)
@@ -227,5 +229,62 @@ public class SongWhether {
 	 }
 	
 
+	 //몽고디비에서 feel가져와서 csv만들기 
+	 public void feelData(String song)
+	   {
+		   
+		   try
+		   {
+				mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
+				db=mc.getDB("project3");
+				dbc=db.getCollection("whether");  
+				
+				
+				//노래에 대한 리뷰커서들 가져옴 
+				BasicDBObject where=new BasicDBObject();
+				
+				where.put("song", song);
+				
+	    		DBCursor cursor =dbc.find(where); 
+		
+	    		FileWriter fw=new FileWriter("/home/sist/recommend-data/susubar.csv");
+				CSVWriter cw=new CSVWriter(fw);
+				
+				
+				
+			   while(cursor.hasNext())
+			   {
+				   BasicDBObject obj=(BasicDBObject)cursor.next();
+				   SongVO vo=new SongVO();
+				   String db_feel=obj.getString("feel");
+				  
+				   StringTokenizer st= new StringTokenizer(db_feel, ","); // db_feel="SF:2,ani:7"
+				   List<String[]> list= new ArrayList<String[]>();
+				   
+				   while(st.hasMoreTokens())
+				   {
+					   String temp=st.nextToken();
+					   String temp2=temp.substring(0,temp.lastIndexOf(":"));
+					   String temp3=temp.substring(temp.lastIndexOf(":")+1);
+				
+						   String[] ss={temp2,temp3};
+						   list.add(ss);
+					   
+					   
+				   }
+				   cw.writeAll(list);
+				   fw.close();
+				   
+				   
+			   }
+			   cursor.close();
+			   
+			   System.out.println("생성");
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+	
+	   }
 	
 }

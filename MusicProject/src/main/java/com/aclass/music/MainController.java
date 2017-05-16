@@ -144,10 +144,11 @@ public class MainController{
 		}
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
-		//songwhether.songData(song);
-		//songwhether.SongWhether(song,singer);
-		//rmanager.rGraph(song);
-		//rmanager.rGraph2(song);
+		songwhether.songData(song);
+		songwhether.SongWhether(song,singer);
+		songwhether.feelData(song);
+		rmanager.rGraph(song);
+		rmanager.rGraph2(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")

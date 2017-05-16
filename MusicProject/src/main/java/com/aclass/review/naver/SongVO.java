@@ -9,6 +9,16 @@ public class SongVO {
  private String singer;
  
  private String naverReview;
+ private String feel;
+ 
+ 
+public String getFeel() {
+	return feel;
+}
+
+public void setFeel(String feel) {
+	this.feel = feel;
+}
 
 public String getNaverReview() {
 	return naverReview;

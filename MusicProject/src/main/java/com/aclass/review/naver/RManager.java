@@ -22,7 +22,7 @@ public void rGraph(String song)
 		   rc.voidEval("library(RMongo)");
 		   rc.voidEval("library(stringr)");
 		   
-		   rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
+		   rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 		
 		   rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
 
@@ -64,32 +64,20 @@ public void rGraph(String song)
 
 public void rGraph2(String song)
 {
-	   try
-	   {
-		   RConnection rc=new RConnection();
-		   rc.voidEval("library(rJava)");
-		   rc.voidEval("library(RMongo)");
-		   
-		 //명령어 전달 (내역이름이 브이원, 수치가 브이투) 
-	      	 rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/pie.png\")");
-	      	 
-			 rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
-			 rc.voidEval("data<-dbGetQuery(mongo,\"whether\",\"{song:'"+song+"'}\")"); 
-	      	  
-	      //rc.voidEval("par(mfrow=c(2,2))"); //차트를 두줄에 두개씩 그릴것이다 (한줄에 세개는 2,3)
-	   	  //rc.voidEval("barplot(data$V2,names.arg=data$V1,col=rainbow(5))");
-		  //rc.voidEval("hist(data$V2)");
-	   	  rc.voidEval("pie(data$V2,labels=data$V1,col=rainbow(5))");
-	   	  
-	   	  
-	   	  //차트종료,알연결종료
-	   	  rc.voidEval("dev.off()");
-	   	  rc.close();
-	   	  
-	   }catch(Exception ex)
-	   {
-		   System.out.println(ex.getMessage());
-	   }
+	  try
+	  {
+		  RConnection rc=new RConnection();
+		  rc.voidEval("naver<-read.csv(\"/home/sist/recommend-data/susubar.csv\",header=F,sep=\",\")");
+		  rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/susubar.png\")");
+		  rc.voidEval("pct<-round((naver$V2/sum(naver$V2))*100,1)");
+		  rc.voidEval("lab<-paste(naver$V1,\"\n\",\"(\",pct,\"%)\")");
+		  rc.voidEval("pie(naver$V2,labels=lab,col=rainbow(10),main=\"날씨감성\")");
+		  rc.voidEval("dev.off()");
+		  rc.close();
+	  }catch(Exception ex)
+	  {
+		  System.out.println(ex.getMessage());
+	  }
 }
    
    
