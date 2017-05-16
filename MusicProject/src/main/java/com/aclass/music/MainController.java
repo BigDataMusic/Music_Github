@@ -3,6 +3,7 @@ package com.aclass.music;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.hadoop.conf.Configuration;
@@ -427,5 +428,10 @@ public class MainController{
 		model.addAttribute("data", data);
 		model.addAttribute("rList", rList);
 		return "issue";
+	}
+	
+	@PostConstruct
+	public void init(){
+		
 	}
 }
