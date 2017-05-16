@@ -96,6 +96,7 @@ public class MusicDAO {
 			if(musicSite.equals("melon")) cursor=mdbc.find();
 			else if(musicSite.equals("bugs")) cursor=bdbc.find();
 			else if(musicSite.equals("newMusic")) cursor=newMusicDBC.find();
+			
 			while(cursor.hasNext()){
 				//System.out.println("확인");
 				BasicDBObject obj=(BasicDBObject)cursor.next();

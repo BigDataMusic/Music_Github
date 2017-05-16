@@ -119,7 +119,7 @@ public class MainController{
 		//음악인
 		if(cate.equals("1")) bList=bmgr.bugsRankData();
 		//멜론
-		else if(cate.equals("2")) bList=mmgr.getMelonTop100();
+		else if(cate.equals("2")) bList=dao.getMongoMusicData("melon");
 		//벅스
 		else if(cate.equals("3")) bList=bmgr.bugsRankData();
 		//지니
