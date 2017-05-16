@@ -2,6 +2,8 @@ package com.aclass.music;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
@@ -74,7 +76,8 @@ public class MainController{
 	private ReviewDAO reviewdao;
 	@Autowired
 	private SongWhether songwhether;
-	
+	@Autowired
+	private SparkWeatherManager sparkweather;
 	@RequestMapping("main.do")
 	public String main_page(String data,Model model)
 	{
@@ -446,4 +449,100 @@ public class MainController{
 		model.addAttribute("rList", rList);
 		return "issue";
 	}
+	
+	/*
+	 * <li><a href="recommand.do?no=1">봄</a></li>
+						<li><a href="recommand.do?no=2">여름</a></li>
+						<li><a href="recommand.do?no=3">가을</a></li>
+						<li><a href="recommand.do?no=4">겨울</a></li>
+						<li><a href="recommand.do?no=5">화창한날</a></li>
+						<li><a href="recommand.do?no=6">아침</a></li>
+						<li><a href="recommand.do?no=7">오후</a></li>
+						<li><a href="recommand.do?no=8">저녁</a></li>
+						<li><a href="recommand.do?no=9">밤/새벽</a></li>
+						<li><a href="recommand.do?no=10">비/흐림</a></li>
+						<!-- <li><a href="#">크리스마스</a></li> -->
+						<li><a href="recommand.do?no=11">눈오는 날</a></li>
+	 * 
+	 */
+	@RequestMapping("main/recommand.do")
+	public String naver_recommand(String recommand,Model model)
+    {
+    	String[] reday={"봄","여름","가을","겨울","화창한날","아침","오후","저녁","밤/새벽","비/흐림","크리스마스","눈오는 날"};
+    	if(recommand==null)
+    		recommand="1";
+    	String redata=reday[Integer.parseInt(recommand)-1];
+    	sparkweather.execute();
+    	//nmr.naverReviewData2(redata+" 영화추천");
+    	//nmr.naverReviewSave2();
+    	List<String> tList=dao.musicTitleAllData();
+    	try
+    	{
+    		//File file=new File("/home/sist/review/naver_recommand.txt");
+    		File file=new File("/home/sist/feel-data/review.txt");
+    		FileReader fr=new FileReader(file);
+    		String data="";
+    		int i=0;
+    		while((i=fr.read())!=-1)
+    		{
+    			data+=String.valueOf((char)i);
+    		}
+    		fr.close();
+    		String temp[]=data.split("\n");
+    		/*for(String s:temp)
+    		{
+    			System.out.println(s);
+    		}*/
+    		Pattern[] p=new Pattern[tList.size()];
+    		for(i=0;i<p.length;i++)
+    		{
+    			//if(tList.get(i).length()>1)
+    			//{
+    			  p[i]=Pattern.compile(tList.get(i));
+    			//}
+    		}
+    		Matcher[] m=new Matcher[tList.size()];
+    		List<String> sList=new ArrayList<String>();
+    		int[] count=new int[tList.size()];
+    		
+    		for(String s:temp)
+    		{
+    			
+	    			for(i=0;i<m.length;i++)
+	    			{
+	    				m[i]=p[i].matcher(s);
+	    				if(m[i].find())
+	    				{
+	    					
+	    					
+	    					System.out.println(m[i].group());
+	    					count[i]++;
+	    					if(count[i]==1)
+	    					{
+	    						sList.add(m[i].group());
+	    					}
+	    				}
+	    				
+	    			}
+    			
+    		}
+    		
+    		List<MusicVO> mmList=new ArrayList<MusicVO>();
+    		
+    		for(String s:sList)
+    		{
+    			MusicVO vo=dao.musicGetData(s);
+    			mmList.add(vo);
+    		}
+    		
+    		model.addAttribute("kList", mmList);
+    	}catch(Exception ex)
+    	{
+    		System.out.println(ex.getMessage());
+    	}
+    	model.addAttribute("main_jsp", "recommand.jsp");
+    	// commonData(model);
+    	return "main";
+    }
+	
 }

@@ -22,7 +22,7 @@
 					<th width="10%">장르</th>
 					<th width="15%">발매사</th>
 				</tr>
-			 	<c:forEach var="i" begin="1" end="10">
+			 	<%-- <c:forEach var="i" begin="1" end="10">
 					<tr>
 						<td>${i}</td>
 						<td><a href="content.do"><img
@@ -34,7 +34,25 @@
 						<td>장르</td>
 						<td>발매사발매사발매</td>
 					</tr>
-					</c:forEach>
+					</c:forEach> --%>
+						<c:forEach var="vo" items="${kList }" varStatus="s">
+						<tr>
+                        <c:if test="${s.index<10 }">
+                        <td>
+                             <a href="content.do?alno=${vo.alno }">
+                             <img src="${vo.poster }" width="100"
+                                  height="100"/></a>
+                        </td>
+                        <td class="song">${vo.title }</td>
+                        <td >${vo.rank }</td>
+                        <td >${vo.artist }</td>
+                        <td>2017.12.31.</td>
+							<td>장르</td>
+							<td>발매사발매사발매</td>
+                        </c:if>
+                      </tr>
+                    </c:forEach>
+						
 			</table>
 		</div>
 	</div>
