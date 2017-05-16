@@ -41,10 +41,13 @@
 		<ul id="navigation" style="padding-top: 0px">
 			<c:forEach var="vo" items="${nlist }" varStatus="i">
 				<c:if test="${i.index<10}">
-				<c:if test="${i.index%2==0 }">
-					<li class="color">
-				</c:if>
-				<a href="#">${vo.artist.trim() }</a></li>
+					<c:if test="${i.index%2==0 }">
+						<li class="color">
+					</c:if>
+					<c:if test="${i.index%2!=0 }">
+						<li>
+					</c:if>
+					<a href="#">${vo.artist.trim() }</a></li>
 				</c:if>
 			</c:forEach>
 		</ul>	
