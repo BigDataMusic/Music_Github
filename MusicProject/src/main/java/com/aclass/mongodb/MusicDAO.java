@@ -27,8 +27,8 @@ public class MusicDAO {
 	private MongoTemplate mt;
 	
 	private MongoClient mc;
-	private DB db,db2;
-	private DBCollection mdbc,bdbc,navdbc,newMusicDBC,AlbumDBC,wdbc;
+	private DB db;
+	private DBCollection mdbc,bdbc,navdbc,newMusicDBC,AlbumDBC;
 	public MusicDAO(){
 		try
     	{
@@ -39,8 +39,6 @@ public class MusicDAO {
 			navdbc=db.getCollection("Top100_Naver");
 			newMusicDBC=db.getCollection("NewMusic");
 			AlbumDBC=db.getCollection("MusicAlbum");
-			db2=mc.getDB("project3");
-			wdbc=db2.getCollection("weather");
 		}catch(Exception ex){}
 	}
 	public List<MusicVO> getMongoMusicData(String musicSite){
@@ -216,30 +214,7 @@ public class MusicDAO {
 	 * 
 	 * 
 	 */
-	public MusicVO musicGetData()
-	   {
-			MusicVO vo=new MusicVO();
-		   try
-		   {
-			   BasicDBObject where=
-					   new BasicDBObject();
-			   //where.put("title", title);
-			   BasicDBObject obj=(BasicDBObject)wdbc.findOne(where);
-			   vo.setNo(obj.getInt("no"));
-			   vo.setRank(obj.getInt("rank"));
-			   vo.setPoster(obj.getString("poster"));
-			   vo.setTitle(obj.getString("title"));
-			   vo.setArtist(obj.getString("artist"));
-			   //vo.getAlbumname());
-			   //vo.getLike(obj.getInt("like"));
-			   //vo.getIncrement(obj.getString("increment"));
-			   
-		   }catch(Exception ex)
-		   {
-			   System.out.println(ex.getMessage());
-		   }
-		   return vo;
-	   }
+	
 	
 	/*public List<MusicVO> songData()
     {
