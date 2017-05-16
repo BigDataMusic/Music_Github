@@ -44,8 +44,8 @@
 						<li><a href="recommand.do?no=8">저녁</a></li>
 						<li><a href="recommand.do?no=9">밤/새벽</a></li>
 						<li><a href="recommand.do?no=10">비/흐림</a></li>
-						<!-- <li><a href="#">크리스마스</a></li> -->
-						<li><a href="recommand.do?no=11">눈오는 날</a></li>
+						<li><a href="recommand.do?no=11">크리스마스</a></li>
+						<li><a href="recommand.do?no=12">눈오는 날</a></li>
 					</ul>
 				</li>
 				<li>
