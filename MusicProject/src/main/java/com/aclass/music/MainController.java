@@ -87,8 +87,7 @@ public class MainController{
         		b.setTitle(mTitle);
 			}
 		}*/
-		dao.AllMusicRank();
-		List<MusicVO> bList = dao.bugsMusicData();
+		List<MusicVO> bList = dao.getMongoMusicData("bugs");
 		String mTitle="";
 		for(MusicVO b:bList){
 			if(b.getTitle().length()>15){
@@ -201,7 +200,7 @@ public class MainController{
 	public String main_newtracks(Model model)
 	{
 		boolean Check=false;
-		List<MusicVO> nlist = dao.newMusicData();
+		List<MusicVO> nlist = dao.getMongoMusicData("newMusic");
 		List<AlbumVO> alist = dao.AlbumData();
 		List<AlbumVO> malist = new ArrayList<AlbumVO>();
 		for(int i=0;i<5;i++){
