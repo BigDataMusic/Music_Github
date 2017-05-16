@@ -58,7 +58,7 @@ public class BoardDAO {
 	public List<BoardVO> boardListData(int page){
 		List<BoardVO> list=new ArrayList<BoardVO>();
 		try {
-			int rowSize=10;
+			int rowSize=25;
 			int skip=(page*rowSize)-(rowSize);
 			DBCursor cursor=dbc.find().sort(new BasicDBObject("group_id",-1).append("group_step", 1)).skip(skip).limit(rowSize);
 			while(cursor.hasNext()){
@@ -83,7 +83,7 @@ public class BoardDAO {
     	try {
     		DBCursor cursor = dbc.find();
     		int count = cursor.count();
-    		total=(int)(Math.ceil(count/10.0));
+    		total=(int)(Math.ceil(count/25.0));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
