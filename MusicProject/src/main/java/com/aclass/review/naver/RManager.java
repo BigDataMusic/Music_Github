@@ -35,7 +35,9 @@ public void rGraph(String song)
 		   //rc.voidEval("news<-data");
 		   //rc.voidEval("news<-data$review"); //이거쓰니까 데이터 줄어버려 
 		   
-	   rc.voidEval("news=gsub(\"[A-Za-z0-9]\",\"\",news)"); //영어숫자를 공백으로 전환
+	 
+		   rc.voidEval("news=gsub(\"</b>\",\"\",news)"); //영어숫자를 공백으로 전환
+		   rc.voidEval("news=gsub(\"[A-Za-z0-9]\",\"\",news)"); //영어숫자를 공백으로 전환
 		   rc.voidEval("news=gsub(\"<>\",\"\",news)"); //영어숫자를 공백으로 전환
 		   rc.voidEval("news=gsub(\"+\",\"\",news)"); //영어숫자를 공백으로 전환
 		   rc.voidEval("news=gsub(\"&\",\"\",news)"); //영어숫자를 공백으로 전환
@@ -60,7 +62,35 @@ public void rGraph(String song)
 	   }
 }
 
-   
+public void rGraph2(String song)
+{
+	   try
+	   {
+		   RConnection rc=new RConnection();
+		   rc.voidEval("library(rJava)");
+		   rc.voidEval("library(RMongo)");
+		   
+		 //명령어 전달 (내역이름이 브이원, 수치가 브이투) 
+	      	 rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/pie.png\")");
+	      	 
+			 rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
+			 rc.voidEval("data<-dbGetQuery(mongo,\"whether\",\"{song:'"+song+"'}\")"); 
+	      	  
+	      //rc.voidEval("par(mfrow=c(2,2))"); //차트를 두줄에 두개씩 그릴것이다 (한줄에 세개는 2,3)
+	   	  //rc.voidEval("barplot(data$V2,names.arg=data$V1,col=rainbow(5))");
+		  //rc.voidEval("hist(data$V2)");
+	   	  rc.voidEval("pie(data$V2,labels=data$V1,col=rainbow(5))");
+	   	  
+	   	  
+	   	  //차트종료,알연결종료
+	   	  rc.voidEval("dev.off()");
+	   	  rc.close();
+	   	  
+	   }catch(Exception ex)
+	   {
+		   System.out.println(ex.getMessage());
+	   }
+}
    
    
    

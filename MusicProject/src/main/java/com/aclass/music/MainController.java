@@ -23,6 +23,7 @@ import com.aclass.review.naver.RManager;
 import com.aclass.review.naver.ReviewDAO;
 import com.aclass.review.naver.ReviewManager;
 import com.aclass.review.naver.SongVO;
+import com.aclass.review.naver.SongWhether;
 import com.aclass.mongodb.*;
 
 @Controller
@@ -48,6 +49,8 @@ public class MainController{
 	private ReviewManager reviewmanager;
 	@Autowired
 	private ReviewDAO reviewdao;
+	@Autowired
+	private SongWhether songwhether;
 	
 	@RequestMapping("main.do")
 	public String main_page(String data,Model model)
@@ -98,7 +101,10 @@ public class MainController{
 		
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
+		songwhether.songData(song);
+		songwhether.SongWhether(song);
 		rmanager.rGraph(song);
+		rmanager.rGraph2(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")
