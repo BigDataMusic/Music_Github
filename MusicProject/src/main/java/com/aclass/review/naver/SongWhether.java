@@ -36,7 +36,7 @@ public class SongWhether {
 		
 		String song = "팔레트 (Feat. G-DRAGON)";
 		SongWhether rm = new SongWhether();
-		rm.SongWhether(song);
+		//rm.SongWhether(song);
 	}
 	
 	 public List<SongVO> songData(String song)
@@ -78,7 +78,7 @@ public class SongWhether {
 	   	 return list;
 	    }
 	 
-	 public void SongWhether(String song)
+	 public void SongWhether(String song,String singer)
 	 {
 			try
 			{
@@ -203,11 +203,23 @@ public class SongWhether {
 							
 							BasicDBObject obj=new BasicDBObject();
 			    			
-		    				obj.put("song", song.trim());
+							obj.put("song", song.trim());
+							obj.put("singer", singer.trim());
+							obj.put("feel", (taste[0]+":"+count[0]+","+taste[1]+":"+count[1]+","
+										+taste[2]+":"+count[2]+","+taste[3]+":"+count[3]+","
+										+taste[4]+":"+count[4]+","+taste[5]+":"+count[5]+","+taste[6]+":"+count[6]+","
+										+taste[7]+":"+count[7]+","+taste[8]+":"+count[8]+","+taste[9]+":"+count[9]+","
+										+taste[10]+":"+count[10]+","+taste[11]+":"+count[11]).trim()
+									);
+
+
 		    				for(int ie=0;ie<12;ie++)
 		    				{
+		    					
+		    					
 		    					obj.put(taste[ie], count[ie]);
 		    				}
+		    				
 		    				
 		    				dbc.insert(obj);
 			 
