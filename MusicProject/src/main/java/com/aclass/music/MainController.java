@@ -448,7 +448,9 @@ public class MainController{
 	}
 	
 	@PostConstruct
-	public void init(){
-		
+	public void init(){		
+		dao.dropTop100();
+		dao.insertTop100("melon");
+		dao.insertTop100("newMusic");
 	}
 }

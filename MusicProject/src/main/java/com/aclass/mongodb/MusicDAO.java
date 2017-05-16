@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.aclass.mgr.AlbumVO;
+import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
 import com.mongodb.*;
@@ -18,6 +20,10 @@ import com.mongodb.*;
 public class MusicDAO {
 	@Autowired
 	private MelonManager mmgr;
+	@Autowired
+	private BugsManager bmgr;
+	@Autowired
+	private MongoTemplate mt;
 	
 	private MongoClient mc;
 	private DB db;
@@ -139,7 +145,6 @@ public class MusicDAO {
 	}
 	public List<MusicVO> AllMusicRank(){
 		/*
-		 * 
 			bdbc=db.getCollection("Top100_Bugs");
 			newMusicDBC=db.getCollection("NewMusic");
 			AlbumDBC=db.getCollection("MusicAlbum");
@@ -160,8 +165,48 @@ public class MusicDAO {
 			cnt++;
 			System.out.println(cnt+" "+mvo.getTitle());
 		}
-		
-		
 		return rlist;
+	}
+	
+	public void dropTop100(){
+		mt.dropCollection("Top100_Melon");
+		mt.dropCollection("NewMusic");
+	}
+	
+	public void insertTop100(String musicSite){
+		try {
+			DBCollection indata=null;
+			List<MusicVO> list = null;
+			if(musicSite.equals("melon")){
+				indata=mdbc;
+				list=mmgr.getMelonTop100();
+			}
+			else if(musicSite.equals("bugs")){ 
+				indata=bdbc;
+				list=bmgr.bugsRankData();
+			}
+			else if(musicSite.equals("newMusic")){
+				indata=newMusicDBC;
+				list=mmgr.getMelonNewMusic();
+			}
+			else if(musicSite.equals("naver"))indata=navdbc;
+			
+			for(MusicVO vo : list){
+				BasicDBObject obj = new BasicDBObject();
+				obj.put("title", vo.getTitle());
+				obj.put("rank", vo.getRank());
+				obj.put("poster", vo.getPoster());
+				obj.put("artist", vo.getArtist());
+				obj.put("album", vo.getAlbumname());
+				obj.put("increment", vo.getIncrement());
+				
+				indata.insert(obj);
+			}
+			
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("insertTop100 "+e.getMessage());
+		}
 	}
 }

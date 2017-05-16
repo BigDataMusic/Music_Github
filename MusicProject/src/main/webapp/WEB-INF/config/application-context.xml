@@ -53,6 +53,6 @@
 	/>
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 	 <constructor-arg ref="mongo" />
-	 <constructor-arg name="" value="mydb"/>
+	 <constructor-arg name="databaseName" value="mydb"/>
 	</bean>
 </beans>
