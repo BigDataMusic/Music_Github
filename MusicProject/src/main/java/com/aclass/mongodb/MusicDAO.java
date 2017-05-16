@@ -21,7 +21,7 @@ public class MusicDAO {
 	
 	private MongoClient mc;
 	private DB db;
-	private DBCollection mdbc,bdbc,newMusicDBC,AlbumDBC;
+	private DBCollection mdbc,bdbc,navdbc,newMusicDBC,AlbumDBC;
 	public MusicDAO(){
 		try
     	{
@@ -29,6 +29,7 @@ public class MusicDAO {
 			db=mc.getDB("mydb");
 			bdbc=db.getCollection("Top100_Bugs");
 			mdbc=db.getCollection("Top100_Melon");
+			navdbc=db.getCollection("Top100_Naver");
 			newMusicDBC=db.getCollection("NewMusic");
 			AlbumDBC=db.getCollection("MusicAlbum");
 		}catch(Exception ex){}
@@ -90,12 +91,12 @@ public class MusicDAO {
 	}
 	public List<MusicVO> getMongoMusicData(String musicSite){
 		List<MusicVO> list= new ArrayList<MusicVO>();
-		
 		try {
 			DBCursor cursor=null;
 			if(musicSite.equals("melon")) cursor=mdbc.find();
 			else if(musicSite.equals("bugs")) cursor=bdbc.find();
 			else if(musicSite.equals("newMusic")) cursor=newMusicDBC.find();
+			else if(musicSite.equals("naver"))cursor=navdbc.find();
 			while(cursor.hasNext()){
 				//System.out.println("확인");
 				BasicDBObject obj=(BasicDBObject)cursor.next();
@@ -116,6 +117,7 @@ public class MusicDAO {
 		}
 		return list;
 	}
+	// main
 	public List<MusicVO> bugsMusicData(){
 		List<MusicVO> list= new ArrayList<MusicVO>();
 		try {

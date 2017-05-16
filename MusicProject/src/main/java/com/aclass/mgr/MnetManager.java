@@ -8,7 +8,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+import org.springframework.stereotype.Component;
+@Component
 public class MnetManager {
 
 	public static void main(String[] args) {
@@ -47,13 +48,14 @@ public class MnetManager {
 					vo.setAlbumname(al.text().trim());
 					
 					//String incre=in.text().trim();
-					//vo.setIncrement(incre);
+					vo.setIncrement("-");
 					
 					/*System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
 					System.out.println("   " + vo.getPoster());
 					System.out.println("   " + vo.getAlbumname());*/
 					//System.out.println("   "+vo.getIncrement());
 					rank++;
+					mList.add(vo);
 				}
 			}
 
