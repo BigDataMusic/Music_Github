@@ -11,14 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.aclass.mgr.AlbumVO;
-import com.aclass.mgr.BugsManager;
-import com.aclass.mgr.MelonManager;
-import com.aclass.mgr.MusicVO;
-import com.aclass.mongodb.MusicDAO;
+import com.aclass.mgr.*;
 import com.aclass.news.*;
 import com.aclass.rank.*;
-import com.aclass.rank.RankVO;
 import com.aclass.review.naver.RManager;
 import com.aclass.review.naver.ReviewDAO;
 import com.aclass.review.naver.ReviewManager;
@@ -38,6 +33,10 @@ public class MainController{
 	private BugsManager bmgr;
 	@Autowired
 	private MelonManager mmgr;
+	@Autowired
+	private MnetManager mnetmgr;
+	@Autowired
+	private GenieManager gmgr;
 	@Autowired
 	private Configuration conf;
 	@Autowired
@@ -96,9 +95,6 @@ public class MainController{
 	@RequestMapping("content.do")
 	public String main_content_page(String song,String singer)
 	{
-		
-		
-		
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);
@@ -119,15 +115,15 @@ public class MainController{
 		//음악인
 		if(cate.equals("1")) bList=bmgr.bugsRankData();
 		//멜론
-		else if(cate.equals("2")) bList=mmgr.getMelonTop100();
+		else if(cate.equals("2")) bList=dao.getMongoMusicData("melon");
 		//벅스
-		else if(cate.equals("3")) bList=bmgr.bugsRankData();
+		else if(cate.equals("3")) bList=dao.getMongoMusicData("bugs");
 		//지니
-		else if(cate.equals("4")) bList=bmgr.bugsRankData();
+		else if(cate.equals("4")) bList=gmgr.genieRankData();
 		//엠넷
-		else if(cate.equals("5")) bList=bmgr.bugsRankData();
+		else if(cate.equals("5")) bList=mnetmgr.mnetRankData();
 		//네이버
-		else if(cate.equals("6")) bList=bmgr.bugsRankData();
+		else if(cate.equals("6")) bList=dao.getMongoMusicData("naver");
 		List<MusicVO> vList=new ArrayList<MusicVO>();
 		
 		for(int i=start;i<end;i++)
