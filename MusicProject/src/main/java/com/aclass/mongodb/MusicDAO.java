@@ -52,6 +52,12 @@ public class MusicDAO {
 				//System.out.println("확인");
 				BasicDBObject obj=(BasicDBObject)cursor.next();
 				MusicVO vo = new MusicVO();
+				if(musicSite.equals("newMusic")){
+					vo.setAlno(obj.getString("alno"));
+					vo.setN(obj.getInt("no"));
+					vo.setNo(obj.getInt("mno"));
+					vo.setLyrics(obj.getString("lyrics"));
+				}
 				vo.setRank(obj.getInt("rank"));
 				vo.setTitle(obj.getString("title"));
 				vo.setPoster(obj.getString("poster"));
@@ -90,13 +96,11 @@ public class MusicDAO {
 				vo.setAlInfo(obj.getString("alInfo"));
 				List<MusicVO> mvolist = new ArrayList<MusicVO>();
 				MusicVO mvo = new MusicVO();
-				for(int k=1;;k++){
-					if(obj.getString("mTitle"+k)!=null){
-						mvo.setTitle(obj.getString("mTitle"+k));
-						mvo.setTitle(obj.getString("mLyrics"+k));
-						mvolist.add(mvo);
-					}
-					else break;
+				for(int k=1; obj.getString("mTitle"+k)!=null; k++){
+					mvo.setTitle(obj.getString("mTitle"+k));
+					mvo.setTitle(obj.getString("mLyrics"+k));
+					mvolist.add(mvo);
+					
 				}
 				vo.setmList(mvolist);
 				list.add(vo);
@@ -190,9 +194,15 @@ public class MusicDAO {
 				list=mmgr.getMelonNewMusic();
 			}
 			else if(musicSite.equals("naver"))indata=navdbc;
-			
+			int cnt=0;
 			for(MusicVO vo : list){
 				BasicDBObject obj = new BasicDBObject();
+				if(musicSite.equals("newMusic")){
+					obj.put("no", ++cnt);
+					obj.put("mno", vo.getNo());
+					obj.put("lyrics", vo.getLyrics());
+					obj.put("alno", vo.getAlno());
+				}
 				obj.put("title", vo.getTitle());
 				obj.put("rank", vo.getRank());
 				obj.put("poster", vo.getPoster());

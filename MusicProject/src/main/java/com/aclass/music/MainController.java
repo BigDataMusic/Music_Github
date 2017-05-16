@@ -200,15 +200,19 @@ public class MainController{
 	@RequestMapping("newtracks.do")
 	public String main_newtracks(Model model,String page)
 	{
+		System.out.println("newnewnewnew1");
 		if(page==null) page="1";
 		boolean Check=false;
 		List<MusicVO> nlist = dao.getMongoMusicData("newMusic");
 		List<AlbumVO> alist = dao.AlbumData();
 		List<AlbumVO> malist = new ArrayList<AlbumVO>();
+		System.out.println("newnewnewnew2");
 		for(int i=0;i<5;i++){
-			System.out.println(nlist.get(i).getAlno());
+			System.out.println(nlist.get(i).getTitle());
 			for(int j=0;j<alist.size();j++){
 				System.out.println(j+" 비교");
+				System.out.println(nlist.get(i).getAlno());
+				System.out.println(alist.get(j).getAlNo());
 				if(nlist.get(i).getAlno().equals(Integer.toString(alist.get(j).getAlNo()))){	
 					System.out.println("있는 앨범정보");
 					malist.add(alist.get(j));
@@ -223,10 +227,13 @@ public class MainController{
 				}
 			}
 		}
-		
+
+		System.out.println("newnewnewnew3");
 		int start=Integer.parseInt(page)*5-5;
 		int end=Integer.parseInt(page)*5;
 		List<MusicVO> vList=new ArrayList<MusicVO>();
+
+		System.out.println("newnewnewnew4");
 		for(int i=start;i<end;i++)
 		{
 			MusicVO nvo=new MusicVO();

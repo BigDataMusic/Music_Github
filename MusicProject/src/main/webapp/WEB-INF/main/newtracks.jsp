@@ -56,7 +56,8 @@ $(function(){
 			<td><img src="${vo.poster }"></td>
 			<td class="song"><a href="${vo.alno }">${vo.title }</a></td>
 			<td>${vo.artist }</td>		
-			<td><a href="#" target="_blank"><img src="resources/images/ly.png"></a></td>
+			<!-- <a href="#" target="_blank"></a> -->
+			<td><img src="resources/images/ly.png"></td>
 		</tr>
 		</c:forEach>
 	</table>
