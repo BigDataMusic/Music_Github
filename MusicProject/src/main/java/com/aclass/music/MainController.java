@@ -88,8 +88,7 @@ public class MainController{
         		b.setTitle(mTitle);
 			}
 		}*/
-		dao.AllMusicRank();
-		List<MusicVO> bList = dao.bugsMusicData();
+		List<MusicVO> bList = dao.getMongoMusicData("bugs");
 		String mTitle="";
 		for(MusicVO b:bList){
 			if(b.getTitle().length()>15){
@@ -199,10 +198,11 @@ public class MainController{
 		return "recommand";
 	}
 	@RequestMapping("newtracks.do")
-	public String main_newtracks(Model model)
+	public String main_newtracks(Model model,String page)
 	{
+		if(page==null) page="1";
 		boolean Check=false;
-		List<MusicVO> nlist = dao.newMusicData();
+		List<MusicVO> nlist = dao.getMongoMusicData("newMusic");
 		List<AlbumVO> alist = dao.AlbumData();
 		List<AlbumVO> malist = new ArrayList<AlbumVO>();
 		for(int i=0;i<5;i++){
@@ -223,8 +223,25 @@ public class MainController{
 				}
 			}
 		}
+		
+		int start=Integer.parseInt(page)*5-5;
+		int end=Integer.parseInt(page)*5;
+		List<MusicVO> vList=new ArrayList<MusicVO>();
+		for(int i=start;i<end;i++)
+		{
+			MusicVO nvo=new MusicVO();
+			nvo.setN(nlist.get(i).getN());
+			nvo.setIncrement(nlist.get(i).getIncrement());
+			nvo.setPoster(nlist.get(i).getPoster());
+			nvo.setTitle(nlist.get(i).getTitle());
+			nvo.setArtist(nlist.get(i).getArtist());
+			nvo.setAlbumname(nlist.get(i).getAlbumname());
+			vList.add(nvo);
+		}
+		
 		model.addAttribute("malist",malist);
 		model.addAttribute("nlist",nlist);
+		model.addAttribute("vList",vList);
 		return "newtracks";
 	}
 	@RequestMapping("board_insert.do")

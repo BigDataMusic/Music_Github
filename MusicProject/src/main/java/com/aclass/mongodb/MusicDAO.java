@@ -34,61 +34,6 @@ public class MusicDAO {
 			AlbumDBC=db.getCollection("MusicAlbum");
 		}catch(Exception ex){}
 	}
-	
-	/*public void musicTop100Drop(){
-    	dbc.drop();
-    }
-	public void musicTop100Insert(){
-    	try{
-    		File file=new File("/home/sist/bugsMusicTop100.csv");
-    		String top100_data="";
-    		int i=0;
-    		FileReader fr=new FileReader(file);
-    		while((i=fr.read())!=-1){
-    			top100_data+=String.valueOf((char)i);
-    		}
-    		fr.close();
-    		String[] data=top100_data.split("\n");
-    		String[] column={
-    				"rank","title","artist","albumname","poster"
-    		};
-    		for(String s:data){
-    			String[] in=s.split("|");
-    			BasicDBObject obj=new BasicDBObject();
-    			for(i=0;i<column.length;i++){
-    				obj.put(column[i], in[i]);
-    			}
-    			dbc.insert(obj);
-    		}    		
-    	}catch(Exception ex){
-    		System.out.println(ex.getMessage());
-    	}
-    }*/
-	public List<MusicVO> newMusicData(){
-		List<MusicVO> list= new ArrayList<MusicVO>();
-		try {
-			DBCursor cursor=newMusicDBC.find();
-			while(cursor.hasNext()){
-				BasicDBObject obj=(BasicDBObject)cursor.next();
-				MusicVO vo = new MusicVO();
-				vo.setN(obj.getInt("no"));
-				vo.setNo(obj.getInt("mno"));
-				vo.setTitle(obj.getString("title"));
-				vo.setPoster(obj.getString("poster"));
-				vo.setArtist(obj.getString("artist"));
-				vo.setLyrics(obj.getString("lyrics"));
-				vo.setAlbumname(obj.getString("alname"));
-				vo.setAlno(obj.getString("alno"));
-				//System.out.println(obj.getString("alno\t"));
-				list.add(vo);
-			}
-			cursor.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("newMusicData "+e.getMessage());
-		}
-		return list;
-	}
 	public List<MusicVO> getMongoMusicData(String musicSite){
 		List<MusicVO> list= new ArrayList<MusicVO>();
 		try {
@@ -97,31 +42,6 @@ public class MusicDAO {
 			else if(musicSite.equals("bugs")) cursor=bdbc.find();
 			else if(musicSite.equals("newMusic")) cursor=newMusicDBC.find();
 			else if(musicSite.equals("naver"))cursor=navdbc.find();
-			while(cursor.hasNext()){
-				//System.out.println("확인");
-				BasicDBObject obj=(BasicDBObject)cursor.next();
-				MusicVO vo = new MusicVO();
-				vo.setRank(obj.getInt("rank"));
-				vo.setTitle(obj.getString("title"));
-				vo.setPoster(obj.getString("poster"));
-				vo.setArtist(obj.getString("artist"));
-				vo.setAlbumname(obj.getString("album"));
-				vo.setIncrement(obj.getString("increment"));
-				//System.out.println(obj.getString("title"));
-				list.add(vo);
-			}
-			cursor.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("bugsMusicData "+e.getMessage());
-		}
-		return list;
-	}
-	// main
-	public List<MusicVO> bugsMusicData(){
-		List<MusicVO> list= new ArrayList<MusicVO>();
-		try {
-			DBCursor cursor=bdbc.find();
 			while(cursor.hasNext()){
 				//System.out.println("확인");
 				BasicDBObject obj=(BasicDBObject)cursor.next();
