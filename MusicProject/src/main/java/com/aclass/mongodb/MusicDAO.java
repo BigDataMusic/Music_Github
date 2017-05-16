@@ -7,19 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.aclass.mgr.AlbumVO;
+import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
 import com.mongodb.*;
-import com.sist.mapred.SongVO;
 
 
 @Repository
 public class MusicDAO {
 	@Autowired
 	private MelonManager mmgr;
+	@Autowired
+	private BugsManager bmgr;
+	@Autowired
+	private MongoTemplate mt;
 	
 	private MongoClient mc;
 	private DB db,db2;
@@ -38,61 +43,6 @@ public class MusicDAO {
 			wdbc=db2.getCollection("weather");
 		}catch(Exception ex){}
 	}
-	
-	/*public void musicTop100Drop(){
-    	dbc.drop();
-    }
-	public void musicTop100Insert(){
-    	try{
-    		File file=new File("/home/sist/bugsMusicTop100.csv");
-    		String top100_data="";
-    		int i=0;
-    		FileReader fr=new FileReader(file);
-    		while((i=fr.read())!=-1){
-    			top100_data+=String.valueOf((char)i);
-    		}
-    		fr.close();
-    		String[] data=top100_data.split("\n");
-    		String[] column={
-    				"rank","title","artist","albumname","poster"
-    		};
-    		for(String s:data){
-    			String[] in=s.split("|");
-    			BasicDBObject obj=new BasicDBObject();
-    			for(i=0;i<column.length;i++){
-    				obj.put(column[i], in[i]);
-    			}
-    			dbc.insert(obj);
-    		}    		
-    	}catch(Exception ex){
-    		System.out.println(ex.getMessage());
-    	}
-    }*/
-	public List<MusicVO> newMusicData(){
-		List<MusicVO> list= new ArrayList<MusicVO>();
-		try {
-			DBCursor cursor=newMusicDBC.find();
-			while(cursor.hasNext()){
-				BasicDBObject obj=(BasicDBObject)cursor.next();
-				MusicVO vo = new MusicVO();
-				vo.setN(obj.getInt("no"));
-				vo.setNo(obj.getInt("mno"));
-				vo.setTitle(obj.getString("title"));
-				vo.setPoster(obj.getString("poster"));
-				vo.setArtist(obj.getString("artist"));
-				vo.setLyrics(obj.getString("lyrics"));
-				vo.setAlbumname(obj.getString("alname"));
-				vo.setAlno(obj.getString("alno"));
-				//System.out.println(obj.getString("alno\t"));
-				list.add(vo);
-			}
-			cursor.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("newMusicData "+e.getMessage());
-		}
-		return list;
-	}
 	public List<MusicVO> getMongoMusicData(String musicSite){
 		List<MusicVO> list= new ArrayList<MusicVO>();
 		try {
@@ -105,31 +55,12 @@ public class MusicDAO {
 				//System.out.println("확인");
 				BasicDBObject obj=(BasicDBObject)cursor.next();
 				MusicVO vo = new MusicVO();
-				vo.setRank(obj.getInt("rank"));
-				vo.setTitle(obj.getString("title"));
-				vo.setPoster(obj.getString("poster"));
-				vo.setArtist(obj.getString("artist"));
-				vo.setAlbumname(obj.getString("album"));
-				vo.setIncrement(obj.getString("increment"));
-				//System.out.println(obj.getString("title"));
-				list.add(vo);
-			}
-			cursor.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("bugsMusicData "+e.getMessage());
-		}
-		return list;
-	}
-	// main
-	public List<MusicVO> bugsMusicData(){
-		List<MusicVO> list= new ArrayList<MusicVO>();
-		try {
-			DBCursor cursor=bdbc.find();
-			while(cursor.hasNext()){
-				//System.out.println("확인");
-				BasicDBObject obj=(BasicDBObject)cursor.next();
-				MusicVO vo = new MusicVO();
+				if(musicSite.equals("newMusic")){
+					vo.setAlno(obj.getString("alno"));
+					vo.setN(obj.getInt("no"));
+					vo.setNo(obj.getInt("mno"));
+					vo.setLyrics(obj.getString("lyrics"));
+				}
 				vo.setRank(obj.getInt("rank"));
 				vo.setTitle(obj.getString("title"));
 				vo.setPoster(obj.getString("poster"));
@@ -168,13 +99,11 @@ public class MusicDAO {
 				vo.setAlInfo(obj.getString("alInfo"));
 				List<MusicVO> mvolist = new ArrayList<MusicVO>();
 				MusicVO mvo = new MusicVO();
-				for(int k=1;;k++){
-					if(obj.getString("mTitle"+k)!=null){
-						mvo.setTitle(obj.getString("mTitle"+k));
-						mvo.setTitle(obj.getString("mLyrics"+k));
-						mvolist.add(mvo);
-					}
-					else break;
+				for(int k=1; obj.getString("mTitle"+k)!=null; k++){
+					mvo.setTitle(obj.getString("mTitle"+k));
+					mvo.setTitle(obj.getString("mLyrics"+k));
+					mvolist.add(mvo);
+					
 				}
 				vo.setmList(mvolist);
 				list.add(vo);
@@ -223,7 +152,6 @@ public class MusicDAO {
 	}
 	public List<MusicVO> AllMusicRank(){
 		/*
-		 * 
 			bdbc=db.getCollection("Top100_Bugs");
 			newMusicDBC=db.getCollection("NewMusic");
 			AlbumDBC=db.getCollection("MusicAlbum");
@@ -244,8 +172,6 @@ public class MusicDAO {
 			cnt++;
 			System.out.println(cnt+" "+mvo.getTitle());
 		}
-		
-		
 		return rlist;
 	}
 	
@@ -315,7 +241,7 @@ public class MusicDAO {
 		   return vo;
 	   }
 	
-	public List<MusicVO> songData()
+	/*public List<MusicVO> songData()
     {
     	List<SongVO> list = new ArrayList<SongVO>();
     	try
@@ -346,6 +272,53 @@ public class MusicDAO {
     	}
     	
    	 return list;
-    }
+    }*/
 	
+	public void dropTop100(){
+		mt.dropCollection("Top100_Melon");
+		mt.dropCollection("NewMusic");
+	}
+	
+	public void insertTop100(String musicSite){
+		try {
+			DBCollection indata=null;
+			List<MusicVO> list = null;
+			if(musicSite.equals("melon")){
+				indata=mdbc;
+				list=mmgr.getMelonTop100();
+			}
+			else if(musicSite.equals("bugs")){ 
+				indata=bdbc;
+				list=bmgr.bugsRankData();
+			}
+			else if(musicSite.equals("newMusic")){
+				indata=newMusicDBC;
+				list=mmgr.getMelonNewMusic();
+			}
+			else if(musicSite.equals("naver"))indata=navdbc;
+			int cnt=0;
+			for(MusicVO vo : list){
+				BasicDBObject obj = new BasicDBObject();
+				if(musicSite.equals("newMusic")){
+					obj.put("no", ++cnt);
+					obj.put("mno", vo.getNo());
+					obj.put("lyrics", vo.getLyrics());
+					obj.put("alno", vo.getAlno());
+				}
+				obj.put("title", vo.getTitle());
+				obj.put("rank", vo.getRank());
+				obj.put("poster", vo.getPoster());
+				obj.put("artist", vo.getArtist());
+				obj.put("album", vo.getAlbumname());
+				obj.put("increment", vo.getIncrement());
+				
+				indata.insert(obj);
+			}
+			
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("insertTop100 "+e.getMessage());
+		}
+	}
 }

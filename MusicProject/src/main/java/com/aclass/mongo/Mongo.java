@@ -1,4 +1,4 @@
-/*package com.aclass.mongo;
+package com.aclass.mongo;
 
 import com.aclass.mgr.*;
 import com.mongodb.BasicDBObject;
@@ -18,7 +18,7 @@ public class Mongo {
 			//dbc.drop();
 			List<AlbumVO> alList = new ArrayList<AlbumVO>();
 			MelonManager mm = new MelonManager();
-			alList = mm.getAlbumData(10);
+			alList = null;
 
 			mc = new MongoClient("localhost");
 			db = mc.getDB("aclass");
@@ -39,4 +39,3 @@ public class Mongo {
 	}
 
 }
-*/

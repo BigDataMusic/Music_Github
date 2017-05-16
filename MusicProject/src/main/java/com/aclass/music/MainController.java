@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.hadoop.conf.Configuration;
@@ -90,8 +91,7 @@ public class MainController{
         		b.setTitle(mTitle);
 			}
 		}*/
-		dao.AllMusicRank();
-		List<MusicVO> bList = dao.bugsMusicData();
+		List<MusicVO> bList = dao.getMongoMusicData("bugs");
 		String mTitle="";
 		for(MusicVO b:bList){
 			if(b.getTitle().length()>15){
@@ -147,10 +147,11 @@ public class MainController{
 		}
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
-		//songwhether.songData(song);
-		//songwhether.SongWhether(song,singer);
-		//rmanager.rGraph(song);
-		//rmanager.rGraph2(song);
+		songwhether.songData(song);
+		songwhether.SongWhether(song,singer);
+		songwhether.feelData(song);
+		rmanager.rGraph(song);
+		rmanager.rGraph2(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")
@@ -203,15 +204,19 @@ public class MainController{
 	@RequestMapping("newtracks.do")
 	public String main_newtracks(Model model,String page)
 	{
+		System.out.println("newnewnewnew1");
 		if(page==null) page="1";
 		boolean Check=false;
-		List<MusicVO> nlist = dao.newMusicData();
+		List<MusicVO> nlist = dao.getMongoMusicData("newMusic");
 		List<AlbumVO> alist = dao.AlbumData();
 		List<AlbumVO> malist = new ArrayList<AlbumVO>();
+		System.out.println("newnewnewnew2");
 		for(int i=0;i<5;i++){
-			System.out.println(nlist.get(i).getAlno());
+			System.out.println(nlist.get(i).getTitle());
 			for(int j=0;j<alist.size();j++){
 				System.out.println(j+" 비교");
+				System.out.println(nlist.get(i).getAlno());
+				System.out.println(alist.get(j).getAlNo());
 				if(nlist.get(i).getAlno().equals(Integer.toString(alist.get(j).getAlNo()))){	
 					System.out.println("있는 앨범정보");
 					malist.add(alist.get(j));
@@ -226,10 +231,13 @@ public class MainController{
 				}
 			}
 		}
-		
+
+		System.out.println("newnewnewnew3");
 		int start=Integer.parseInt(page)*5-5;
 		int end=Integer.parseInt(page)*5;
 		List<MusicVO> vList=new ArrayList<MusicVO>();
+
+		System.out.println("newnewnewnew4");
 		for(int i=start;i<end;i++)
 		{
 			MusicVO nvo=new MusicVO();
@@ -465,7 +473,7 @@ public class MainController{
 						<li><a href="recommand.do?no=11">눈오는 날</a></li>
 	 * 
 	 */
-	@RequestMapping("main/recommand.do")
+/*	@RequestMapping("main/recommand.do")
 	public String naver_recommand(String recommand,Model model)
     {
     	String[] reday={"봄","여름","가을","겨울","화창한날","아침","오후","저녁","밤/새벽","비/흐림","크리스마스","눈오는 날"};
@@ -489,10 +497,10 @@ public class MainController{
     		}
     		fr.close();
     		String temp[]=data.split("\n");
-    		/*for(String s:temp)
+    		for(String s:temp)
     		{
     			System.out.println(s);
-    		}*/
+    		}
     		Pattern[] p=new Pattern[tList.size()];
     		for(i=0;i<p.length;i++)
     		{
@@ -543,6 +551,12 @@ public class MainController{
     	model.addAttribute("main_jsp", "recommand.jsp");
     	// commonData(model);
     	return "main";
-    }
+    }*/
 	
+	@PostConstruct
+	public void init(){		
+		dao.dropTop100();
+		dao.insertTop100("melon");
+		dao.insertTop100("newMusic");
+	}
 }

@@ -56,7 +56,7 @@
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
 			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" />
 			<div style="height: 10px"></div>
-			<img src="resources/images/pie.jpg" alt="" width="200" height="200" />
+			<img src="resources/images/susubar.png" alt="" width="200" height="200" />
 		</div>
 	</div>
 </body>

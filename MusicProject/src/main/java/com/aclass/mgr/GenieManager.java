@@ -61,15 +61,15 @@ public class GenieManager {
 
 					vo.setRank(rank);
 					vo.setTitle(t.text().trim());
-					vo.setPoster(poster.trim());
+					vo.setPoster("http://"+poster.trim());
 					vo.setArtist(art.text().trim());
 					vo.setAlbumname(al.text().trim());
 					vo.setIncrement("-");
 					gList.add(vo);
 					
-					/*System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
-					System.out.println("   " + vo.getPoster());
-					System.out.println("   " + vo.getAlbumname());*/
+					//System.out.println(vo.getRank() + "위 " + vo.getTitle() + " - " + vo.getArtist());
+					//System.out.println("   " + vo.getPoster());
+					//System.out.println("   " + vo.getAlbumname());
 					
 					rank++;
 				}

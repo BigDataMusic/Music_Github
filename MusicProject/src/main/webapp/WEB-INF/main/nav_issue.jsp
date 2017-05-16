@@ -20,8 +20,10 @@
 		<p id="title_ex">NAVER 실시간 검색</p>
 		<br/>
 		<ul id="navigation" style="padding-top: 0px;list-style-type: decimal;">
-		<c:forEach var="vo" items="${nrList }">
-			<li class="color">${vo.rank }&nbsp;&nbsp;&nbsp;&nbsp;<a href="${vo.url }">${vo.title }</a></li>
+		<c:forEach var="vo" items="${nrList }" varStatus="s">
+			<c:if test="${s.index%2!=0 }"><li class="color"></c:if>
+			<c:if test="${s.index%2==0 }"><li></c:if>
+			${vo.rank }&nbsp;&nbsp;&nbsp;&nbsp;<a href="${vo.url }">${vo.title }</a></li>
 		</c:forEach>
 		</ul>
 		<br />
@@ -30,8 +32,10 @@
 		<p id="title_ex">DAUM 실시간 검색</p>
 		<br />
 		<ul id="navigation" style="padding-top: 0px;list-style-type: decimal;">
-		<c:forEach var="vo" items="${drList }">
-			<li class="color">${vo.rank }&nbsp;&nbsp;&nbsp;&nbsp;<a href="${vo.url }">${vo.title }</a></li>
+		<c:forEach var="vo" items="${drList }" varStatus="s">
+			<c:if test="${s.index%2!=0 }"><li class="color"></c:if>
+			<c:if test="${s.index%2==0 }"><li></c:if>
+			${vo.rank }&nbsp;&nbsp;&nbsp;&nbsp;<a href="${vo.url }">${vo.title }</a></li>
 		</c:forEach>
 		</ul>		
 	</div>
