@@ -41,6 +41,17 @@
        </td>
       </tr>
      </table>
+     <table width="735" style="margin-top: 5px">
+			<tr>
+				<td align="center" valign="middle" style="padding: 10px 0 0 0">
+					<a href="board_update.do?no={{data[0]}}" style="text-decoration: none"><input type="button" value="수정" style="padding: 5px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="board_delete.do?no={{data[0]}}" style="text-decoration: none"><input type="button" value="삭제" style="padding: 5px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="board_reply.do?no={{data[0]}}" style="text-decoration: none"><input type="button" value="댓글" style="padding: 5px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" value="목록" style="padding: 5px"
+					onclick="javascript:history.back()" />
+				</td>
+			</tr>
+		</table>
      </div>
 </body>
 </html>
