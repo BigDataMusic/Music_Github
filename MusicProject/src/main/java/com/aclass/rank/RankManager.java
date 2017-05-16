@@ -14,9 +14,9 @@ public class RankManager {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		RankManager rm = new RankManager();
-		rm.naverRankData();
+		//rm.naverRankData();
 		rm.daumRankData();
-		rm.naverIssuData();
+		//rm.naverIssuData();
 	}
 	
 	public List<RankVO> naverRankData() {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,16 +37,16 @@
 		<br />
 		<br />
 		<p id="title_ex">신곡출시가수</p>
-		<br />
+		<br/>
 		<ul id="navigation" style="padding-top: 0px">
-			<li class="color"><a href="#">가수 1호</a></li>
-			<li><a href="#">가수 2호</a></li>
-			<li class="color"><a href="#">가수 3호</a></li>
-			<li><a href="#">가수 4호</a></li>
-			<li class="color"><a href="#">가수 5호</a></li>
-			<li><a href="#">가수 6호</a></li>
-			<li class="color"><a href="#">가수 7호</a></li>
-			<li><a href="#">가수 8호</a></li>
+			<c:forEach var="vo" items="${nlist }" varStatus="i">
+				<c:if test="${i.index<10}">
+				<c:if test="${i.index%2==0 }">
+					<li class="color">
+				</c:if>
+				<a href="#">${vo.artist.trim() }</a></li>
+				</c:if>
+			</c:forEach>
 		</ul>	
 	</div>	
 </body>

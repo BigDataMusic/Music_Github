@@ -64,6 +64,7 @@ public class MainController{
         		b.setTitle(mTitle);
 			}
 		}*/
+		dao.AllMusicRank();
 		List<MusicVO> bList = dao.bugsMusicData();
 		String mTitle="";
 		for(MusicVO b:bList){
@@ -107,14 +108,26 @@ public class MainController{
 		return "content";
 	}
 	@RequestMapping("top100.do")
-	public String main_top100(String page,Model model)
+	public String main_top100(String cate,String page,Model model)
 	{
-		if(page==null)
-			page="1";
+		if(page==null) page="1";
+		if(cate==null) cate="1";
 		int start=Integer.parseInt(page)*10-10;
 		int end=Integer.parseInt(page)*10;
 		
-		List<MusicVO> bList=bmgr.bugsRankData();
+		List<MusicVO> bList=null;
+		//음악인
+		if(cate.equals("1")) bList=bmgr.bugsRankData();
+		//멜론
+		else if(cate.equals("2")) bList=mmgr.getMelonTop100();
+		//벅스
+		else if(cate.equals("3")) bList=bmgr.bugsRankData();
+		//지니
+		else if(cate.equals("4")) bList=bmgr.bugsRankData();
+		//엠넷
+		else if(cate.equals("5")) bList=bmgr.bugsRankData();
+		//네이버
+		else if(cate.equals("6")) bList=bmgr.bugsRankData();
 		List<MusicVO> vList=new ArrayList<MusicVO>();
 		
 		for(int i=start;i<end;i++)
@@ -128,7 +141,7 @@ public class MainController{
 			nvo.setAlbumname(bList.get(i).getAlbumname());
 			vList.add(nvo);
 		}
-			
+		model.addAttribute("cate",cate);
 		model.addAttribute("vList", vList);
 		return "top100";
 	}
@@ -245,7 +258,7 @@ public class MainController{
 		}		
 		
     	List<RankVO> nrList=rmgr.naverRankData();
-    	List<RankVO> drList=rmgr.naverRankData();
+    	List<RankVO> drList=rmgr.daumRankData();
     	List<IssueVO> niList=rmgr.naverIssuData();
     	
     	model.addAttribute("niList", niList);
