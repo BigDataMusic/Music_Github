@@ -26,7 +26,7 @@
 			<td>${vo.rank}</td>
 			<td>${vo.increment}</td>
 			<td><a href="content.do?song=${vo.title }&singer=${vo.artist}"><img src="${vo.poster }" class="jacket_thumb100" /></a></td>
-			<td class="song"><a href="content.do?title=${vo.title}">${vo.title }</a></td>
+			<td class="song"><a href="content.do?title=${vo.title}" style="text-decoration: none;color:#555">${vo.title }</a></td>
 			<td>${vo.artist }</td>
 			<td>${vo.albumname }</td>
 		</tr>

@@ -1,4 +1,4 @@
-package com.aclass.aspect;
+package com.aclass.aop;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class MelonManager {
 	public static void main(String[] args){
 		MelonManager m = new MelonManager();
-		//m.getMelonTop100(); //TOP100
+		m.getMelonTop100(); //TOP100
 		//m.getAlbumData(10060030); //앨범정보
 		//m.getAlno100(); //top100에 있는 앨범번호
 		m.getMelonNewMusic(); //최신앨범(적용전)
@@ -68,7 +68,7 @@ public class MelonManager {
 				vo.setIncrement(increment);
 				vo.setPoster(pElem.get(j-6).attr("src"));
 				vo.setTitle(titleElem.get(j).text());
-				vo.setArtist(artElem.get(j-6).text());
+				vo.setArtist(artElem.get(j-6).text().substring(0, artElem.get(j-6).text().length()/2));
 				vo.setAlbumname(alElem.get(j-6).text());
 				vo.setAlno(alnoElem.get(j-6).attr("onclick").substring(alnoElem.get(j-6).attr("onclick").indexOf("'")+1,alnoElem.get(j-6).attr("onclick").lastIndexOf("'")));
 				list.add(vo);
