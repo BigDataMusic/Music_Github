@@ -98,7 +98,7 @@ public class SongWhether implements Serializable{
 					fw.close();
 				}
 				
-				//날씨사전 불러오기 
+				//날씨사전 불러오기 (홈 레커멘드데이타에 날씨사전 있어야댐)
 				FileReader fr=new FileReader("/home/sist/recommend-data/weather_data");
 				String weatherdata="";
 				int i=0;
