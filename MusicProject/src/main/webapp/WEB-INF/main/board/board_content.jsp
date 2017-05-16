@@ -6,12 +6,43 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"	href="resources/css/top100_table.css" />
 <title>Insert title here</title>
+<<<<<<< HEAD
+<script type="text/javascript" src="resources/smarteditor2/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+=======
 <!-- <script type="text/javascript" src="resources/smarteditor2/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script> -->
+>>>>>>> branch 'master' of https://github.com/BigDataMusic/Music_Github.git
 </head>
-<body>
+<body ng-app="">
 	<center>
 		<h1 style="margin-bottom: 10px">Free Board Content</h1>
 	</center>
+<<<<<<< HEAD
+	<div ng-init="data=${json }" id="content_top100" style="margin-top: 10px">
+	<table id="table2" width="735">
+      <tr>
+       <th width="20%" style="border-radius: 15px;">번호</th>
+       <td width="30%" align="center">{{data[0]}}</td>
+       <th width="20%" style="border-radius: 15px;">작성일</th>
+       <td width="30%" align="center">{{data[3]}}</td>
+      </tr>
+      <tr>
+       <th width="20%" style="border-radius: 15px;">이름</th>
+       <td width="30%" align="center">{{data[1]}}</td>
+       <th width="20%" style="border-radius: 15px;">조회수</th>
+       <td width="30%" align="center">{{data[4]}}</td>
+      </tr>
+      <tr>
+       <th width="20%" style="border-radius: 15px;">제목</th>
+       <td colspan="3" align="left">{{data[2]}}</td>
+      </tr>
+      <tr>
+       <td colspan="4" style="border-radius: 15px;" align="left" valign="top" height="200">
+       <textarea style="width: 728px;height: 580px;" readonly>{{data[5]}}</textarea>
+       </td>
+      </tr>
+     </table>
+=======
 	<div id="content_top100" style="margin-top: 10px">
 		<table width="735" id="table2">
 			<tr>
@@ -43,12 +74,13 @@
 				</td>
 			</tr>
 		</table>
+>>>>>>> branch 'master' of https://github.com/BigDataMusic/Music_Github.git
 		<table width="735" style="margin-top: 5px">
 			<tr>
 				<td align="center" valign="middle" style="padding: 10px 0 0 0">
-					<input type="button" value="수정" style="padding: 5px" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="button" value="삭제" style="padding: 5px" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="button" value="댓글" style="padding: 5px" />&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="board_update.do?no={{data[0]}}" style="text-decoration: none"><input type="button" value="수정" style="padding: 5px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="board_delete.do?no={{data[0]}}" style="text-decoration: none"><input type="button" value="삭제" style="padding: 5px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="board_reply.do?no={{data[0]}}" style="text-decoration: none"><input type="button" value="댓글" style="padding: 5px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" value="목록" style="padding: 5px"
 					onclick="javascript:history.back()" />
 				</td>
