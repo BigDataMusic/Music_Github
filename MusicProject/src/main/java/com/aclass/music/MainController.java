@@ -1,5 +1,6 @@
 package com.aclass.music;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.annotation.Resource;
@@ -10,20 +11,30 @@ import org.springframework.data.hadoop.mapreduce.JobRunner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.codehaus.jettison.json.JSONObject;
+import org.json.simple.JSONArray;
 
+import java.io.*;
+
+import com.aclass.mgr.*;
 import com.aclass.mgr.AlbumVO;
 import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
+import com.aclass.mongo.FeelDAO;
+import com.aclass.mongo.MusicManager;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
 import com.aclass.rank.*;
-import com.aclass.rank.RankVO;
+import com.aclass.recom.RecommandDAO;
 import com.aclass.review.naver.RManager;
 import com.aclass.review.naver.ReviewDAO;
 import com.aclass.review.naver.ReviewManager;
 import com.aclass.review.naver.SongVO;
 import com.aclass.review.naver.SongWhether;
+import com.aclass.spark.SparkEmotionManager;
+import com.aclass.spark.SparkWeatherManager;
 import com.aclass.mongodb.*;
 
 @Controller
@@ -39,18 +50,33 @@ public class MainController{
 	@Autowired
 	private MelonManager mmgr;
 	@Autowired
+	private MnetManager mnetmgr;
+	@Autowired
+	private GenieManager gmgr;
+	@Autowired
 	private Configuration conf;
 	@Autowired
 	private JobRunner jr;
-	
 	@Autowired
-	private RManager rmanager;
+	private RManager rmanager;	
+	@Autowired
+	private SparkWeatherManager swgr;
+	@Autowired
+	private SparkEmotionManager segr;
+	@Autowired
+	private MusicManager msmgr;
+	@Autowired
+	private FeelDAO fdao;
+	@Autowired
+	private BoardDAO bdao;
 	@Autowired
 	private ReviewManager reviewmanager;
 	@Autowired
 	private ReviewDAO reviewdao;
 	@Autowired
 	private SongWhether songwhether;
+	@Autowired
+	private RecommandDAO recomdao;
 	
 	@RequestMapping("main.do")
 	public String main_page(String data,Model model)
@@ -64,6 +90,7 @@ public class MainController{
         		b.setTitle(mTitle);
 			}
 		}*/
+		dao.AllMusicRank();
 		List<MusicVO> bList = dao.bugsMusicData();
 		String mTitle="";
 		for(MusicVO b:bList){
@@ -93,28 +120,62 @@ public class MainController{
 		return "main";
 	}
 	@RequestMapping("content.do")
-	public String main_content_page(String song,String singer)
+	public String main_content_page(String song,String singer,String title,Model model)
 	{
-		
-		
-		
+		msmgr.reviewData(title);
+		try {
+			File dir=new File("/home/sist/feel-data/weather");
+			if(dir.exists()){
+				File[] lists=dir.listFiles();
+				for(File f:lists){
+					f.delete();
+				}
+				dir.delete();
+			}
+			File dir1=new File("/home/sist/feel-data/emotion");
+			if(dir1.exists()){
+				File[] lists1=dir1.listFiles();
+				for(File f:lists1){
+					f.delete();
+				}
+				dir1.delete();
+			}
+		swgr.execute();
+		segr.execute();
+		} catch (Exception ex) {
+			System.out.println("파일 만들기 : "+ex.getMessage());
+		}
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);
-		songwhether.SongWhether(song);
+		songwhether.SongWhether(song,title);
+		//songwhether.songData(song);
+		//songwhether.SongWhether(song,singer);
 		//rmanager.rGraph(song);
 		//rmanager.rGraph2(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")
-	public String main_top100(String page,Model model)
+	public String main_top100(String cate,String page,Model model)
 	{
-		if(page==null)
-			page="1";
+		if(page==null) page="1";
+		if(cate==null) cate="1";
 		int start=Integer.parseInt(page)*10-10;
 		int end=Integer.parseInt(page)*10;
 		
-		List<MusicVO> bList=bmgr.bugsRankData();
+		List<MusicVO> bList=null;
+		//음악인
+		if(cate.equals("1")) bList=bmgr.bugsRankData();
+		//멜론
+		else if(cate.equals("2")) bList=dao.getMongoMusicData("melon");
+		//벅스
+		else if(cate.equals("3")) bList=dao.getMongoMusicData("bugs");
+		//지니
+		else if(cate.equals("4")) bList=gmgr.genieRankData();
+		//엠넷
+		else if(cate.equals("5")) bList=mnetmgr.mnetRankData();
+		//네이버
+		else if(cate.equals("6")) bList=dao.getMongoMusicData("naver");
 		List<MusicVO> vList=new ArrayList<MusicVO>();
 		
 		for(int i=start;i<end;i++)
@@ -128,17 +189,59 @@ public class MainController{
 			nvo.setAlbumname(bList.get(i).getAlbumname());
 			vList.add(nvo);
 		}
-			
+		model.addAttribute("cate",cate);
 		model.addAttribute("vList", vList);
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
-	public String main_recommand(Model model)
+	public String main_recommand(Model model,String feel,String rno)
 	{
-		List<SongVO> list = reviewmanager.songData();
+		//List<SongVO> list = reviewmanager.songData();
+		//rno="봄";
+		if(rno==null) rno="1";
+		List<String> weatherList=recomdao.songGetWeather();
+		if(feel!=null)
+		{
+			List<SongVO> weatherRecommandList=recomdao.weatherRecommandData(feel);
+			model.addAttribute("weatherRecommandList", weatherRecommandList);
+		}
+		List<SongVO> weatherFeelList=null;
+		//음악인
+		if(rno.equals("1")) weatherFeelList=recomdao.getMongoFeelData(rno);
+		//멜론
+		/*else if(no.equals("2")) bList=dao.getMongoMusicData("melon");
+		//벅스
+		else if(no.equals("3")) bList=dao.getMongoMusicData("bugs");
+		//지니
+		else if(no.equals("4")) bList=gmgr.genieRankData();
+		//엠넷
+		else if(no.equals("5")) bList=mnetmgr.mnetRankData();
+		//네이버
+		else if(no.equals("6")) bList=dao.getMongoMusicData("naver");
+		else if(no.equals("7")) bList=dao.getMongoMusicData("bugs");
+		//지니
+		else if(no.equals("8")) bList=gmgr.genieRankData();
+		//엠넷
+		else if(no.equals("9")) bList=mnetmgr.mnetRankData();
+		//네이버
+		else if(no.equals("10")) bList=dao.getMongoMusicData("naver");
+		else if(no.equals("11")) bList=dao.getMongoMusicData("bugs");
+		//지니
+		else if(no.equals("12")) bList=gmgr.genieRankData();*/
+		List<SongVO> mList=
+				new ArrayList<SongVO>();
+		List<String> sList=new ArrayList<String>();
 		
-	 	model.addAttribute("main_jsp", "recommand.jsp");
-		model.addAttribute("list", list);
+		for(String s:sList)
+		{
+			List<SongVO> vo=recomdao.getWeather();
+			mList.addAll(vo);
+		}
+		model.addAttribute("mList", mList);
+		model.addAttribute("rno", rno);
+		model.addAttribute("weatherFeelList", weatherFeelList);
+		model.addAttribute("weatherList", weatherList);
+	 	model.addAttribute("main_jsp", "recommand.jsp");	 	
 		return "recommand";
 	}
 	@RequestMapping("newtracks.do")
@@ -170,25 +273,141 @@ public class MainController{
 		model.addAttribute("nlist",nlist);
 		return "newtracks";
 	}
+	@RequestMapping("board_insert.do")
+	public String board_insert(){
+		return "board/board_insert";//forward
+	}
+	@RequestMapping("board_insert_ok.do")
+	public String board_insert_ok(BoardVO vo){
+		bdao.boardInsert(vo);
+		return "redirect:/board.do";
+	}
 	@RequestMapping("board.do")
-	public String main_board()
-	{
+	public String board_list(String page,Model model){
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		List<BoardVO> list=bdao.boardListData(curpage);
+		String json=boardListJson(list);
+		int totalpage=bdao.boardTotalPage();
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("json", json);
+		model.addAttribute("list", list);
 		return "board/board";
 	}
 	@RequestMapping("board_content.do")
-	public String main_board_content()
-	{
+	public String board_content(int no,Model model){
+		BoardVO vo=bdao.boardGetData(0, no);
+		String json=boardDataJson(vo);
+		model.addAttribute("json", json);
 		return "board/board_content";
 	}
-	@RequestMapping("board_insert.do")
-	public String main_board_insert()
-	{
-		return "board/board_insert";
-	}
 	@RequestMapping("board_update.do")
-	public String main_board_update()
-	{
+	public String board_update(int no,Model model){
+		String json="";
+		BoardVO vo=bdao.boardGetData(1, no);
+		json=boardDataJson(vo);
+		model.addAttribute("json", json);
 		return "board/board_update";
+	}
+	@RequestMapping("board_update_ok.do")
+	@ResponseBody
+	public String board_update_ok(BoardVO vo){
+		String url="";
+		boolean bCheck=bdao.boardUpdate(vo);
+		if(bCheck==true){
+			url="<script>location.href=\"board_content.do?no="+vo.getNo()+"\";"
+					+"</script>";
+		}else{
+			url="<script>alert(\"Password Fail!!\");"
+					+"history.back();</script>";
+		}
+		return url;
+	}
+	@RequestMapping("board_reply.do")
+	   public String board_reply(int no,Model model)
+	   {
+		   // Model => HttpSevletRequest
+		   // addAttribute() => setAttribute()
+		   // MVC => forward,sendRedirect
+		   // => Controller(DispatcherServlet) => do
+		   // MVC (C) ==> MVVC(Domain)
+		   model.addAttribute("no", no);
+		   return "board/board_reply";// forward
+	   }
+	   @RequestMapping("board_reply_ok.do")
+	   public String board_reply_ok(int pno,BoardVO vo)
+	   {
+		   // DB (저장)
+		   bdao.boardReply(pno, vo);
+		   return "redirect:/board.do";
+	   }
+	   @RequestMapping("board_delete.do")
+	   public String board_delete(int no,Model model)
+	   {
+		   model.addAttribute("no", no);
+		   return "board/board_delete";
+	   }
+	   @RequestMapping("board_delete_ok.do")
+	   @ResponseBody
+	   public String board_delete_ok(int no,String pwd)
+	   {
+		   String url="";
+		   boolean bCheck=bdao.boardDelete(no, pwd);
+		   if(bCheck==true)
+		   {
+			   url="<script>location.href=\"board.do\";"
+					+"</script>";
+		   }
+		   else
+		   {
+			   url="<script>alert(\"Password Fail!!\");"
+					+"history.back();</script>";
+		   }
+		   return url;
+	   }
+	public String boardListJson(List<BoardVO>list){
+		String json="";
+		try {
+			JSONArray arr=new JSONArray();
+			// [{},{},{}}
+			for(BoardVO vo:list){
+				JSONObject obj=new JSONObject();
+				obj.put("no", vo.getNo());
+				obj.put("name", vo.getName());
+				obj.put("subject", vo.getSubject());
+				obj.put("regdate", vo.getRegdate());
+				obj.put("hit", vo.getHit());
+				obj.put("group_tab", vo.getGroup_tab());
+				obj.put("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+				arr.add(obj);
+			}
+			json=arr.toString();
+		} catch (Exception ex) {
+			System.out.println("boardListJson : "+ex.getMessage());
+		}
+		return json;
+	}
+	
+	public String boardDataJson(BoardVO vo){
+		String json="[";
+		try {
+				/*JSONObject obj=new JSONObject();
+				obj.put("no", vo.getNo());
+				obj.put("name", vo.getName());
+				obj.put("subject", vo.getSubject());
+				obj.put("regdate", vo.getRegdate());
+				obj.put("hit", vo.getHit());
+				obj.put("content", vo.getContent());
+				json=obj.toString();*/
+				// {no:,name:,subject:...}
+			json+=vo.getNo()+",'"+vo.getName()+"','"+vo.getSubject()+"','"+vo.getRegdate()+"','"+vo.getHit()+"','"+vo.getContent()+"']";
+			
+		} catch (Exception ex) {
+			System.out.println("boardListJson : "+ex.getMessage());
+		}
+		return json;
 	}
 	@RequestMapping("issue.do")
 	public String main_issue(String page,String data,Model model)
@@ -245,7 +464,7 @@ public class MainController{
 		}		
 		
     	List<RankVO> nrList=rmgr.naverRankData();
-    	List<RankVO> drList=rmgr.naverRankData();
+    	List<RankVO> drList=rmgr.daumRankData();
     	List<IssueVO> niList=rmgr.naverIssuData();
     	
     	model.addAttribute("niList", niList);

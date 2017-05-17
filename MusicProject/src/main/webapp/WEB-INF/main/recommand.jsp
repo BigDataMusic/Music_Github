@@ -22,9 +22,13 @@
 					<th width="10%">장르</th>
 					<th width="15%">발매사</th>
 				</tr>
-			 	<c:forEach var="i" begin="1" end="10">
-					<tr>
-						<td>${i}</td>
+			 
+					
+					<c:forEach var="vo" items="${mList }" varStatus="s">
+					                        <c:if test="${s.index<5 }">
+					                        <c:forEach var="i" begin="1" end="5">
+					                        <tr>
+					            <td>${i}</td>
 						<td><a href="content.do"><img
 								src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg"
 								class="jacket_thumb100" /></a></td>
@@ -34,7 +38,21 @@
 						<td>장르</td>
 						<td>발매사발매사발매</td>
 					</tr>
+
+				  
+				</c:forEach>
+</c:if>
 					</c:forEach>
+						<%-- <td>${i}</td>
+						<td><a href="content.do"><img
+								src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg"
+								class="jacket_thumb100" /></a></td>
+						<td class="song">곡명</td>
+						<td>아티스트</td>
+						<td>2017.12.31.</td>
+						<td>장르</td>
+						<td>발매사발매사발매</td> --%>
+					
 			</table>
 		</div>
 	</div>

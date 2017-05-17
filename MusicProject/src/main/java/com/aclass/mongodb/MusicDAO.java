@@ -21,13 +21,15 @@ public class MusicDAO {
 	
 	private MongoClient mc;
 	private DB db;
-	private DBCollection bdbc,newMusicDBC,AlbumDBC;
+	private DBCollection mdbc,bdbc,navdbc,newMusicDBC,AlbumDBC;
 	public MusicDAO(){
 		try
     	{
 			mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38", 27017)));
 			db=mc.getDB("mydb");
 			bdbc=db.getCollection("Top100_Bugs");
+			mdbc=db.getCollection("Top100_Melon");
+			navdbc=db.getCollection("Top100_Naver");
 			newMusicDBC=db.getCollection("NewMusic");
 			AlbumDBC=db.getCollection("MusicAlbum");
 		}catch(Exception ex){}
@@ -87,12 +89,16 @@ public class MusicDAO {
 		}
 		return list;
 	}
-	public List<MusicVO> bugsMusicData(){
+	public List<MusicVO> getMongoMusicData(String musicSite){
 		List<MusicVO> list= new ArrayList<MusicVO>();
 		try {
-			DBCursor cursor=bdbc.find();
+			DBCursor cursor=null;
+			if(musicSite.equals("melon")) cursor=mdbc.find();
+			else if(musicSite.equals("bugs")) cursor=bdbc.find();
+			else if(musicSite.equals("newMusic")) cursor=newMusicDBC.find();
+			else if(musicSite.equals("naver"))cursor=navdbc.find();
 			while(cursor.hasNext()){
-				System.out.println("확인");
+				//System.out.println("확인");
 				BasicDBObject obj=(BasicDBObject)cursor.next();
 				MusicVO vo = new MusicVO();
 				vo.setRank(obj.getInt("rank"));
@@ -101,7 +107,32 @@ public class MusicDAO {
 				vo.setArtist(obj.getString("artist"));
 				vo.setAlbumname(obj.getString("album"));
 				vo.setIncrement(obj.getString("increment"));
-				System.out.println(obj.getString("title"));
+				//System.out.println(obj.getString("title"));
+				list.add(vo);
+			}
+			cursor.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("bugsMusicData "+e.getMessage());
+		}
+		return list;
+	}
+	// main
+	public List<MusicVO> bugsMusicData(){
+		List<MusicVO> list= new ArrayList<MusicVO>();
+		try {
+			DBCursor cursor=bdbc.find();
+			while(cursor.hasNext()){
+				//System.out.println("확인");
+				BasicDBObject obj=(BasicDBObject)cursor.next();
+				MusicVO vo = new MusicVO();
+				vo.setRank(obj.getInt("rank"));
+				vo.setTitle(obj.getString("title"));
+				vo.setPoster(obj.getString("poster"));
+				vo.setArtist(obj.getString("artist"));
+				vo.setAlbumname(obj.getString("album"));
+				vo.setIncrement(obj.getString("increment"));
+				//System.out.println(obj.getString("title"));
 				list.add(vo);
 			}
 			cursor.close();
@@ -156,8 +187,8 @@ public class MusicDAO {
 		AlbumVO vo = new AlbumVO();
 		try {
 			vo=mmgr.getAlbumData(alno);
-				System.out.println("=====================");
-				System.out.println("======"+vo.getAlTitle()+"========");
+			//	System.out.println("=====================");
+				//System.out.println("======"+vo.getAlTitle()+"========");
 				BasicDBObject obj = new BasicDBObject();
 				obj.put("alNo", vo.getAlNo());
 				obj.put("alType", vo.getAlType());
@@ -185,5 +216,32 @@ public class MusicDAO {
 			System.out.println("albumInsert "+e.getMessage());
 		}
 		return vo;
+	}
+	public List<MusicVO> AllMusicRank(){
+		/*
+		 * 
+			bdbc=db.getCollection("Top100_Bugs");
+			newMusicDBC=db.getCollection("NewMusic");
+			AlbumDBC=db.getCollection("MusicAlbum");
+		 */
+		List<MusicVO> rlist = new ArrayList<MusicVO>();
+		List<MusicVO> buglist=getMongoMusicData("bugs");
+		int cnt=0;
+		System.out.println("==============================");
+		for(MusicVO bvo : buglist){
+			cnt++;
+			System.out.println(cnt+" "+bvo.getTitle());
+			if(cnt==100) break;
+		}
+		cnt=0;
+		System.out.println("==============================");
+		List<MusicVO> mellist=getMongoMusicData("melon");
+		for(MusicVO mvo : mellist){
+			cnt++;
+			System.out.println(cnt+" "+mvo.getTitle());
+		}
+		
+		
+		return rlist;
 	}
 }

@@ -37,7 +37,7 @@ $(function(){
 	</div>
 </div>	
 <div id="content_top100"  style="margin-top: 10px;">
-	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 싱글 BEST 5</p>
+	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 싱글 BEST 50</p>
 	<table id="table2" width="735">
 		<tr>
 			<th width="10%">No</th>

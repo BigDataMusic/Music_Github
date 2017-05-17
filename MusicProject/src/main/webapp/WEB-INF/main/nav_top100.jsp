@@ -21,12 +21,12 @@
 		<p id="title_ex">음원 차트</p>
 		<br />
 		<ul id="navigation">
-			<li class="color"><a href="#">음악인 차트</a></li>
-			<li><a href="#">멜론 차트</a></li>
-			<li class="color"><a href="#">벅스 차트</a></li>
-			<li><a href="#">지니 차트</a></li>
-			<li class="color"><a href="#">엠넷 차트</a></li>
-			<li><a href="#">네이버 뮤직 차트</a></li>
+			<li class="color"><a href="top100.do?cate=1&page=1">음악인 차트</a></li>
+			<li><a href="top100.do?cate=2&page=1">멜론 차트</a></li>
+			<li class="color"><a href="top100.do?cate=3&page=1">벅스 차트</a></li>
+			<li><a href="top100.do?cate=4&page=1">지니 차트</a></li>
+			<li class="color"><a href="top100.do?cate=5&page=1">엠넷 차트</a></li>
+			<li><a href="top100.do?cate=6&page=1">네이버 뮤직 차트</a></li>
 		</ul>
 		<br />
 		<br />
