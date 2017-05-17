@@ -115,15 +115,15 @@ public class MainController{
         	}    		
     	}
     	// Artist
-    	//List<IssueVO> niList=rmgr.naverIssuData();
+    	List<IssueVO> niList=rmgr.naverIssuData();
     	
-    	//model.addAttribute("niList", niList);
+    	model.addAttribute("niList", niList);
     	model.addAttribute("nList", nList);
 		model.addAttribute("bList", bList);
 		return "main";
 	}
 	@RequestMapping("content.do")
-	public String main_content_page(String song,String singer,String poster,String title,Model model)
+	public String main_content_page(String song,String singer,String title,Model model)
 	{
 		msmgr.reviewData(title);
 		try {
@@ -153,9 +153,6 @@ public class MainController{
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);
 		songwhether.SongWhether(song,singer);
-		songwhether.feelData(song);
-		rmanager.rGraph(song);
-		rmanager.rGraph2(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")
@@ -197,8 +194,12 @@ public class MainController{
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
-	public String main_recommand(Model model)
+	public String main_recommand(String feel,Model model)
 	{
+		List<SongVO> list=recomdao.songRecommandData(feel);
+		List<SongVO> elist=recomdao.emotionRecommandData(feel);
+		model.addAttribute("list", list);
+		model.addAttribute("elist", elist);
 	 	model.addAttribute("main_jsp", "recommand.jsp");	 	
 		return "recommand";
 	}

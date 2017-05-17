@@ -4,6 +4,8 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
@@ -22,6 +24,7 @@ public class RecommandDAO {
 	 private MongoClient mc;
     private DB db;
     private DBCollection weather;
+    private DBCollection emotion;
     
     public RecommandDAO()
     {
@@ -30,6 +33,7 @@ public class RecommandDAO {
     		mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38", 27017)));
     		db=mc.getDB("project3");
     		weather=db.getCollection("weather");
+    		emotion=db.getCollection("emotion");
     	}catch(Exception ex)
     	{
     		System.out.println(ex.getMessage());
@@ -41,6 +45,7 @@ public class RecommandDAO {
 			DBCursor cursor = weather.find();
 			while(cursor.hasNext()){
 				BasicDBObject obj = (BasicDBObject)cursor.next();
+				//cursor.
 				SongVO vo = new SongVO();
 				vo.setSong(obj.getString("song"));
 				vo.setSinger(obj.getString("singer"));
@@ -65,34 +70,41 @@ public class RecommandDAO {
 		return list;
 	}
 	//"봄"
-	public List<SongVO> songGetweatherData(String cate)
+	public static void main(String[] arg)
+	{
+		RecommandDAO dao=new RecommandDAO();
+		List<SongVO> list=dao.songRecommandData("봄");
+		for(SongVO vo:list)
+		{
+			System.out.println(vo.getSinger()+" "+vo.getSong());
+		}
+	}
+    public List<SongVO> songRecommandData(String feel)
     {
-    	List<SongVO> list=new ArrayList<SongVO>();
+    	List<SongVO> list=
+  			   new ArrayList<SongVO>();
     	try
     	{
-			DBCursor cursor = weather.find();
+    		DBCursor cursor=weather.find();
+    		Pattern p=Pattern.compile(feel);
+    		
     		while(cursor.hasNext())
     		{
-    			BasicDBObject obj = (BasicDBObject)cursor.next();
-    			SongVO vo = new SongVO();
-    			vo.setSong(obj.getString("song"));
-				vo.setSinger(obj.getString("singer"));
-				vo.setPoster(obj.getString("poster"));
-				
-				System.out.println(obj.getInt(cate));
-				/*if(obj.getInt(cate) != null)
-				{
-					vo.set봄(obj.getInt(cate));
-					System.out.println(cate+" set완료@@@@@@@@@@@@@@@");
-				}*/
-				list.add(vo);
+    		    BasicDBObject obj=(BasicDBObject)cursor.next();
+    		    String strFeel=obj.getString("feel");
+    		    Matcher m=p.matcher(strFeel);
+    		    if(m.find())
+    		    {
+    		    	SongVO vo=new SongVO();
+    		    	vo.setSong(obj.getString("song"));
+    				vo.setSinger(obj.getString("singer"));
+    				vo.setPoster(obj.getString("poster"));
+    			    vo.setFeel(obj.getString("feel"));
+    			    vo.setAlbum(obj.getString("album"));
+    				list.add(vo);
+    		    	
+    		    }
     		}
-		/*	List<SongVO> vo = new ArrayList<SongVO>();
-						for(SongVO v:vo){
-							if(v.get봄()!=0){
-								System.out.println(v.getSong());
-							}
-						} */
     		cursor.close();
     	}catch(Exception ex)
     	{
@@ -100,66 +112,37 @@ public class RecommandDAO {
     	}
     	return list;
     }
-    public List<SongVO> getMongoFeelData(String rno){
-		List<SongVO> list= new ArrayList<SongVO>();
-		try {
-			DBCursor cursor=null;
-			if(rno.equals("1")) cursor=weather.find();
-			while(cursor.hasNext()){
-				//System.out.println("확인");
-				BasicDBObject obj=(BasicDBObject)cursor.next();
-				SongVO vo = new SongVO();
-				vo.setSong(obj.getString("song"));
-				vo.setSinger(obj.getString("singer"));
-				//vo.setWeather(obj.getString("feel"));
-				System.out.println(obj.getString("singer"));
-				//System.out.println(obj.getString("title"));
-				list.add(vo);
-			}
-			cursor.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("getMongoFeelData "+e.getMessage());
-		}
-		return list;
-	}
-    public List<SongVO> songRecommandData(String 봄,String feel)
+    public List<SongVO> emotionRecommandData(String feel)
     {
- 	   List<SongVO> list=
- 			   new ArrayList<SongVO>();
- 	   try
- 	   {
- 		   BasicDBObject where=
- 				     new BasicDBObject();
- 		   where.put("봄", 봄);
- 		   DBCursor cursor=weather.find(where);
- 		   while(cursor.hasNext())
- 		   {
- 			   BasicDBObject obj=(BasicDBObject)cursor.next();
- 			  SongVO vo=new SongVO();
- 			   //vo.setMno(obj.getInt("mno"));
- 			   vo.setSong(obj.getString("song"));
- 			   vo.setSinger(obj.getString("singer"));
- 			   String db_feel=obj.getString("봄");
- 			   StringTokenizer st=
- 					   new StringTokenizer(db_feel, ",");
- 			   // db_feel="SF:2,ani:7"
- 			   while(st.hasMoreTokens())
- 			   {
- 				   String temp=st.nextToken();
- 				   String temp2=temp.substring(0,temp.lastIndexOf(":"));
- 				   if(temp2.equals(feel))
- 				   {
- 					   list.add(vo);
- 				   }
- 			   }
- 		   }
- 		   cursor.close();
- 	   }catch(Exception ex)
- 	   {
- 		   System.out.println(ex.getMessage());
- 	   }
- 	   return list;
- 	   
+    	List<SongVO> list=
+  			   new ArrayList<SongVO>();
+    	try
+    	{
+    		DBCursor cursor=emotion.find();
+    		Pattern p=Pattern.compile(feel);
+    		
+    		while(cursor.hasNext())
+    		{
+    		    BasicDBObject obj=(BasicDBObject)cursor.next();
+    		    String strFeel=obj.getString("feel");
+    		    Matcher m=p.matcher(strFeel);
+    		    if(m.find())
+    		    {
+    		    	SongVO vo=new SongVO();
+    		    	vo.setSong(obj.getString("song"));
+    				vo.setSinger(obj.getString("singer"));
+    				vo.setPoster(obj.getString("poster"));
+    			    vo.setFeel(obj.getString("feel"));
+    			    vo.setAlbum(obj.getString("album"));
+    				list.add(vo);
+    		    	
+    		    }
+    		}
+    		cursor.close();
+    	}catch(Exception ex)
+    	{
+    		System.out.println(ex.getMessage());
+    	}
+    	return list;
     }
 }

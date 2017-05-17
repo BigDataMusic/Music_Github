@@ -14,47 +14,34 @@
 		<div id="content_top100">
 			<table id="table1" width="735">
 				<tr>
-					<th width="5%">순위</th>
-					<th width="10%">앨범자켓</th>
-					<th width="30%">곡명</th>
-					<th width="15%">아티스트</th>
-					<th width="15%">발매일</th>
-					<th width="10%">장르</th>
-					<th width="15%">발매사</th>
-				</tr>
+					<th width="20%">앨범자켓</th>
+					<th width="45%">곡명</th>
+					<th width="35%">아티스트</th>
 					
-				<%-- <c:forEach var="vo" items="${sList }" varStatus="s">
-				 <c:if test="${s.index<10 }">
-			 	<c:forEach var="i" begin="1" end="10">
+				</tr>
+			 	 <c:forEach var="vo" items="${list }" varStatus="s">
+			 	 <c:if test="${s.index<10 }">
 					<tr>
-						<td></td>
-						<td><a href="content.do"><img
-								src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg"
-								class="jacket_thumb100" /></a></td>
+						<td><img
+								src="${vo.poster }"
+								class="jacket_thumb100" /></td>
 						<td class="song">${vo.song }</td>
 						<td>${vo.singer }</td>
-						<td>2017.12.31.</td>
-						<td>장르</td>
-						<td>발매사발매사발매</td>
-					</tr>				  
-				</c:forEach>
-				</c:if>
-					</c:forEach> --%>
-					            
-			 	 <c:forEach var="i" begin="1" end="10">
-					<tr>
-						<td>${i}</td>
-						<td><a href="content.do"><img
-								src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg"
-								class="jacket_thumb100" /></a></td>
-						<td class="song">곡명</td>
-						<td>아티스트</td>
-						<td>2017.12.31.</td>
-						<td>장르</td>
-						<td>발매사발매사발매</td>
+						
 					</tr>
+					</c:if>
 				</c:forEach>
-				
+				<c:forEach var="vo" items="${elist }" varStatus="s">
+			 	 <c:if test="${s.index<10 }">
+					<tr>
+						<td><img
+								src="${vo.poster }"
+								class="jacket_thumb100" /></td>
+						<td class="song">${vo.song }</td>
+						<td>${vo.singer }</td>
+					</tr>
+					</c:if>
+				</c:forEach>
 						
 			</table>
 		</div>

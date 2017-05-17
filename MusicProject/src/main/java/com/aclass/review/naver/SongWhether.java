@@ -224,13 +224,13 @@ public class SongWhether implements Serializable{
 								}
 							}
 							
-							for(int j=0;j<12;j++)
+							/*for(int j=0;j<12;j++)
 							{
-								//if(count[j]>0)
-								//{
+								if(count[j]>0)
+								{
 									System.out.println(taste[j]+":"+count[j]);
-								//}
-							}
+								}
+							}*/
 							
 							//몽고몽고
 							mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
@@ -248,16 +248,17 @@ public class SongWhether implements Serializable{
 										+taste[10]+":"+count[10]+","+taste[11]+":"+count[11]).trim()
 									);*/
 
-
+                       String ss="";
 		    				for(int ie=0;ie<12;ie++)
 		    				{
 		    					
 		    					if(count[ie]>0)
 		    					{
-		    						obj.put(taste[ie], count[ie]);
+		    						ss+=taste[ie]+":"+count[ie]+",";
 		    					}
 		    				}
-		    				
+		    				ss=ss.substring(0,ss.lastIndexOf(","));
+		    				obj.put("feel", ss);
 		    				
 		    				dbc.insert(obj);
 			 

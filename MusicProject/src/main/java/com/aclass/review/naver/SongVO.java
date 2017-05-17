@@ -22,8 +22,17 @@ public class SongVO {
  private int 크리스마스;
  private int 눈오는날;
  private String poster;
+ private String album;
  
  
+public String getAlbum() {
+	return album;
+}
+
+public void setAlbum(String album) {
+	this.album = album;
+}
+
 public String getPoster() {
 	return poster;
 }

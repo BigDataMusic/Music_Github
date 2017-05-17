@@ -34,29 +34,29 @@
 				<li class="active">
 				<h3>날씨별 추천</h3>
 					<ul>
-						<li><a href="recommand.do?rno=1">봄</a></li>
-						<li><a href="recommand.do?rno=2">여름</a></li>
-						<li><a href="recommand.do?rno=3">가을</a></li>
-						<li><a href="recommand.do?rno=4">겨울</a></li>
-						<li><a href="recommand.do?rno=5">화창한날</a></li>
-						<li><a href="recommand.do?rno=6">아침</a></li>
-						<li><a href="recommand.do?rno=7">오후</a></li>
-						<li><a href="recommand.do?rno=8">저녁</a></li>
-						<li><a href="recommand.do?rno=9">밤/새벽</a></li>
-						<li><a href="recommand.do?rno=10">비/흐림</a></li>
-						<li><a href="recommand.do?rno=11">크리스마스</a></li>
-						<li><a href="recommand.do?rno=12">눈오는 날</a></li>
+						<li><a href="recommand.do?feel=봄">봄</a></li>
+						<li><a href="recommand.do?feel=여름">여름</a></li>
+						<li><a href="recommand.do?feel=가을">가을</a></li>
+						<li><a href="recommand.do?feel=겨울">겨울</a></li>
+						<li><a href="recommand.do?feel=화창한날">화창한날</a></li>
+						<li><a href="recommand.do?feel=아침">아침</a></li>
+						<li><a href="recommand.do?feel=오후">오후</a></li>
+						<li><a href="recommand.do?feel=저녁">저녁</a></li>
+						<li><a href="recommand.do?feel=밤/새벽">밤/새벽</a></li>
+						<li><a href="recommand.do?feel=비/흐림">비/흐림</a></li>
+						<li><a href="recommand.do?feel=크리스마스">크리스마스</a></li>
+						<li><a href="recommand.do?feel=눈오는날">눈오는 날</a></li>
 					</ul>
 				</li>
 				<li>
 					<h3>감정별 추천</h3>
 					<ul>
-						<li><a href="#">사랑/기쁨</a></li>
-						<li><a href="#">이별/슬픔</a></li>
-						<li><a href="#">스트레스/짜증</a></li>
-						<li><a href="#">우울할때</a></li>
-						<li><a href="#">멘붕/불안</a></li>
-						<li><a href="#">외로울때</a></li>
+						<li><a href="recommand.do?feel=사랑/기쁨">사랑/기쁨</a></li>
+						<li><a href="recommand.do?feel=이별/슬픔">이별/슬픔</a></li>
+						<li><a href="recommand.do?feel=스트레스/짜증">스트레스/짜증</a></li>
+						<li><a href="recommand.do?feel=우울할때">우울할때</a></li>
+						<li><a href="recommand.do?feel=멘붕/불안">멘붕/불안</a></li>
+						<li><a href="recommand.do?feel=외로울때">외로울때</a></li>
 					</ul>
 				</li>
 			</ul>
