@@ -28,7 +28,7 @@ import java.net.URLEncoder;
 
 
 @Component
-public class SongWhether implements Serializable{
+public class SongEmotion implements Serializable{
 	
 	private MongoClient mc;
 	private DB db;
@@ -38,12 +38,12 @@ public class SongWhether implements Serializable{
 	public static void main(String[] args){
 		
 		//String song = "맞지?";
-		SongWhether rm = new SongWhether();
-		List<MusicVO> list=rm.songAllData();
+		SongEmotion se = new SongEmotion();
+		List<MusicVO> list=se.songAllData();
 		int i=0;
 		for(MusicVO vo:list)
 		{
-			rm.SongWhether(vo.getTitle(), vo.getArtist(), vo.getPoster());
+			se.SongEmotion(vo.getTitle(), vo.getArtist(), vo.getPoster());
 			System.out.println("i="+i);
 			i++;
 		}
@@ -115,7 +115,7 @@ public class SongWhether implements Serializable{
 	   	 return list;
 	    }
 	 
-	 public void SongWhether(String song,String singer,String poster)
+	 public void SongEmotion(String song,String singer,String poster)
 	 {
 			try
 			{
@@ -134,7 +134,7 @@ public class SongWhether implements Serializable{
 				}
 				
 				//날씨사전 불러오기 (홈 레커멘드데이타에 날씨사전 있어야댐)
-				FileReader fr=new FileReader("/home/sist/recommend-data/weather_data");
+				FileReader fr=new FileReader("/home/sist/recommend-data/emotion_data");
 				String weatherdata="";
 				int i=0;
 				while((i=fr.read())!=-1)
@@ -163,8 +163,8 @@ public class SongWhether implements Serializable{
 				
 							String[] reviewData=data3.split("\n"); // naverReview를 가져올 것
 										
-							String[] taste={"봄","여름","가을","겨울","화창한날","아침",
-									"오후","저녁","밤/새벽","비/흐림","크리스마스","눈오는날"};
+							String[] taste={"사랑/기쁨","이별/슬픔","스트레스/짜증","우울할때",
+									"멘붕/불안","외로울때"};
 							int[] count=new int[taste.length];
 							for(String s:reviewData)
 							{
@@ -173,59 +173,35 @@ public class SongWhether implements Serializable{
 									m[j]=p[j].matcher(s);
 									if(m[j].find())
 									{
-										if(j>=0 && j<=9)
+										if(j>=0 && j<=10)
 										{
 											count[0]++;
 										}
-										if(j>=10 && j<=21)
+										if(j>=11 && j<=18)
 										{
 											count[1]++;
 										}
-										if(j>=22 && j<=28)
+										if(j>=19 && j<=29)
 										{
 											count[2]++;
 										}
-										if(j>=29 && j<=38)
+										if(j>=30 && j<=35)
 										{
 											count[3]++;
 										}
-										if(j>=39 && j<=44)
+										if(j>=36 && j<=40)
 										{
 											count[4]++;
 										}
-										if(j>=45 && j<=48)
+										if(j>=41 && j<=44)
 										{
 											count[5]++;
-										}
-										if(j>=49 && j<=52)
-										{
-											count[6]++;
-										}
-										if(j>=53 && j<=55)
-										{
-											count[7]++;
-										}
-										if(j>=56 && j<=61)
-										{
-											count[8]++;
-										}
-										if(j>=62 && j<=71)
-										{
-											count[9]++;
-										}
-										if(j>=72 && j<=75)
-										{
-											count[10]++;
-										}
-										if(j>=76 && j<=80)
-										{
-											count[11]++;
 										}
 									}
 								}
 							}
 							
-							for(int j=0;j<12;j++)
+							for(int j=0;j<6;j++)
 							{
 								//if(count[j]>0)
 								//{
@@ -236,7 +212,7 @@ public class SongWhether implements Serializable{
 							//몽고몽고
 							mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
 							db=mc.getDB("project3");
-							dbc=db.getCollection("weather");  
+							dbc=db.getCollection("emotion");  
 							
 							BasicDBObject obj=new BasicDBObject();
 			    			
@@ -251,7 +227,7 @@ public class SongWhether implements Serializable{
 									);*/
 
 
-		    				for(int ie=0;ie<12;ie++)
+		    				for(int ie=0;ie<6;ie++)
 		    				{
 		    					
 		    					if(count[ie]>0)
@@ -275,7 +251,7 @@ public class SongWhether implements Serializable{
 		   {
 				mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
 				db=mc.getDB("project3");
-				dbc=db.getCollection("weather");  
+				dbc=db.getCollection("emotion");  
 				
 				
 				//노래에 대한 리뷰커서들 가져옴 
