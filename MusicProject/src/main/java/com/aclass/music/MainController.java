@@ -26,7 +26,6 @@ import com.aclass.mgr.AlbumVO;
 import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
-import com.aclass.mongo.FeelDAO;
 import com.aclass.mongo.MusicManager;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
@@ -69,8 +68,6 @@ public class MainController{
 	private SparkEmotionManager segr;
 	@Autowired
 	private MusicManager msmgr;
-	@Autowired
-	private FeelDAO fdao;
 	@Autowired
 	private BoardDAO bdao;
 	@Autowired
@@ -155,19 +152,10 @@ public class MainController{
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);
-<<<<<<< HEAD
 		songwhether.SongWhether(song,singer);
-=======
-		//songwhether.SongWhether(song,title);
-		//songwhether.songData(song);
-		//songwhether.SongWhether(song,singer);
-		//rmanager.rGraph(song);
-		//rmanager.rGraph2(song);
-		//songwhether.SongWhether(song,singer);
 		songwhether.feelData(song);
 		rmanager.rGraph(song);
 		rmanager.rGraph2(song);
->>>>>>> branch 'master' of https://github.com/BigDataMusic/Music_Github.git
 		return "content";
 	}
 	@RequestMapping("top100.do")
