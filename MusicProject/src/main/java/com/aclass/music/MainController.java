@@ -117,9 +117,9 @@ public class MainController{
         	}    		
     	}
     	// Artist
-    	List<IssueVO> niList=rmgr.naverIssuData();
+    	//List<IssueVO> niList=rmgr.naverIssuData();
     	
-    	model.addAttribute("niList", niList);
+    	//model.addAttribute("niList", niList);
     	model.addAttribute("nList", nList);
 		model.addAttribute("bList", bList);
 		return "main";

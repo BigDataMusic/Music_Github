@@ -20,14 +20,12 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 @Repository
 public class FeelDAO {
-	@Autowired
 	
 	
 	private DB db2;
 	private MongoClient mc;
 	private DBCollection wdbc;
-	@Resource(name="mongoTemplate")
-	private MongoTemplate mt;
+	
 	
 	public FeelDAO(){
 		try {
