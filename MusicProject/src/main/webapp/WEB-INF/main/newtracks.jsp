@@ -18,6 +18,15 @@ $(function(){
 		$(this).stop().animate({width:"250px"}, 900, 'easeOutCirc' ).addClass("on");							
 	});
 });
+function popupOpen(no){
+	
+    var popUrl = "lyric.do?no="+no;    //팝업창에 출력될 페이지 URL
+
+    var popOption = "width=400, height=550, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+        window.open(popUrl,"",popOption);
+
+};
 </script>
 </head>
 <body>
@@ -27,20 +36,15 @@ $(function(){
 </center>
 <div id="content_top100" style="margin: 10px auto;">			
 	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 앨범 BEST 5</p>
-	<div class="section01">
-		<c:forEach var="vo" items="${malist }" varStatus="s">
-			<c:if test="${s.index==0 }">
-				<div class="cont on">			
-			</c:if>		
-			<c:if test="${s.index!=0 }">
-				<div class="cont">			
-			</c:if>
+	<div class="section01 section_nav">
+		<c:forEach var="vo" items="${malist }">
+			<div class="cont on">					
 				<span class="bg"><a href="content.do"><img src="${vo.alPoster }" alt=""/></a></span>															
 				<span class="layer"></span>
 			</div>
 		</c:forEach>
 	</div>
-</div>	
+</div>
 <div id="content_top100"  style="margin-top: 10px;">
 	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 싱글 BEST 50</p>
 	<table id="table2" width="735">
@@ -57,7 +61,12 @@ $(function(){
 			<td class="song"><a href="${vo.alno }">${vo.title }</a></td>
 			<td>${vo.artist }</td>		
 			<!-- <a href="#" target="_blank"></a> -->
-			<td><img src="resources/images/ly.png"></td>
+			<td>
+			<!-- <a href="lyric.do" target="_blank"> -->
+				 <a href="javascript:popupOpen(${vo.n });">
+					<img src="resources/images/ly.png" title="${vo.lyrics }">
+				</a>
+			</td>
 		</tr>
 		</c:forEach>
 	</table>

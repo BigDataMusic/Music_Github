@@ -256,17 +256,15 @@ public class MainController{
 	@RequestMapping("newtracks.do")
 	public String main_newtracks(Model model,String page)
 	{
-		System.out.println("newnewnewnew1");
 		if(page==null) page="1";
 		boolean Check=false;
 		List<MusicVO> nlist = dao.getMongoMusicData("newMusic");
 		List<AlbumVO> alist = dao.AlbumData();
 		List<AlbumVO> malist = new ArrayList<AlbumVO>();
-		System.out.println("newnewnewnew2");
 		for(int i=0;i<5;i++){
 			System.out.println(nlist.get(i).getTitle());
 			for(int j=0;j<alist.size();j++){
-				System.out.println(j+" 비교");
+				//System.out.println(j+" 비교");
 				System.out.println(nlist.get(i).getAlno());
 				System.out.println(alist.get(j).getAlNo());
 				if(nlist.get(i).getAlno().equals(Integer.toString(alist.get(j).getAlNo()))){	
@@ -284,13 +282,12 @@ public class MainController{
 			}
 		}
 
-		System.out.println("newnewnewnew3");
-		int start=Integer.parseInt(page)*5-5;
-		int end=Integer.parseInt(page)*5;
+		
+		int start=Integer.parseInt(page)*10-10;
+		int end=Integer.parseInt(page)*10;
 		List<MusicVO> vList=new ArrayList<MusicVO>();
 
-		System.out.println("newnewnewnew4");
-		for(int i=start;i<end;i++)
+		for(int i=start;i<10;i++)
 		{
 			MusicVO nvo=new MusicVO();
 			nvo.setN(nlist.get(i).getN());
@@ -299,6 +296,7 @@ public class MainController{
 			nvo.setTitle(nlist.get(i).getTitle());
 			nvo.setArtist(nlist.get(i).getArtist());
 			nvo.setAlbumname(nlist.get(i).getAlbumname());
+			nvo.setLyrics(nlist.get(i).getLyrics());
 			vList.add(nvo);
 		}
 		
@@ -509,7 +507,12 @@ public class MainController{
 		model.addAttribute("rList", rList);
 		return "issue";
 	}
-	
+	@RequestMapping("lyric.do")
+	public String lyrics(MusicVO vo,Model model){
+		
+		
+		return "lyric.empty";
+	}
 	/*
 	 * <li><a href="recommand.do?no=1">봄</a></li>
 						<li><a href="recommand.do?no=2">여름</a></li>
@@ -605,10 +608,10 @@ public class MainController{
     	return "main";
     }*/
 	
-	@PostConstruct
+/*	@PostConstruct
 	public void init(){		
 		dao.dropTop100();
 		dao.insertTop100("melon");
 		dao.insertTop100("newMusic");
-	}
+	}*/
 }

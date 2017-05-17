@@ -10,6 +10,12 @@
 		<put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
 	</definition>
 
+	<definition name="empty" template="/WEB-INF/main/lyric.jsp">
+	</definition>
+
+   <definition name="lyric.empty" extends="empty">
+     <put-attribute name="empty" value="/WEB-INF/main/lyric.jsp"></put-attribute>
+   </definition>   
 	<definition name="*" extends="main">
 		<put-attribute name="nav" value="/WEB-INF/main/nav_{1}.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/main/{1}.jsp"></put-attribute>
