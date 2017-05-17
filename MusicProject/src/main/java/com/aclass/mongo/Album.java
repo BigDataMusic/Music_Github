@@ -8,7 +8,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
-/*
+/*123456
  * private int alNo;//d
 	private int alRank;
 	private String alType;//d
