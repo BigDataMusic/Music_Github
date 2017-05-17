@@ -118,15 +118,15 @@ public class MainController{
         	}    		
     	}
     	// Artist
-    	List<IssueVO> niList=rmgr.naverIssuData();
+    	//List<IssueVO> niList=rmgr.naverIssuData();
     	
-    	model.addAttribute("niList", niList);
+    	//model.addAttribute("niList", niList);
     	model.addAttribute("nList", nList);
 		model.addAttribute("bList", bList);
 		return "main";
 	}
 	@RequestMapping("content.do")
-	public String main_content_page(String song,String singer,String title,Model model)
+	public String main_content_page(String song,String singer,String poster,String title,Model model)
 	{
 		msmgr.reviewData(title);
 		try {
@@ -155,7 +155,19 @@ public class MainController{
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);
+<<<<<<< HEAD
 		songwhether.SongWhether(song,singer);
+=======
+		//songwhether.SongWhether(song,title);
+		//songwhether.songData(song);
+		//songwhether.SongWhether(song,singer);
+		//rmanager.rGraph(song);
+		//rmanager.rGraph2(song);
+		//songwhether.SongWhether(song,singer);
+		songwhether.feelData(song);
+		rmanager.rGraph(song);
+		rmanager.rGraph2(song);
+>>>>>>> branch 'master' of https://github.com/BigDataMusic/Music_Github.git
 		return "content";
 	}
 	@RequestMapping("top100.do")

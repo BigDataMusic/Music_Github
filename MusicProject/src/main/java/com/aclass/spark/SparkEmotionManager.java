@@ -29,8 +29,8 @@ public class SparkEmotionManager implements Serializable{
 			SparkConf conf=new SparkConf().setMaster("local").setAppName("emotionFeelCount");
 			// Java에서 연결
 			JavaSparkContext sc=new JavaSparkContext(conf);
-			final String[] feel = {"사랑/기쁨","이별/슬픔","스트레스/짜증","우울할때","화창한날",
-					"멘붕/불안","외로울때",};
+			final String[] feel = {"사랑/기쁨","이별/슬픔","스트레스/짜증","우울할때",
+					"멘붕/불안","외로울때"};
 		 File file=new File("/home/sist/feel-data/emotion_data");
 		 FileReader fr=new FileReader(file);
 		 String data="";

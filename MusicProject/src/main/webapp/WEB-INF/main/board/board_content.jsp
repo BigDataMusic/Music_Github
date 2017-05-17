@@ -48,7 +48,7 @@
 					<a href="board_delete.do?no={{data[0]}}" style="text-decoration: none"><input type="button" value="삭제" style="padding: 5px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="board_reply.do?no={{data[0]}}" style="text-decoration: none"><input type="button" value="댓글" style="padding: 5px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" value="목록" style="padding: 5px"
-					onclick="javascript:history.back()" />
+					onclick="javascript:location.href='board.do'" />
 				</td>
 			</tr>
 		</table>
