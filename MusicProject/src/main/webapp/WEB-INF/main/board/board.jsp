@@ -57,10 +57,10 @@
 		</div>
 		<div id="content_top100" align="center" style="margin-top: 15px">
 			<a href="board.do?page=${curpage>1?curpage-1:curpage}"
-				style="text-decoration: none"><input type="image" src="resources/images/arrow_left.png" style="vertical-align: middle;"/></a>
+				style="text-decoration: none"><img alt="" src="resources/images/f-left.png"  style="vertical-align: middle;"></a>
 			<span style="margin: 0 40px;vertical-align: middle;">${curpage } page / ${totalpage } pages</span>
 			<a href="board.do?page=${curpage<totalpage?curpage+1:curpage}"
-				style="text-decoration: none"><input type="image" src="resources/images/arrow_right.png" style="vertical-align: middle;"/></a>
+				style="text-decoration: none"><img alt="" src="resources/images/f-right.png" style="vertical-align: middle;"></a>
 		</div>
 	</center>
 </body>
