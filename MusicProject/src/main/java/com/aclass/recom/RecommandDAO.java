@@ -21,7 +21,7 @@ public class RecommandDAO {
 	
 	 private MongoClient mc;
     private DB db;
-    private DBCollection whether;
+    private DBCollection weather;
     
     public RecommandDAO()
     {
@@ -29,7 +29,7 @@ public class RecommandDAO {
     	{
     		mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38", 27017)));
     		db=mc.getDB("project3");
-    		whether=db.getCollection("whether");
+    		weather=db.getCollection("weather");
     	}catch(Exception ex)
     	{
     		System.out.println(ex.getMessage());
@@ -38,13 +38,12 @@ public class RecommandDAO {
 	public List<SongVO> getWeather(){
 		List<SongVO> list = new ArrayList<SongVO>();
 		try {
-			DBCursor cursor = whether.find();
+			DBCursor cursor = weather.find();
 			while(cursor.hasNext()){
 				BasicDBObject obj = (BasicDBObject)cursor.next();
 				SongVO vo = new SongVO();
 				vo.setSong(obj.getString("song"));
 				vo.setSinger(obj.getString("singer"));
-				System.out.println(obj.getString("singer"));
 				vo.set봄(obj.getInt("봄"));
 				vo.set여름(obj.getInt("여름"));
 				vo.set가을(obj.getInt("가을"));
@@ -57,9 +56,7 @@ public class RecommandDAO {
 				vo.set흐림(obj.getInt("비/흐림"));
 				vo.set크리스마스(obj.getInt("크리스마스"));
 				vo.set눈오는날(obj.getInt("눈오는날"));
-				System.out.println(obj.getInt("눈오는날"));
 				list.add(vo);
-				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception\
@@ -67,37 +64,66 @@ public class RecommandDAO {
 		}
 		return list;
 	}
-    public List<String> songGetWeather()
+	//"봄"
+	public List<SongVO> songGetweatherData(String cate)
     {
-    	List<String> list=new ArrayList<String>();
+    	List<SongVO> list=new ArrayList<SongVO>();
     	try
     	{
-    		List<String> glist=whether.distinct("feel"); // 중복을 없애는 함수 distinct
-    		for(String s:glist)
+			DBCursor cursor = weather.find();
+    		while(cursor.hasNext())
     		{
-    			System.out.println(s+"s");
-    			int no=s.indexOf("/");
-    			if(no!=-1)
-    				continue;
-    			System.out.println(s+"songGetWeather");
-    			list.add(s);
+    			BasicDBObject obj = (BasicDBObject)cursor.next();
+    			SongVO vo = new SongVO();
+    			vo.setSong(obj.getString("song"));
+				vo.setSinger(obj.getString("singer"));
+				vo.setPoster(obj.getString("poster"));
+				
+				System.out.println(obj.getInt(cate));
+				/*if(obj.getInt(cate) != null)
+				{
+					vo.set봄(obj.getInt(cate));
+					System.out.println(cate+" set완료@@@@@@@@@@@@@@@");
+				}*/
+				list.add(vo);
     		}
-    		/*while(cursor.hasNext())
-    		{
-    			BasicDBObject obj=(BasicDBObject)cursor.next();
-    			String genre=obj.getString("genre");
-    			int no=genre.indexOf("/");
-    			if(no!=0)
-    				continue;
-    			list.add(genre);
-    		}*/
+		/*	List<SongVO> vo = new ArrayList<SongVO>();
+						for(SongVO v:vo){
+							if(v.get봄()!=0){
+								System.out.println(v.getSong());
+							}
+						} */
+    		cursor.close();
     	}catch(Exception ex)
     	{
     		System.out.println(ex.getMessage());
     	}
     	return list;
     }
-    public List<SongVO> weatherRecommandData(String feel)
+    public List<SongVO> getMongoFeelData(String rno){
+		List<SongVO> list= new ArrayList<SongVO>();
+		try {
+			DBCursor cursor=null;
+			if(rno.equals("1")) cursor=weather.find();
+			while(cursor.hasNext()){
+				//System.out.println("확인");
+				BasicDBObject obj=(BasicDBObject)cursor.next();
+				SongVO vo = new SongVO();
+				vo.setSong(obj.getString("song"));
+				vo.setSinger(obj.getString("singer"));
+				//vo.setWeather(obj.getString("feel"));
+				System.out.println(obj.getString("singer"));
+				//System.out.println(obj.getString("title"));
+				list.add(vo);
+			}
+			cursor.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("getMongoFeelData "+e.getMessage());
+		}
+		return list;
+	}
+    public List<SongVO> songRecommandData(String 봄,String feel)
     {
  	   List<SongVO> list=
  			   new ArrayList<SongVO>();
@@ -105,16 +131,16 @@ public class RecommandDAO {
  	   {
  		   BasicDBObject where=
  				     new BasicDBObject();
- 		   where.put("feel", feel);
- 		   DBCursor cursor=whether.find(where);
+ 		   where.put("봄", 봄);
+ 		   DBCursor cursor=weather.find(where);
  		   while(cursor.hasNext())
  		   {
  			   BasicDBObject obj=(BasicDBObject)cursor.next();
- 			   SongVO vo=new SongVO();
- 			   vo.setSinger(obj.getString("singer"));
+ 			  SongVO vo=new SongVO();
+ 			   //vo.setMno(obj.getInt("mno"));
  			   vo.setSong(obj.getString("song"));
- 			   //vo.setSong(obj.getString("feel"));
- 			   String db_feel=obj.getString("feel");
+ 			   vo.setSinger(obj.getString("singer"));
+ 			   String db_feel=obj.getString("봄");
  			   StringTokenizer st=
  					   new StringTokenizer(db_feel, ",");
  			   // db_feel="SF:2,ani:7"
@@ -134,28 +160,6 @@ public class RecommandDAO {
  		   System.out.println(ex.getMessage());
  	   }
  	   return list;
+ 	   
     }
-    public List<SongVO> getMongoFeelData(String rno){
-		List<SongVO> list= new ArrayList<SongVO>();
-		try {
-			DBCursor cursor=null;
-			if(rno.equals("1")) cursor=whether.find();
-			while(cursor.hasNext()){
-				//System.out.println("확인");
-				BasicDBObject obj=(BasicDBObject)cursor.next();
-				SongVO vo = new SongVO();
-				vo.setSong(obj.getString("song"));
-				vo.setSinger(obj.getString("singer"));
-				//vo.setWeather(obj.getString("feel"));
-				System.out.println(obj.getString("singer"));
-				//System.out.println(obj.getString("title"));
-				list.add(vo);
-			}
-			cursor.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("getMongoFeelData "+e.getMessage());
-		}
-		return list;
-	}
 }

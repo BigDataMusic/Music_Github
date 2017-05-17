@@ -21,8 +21,17 @@ public class SongVO {
  private int 흐림;
  private int 크리스마스;
  private int 눈오는날;
+ private String poster;
  
  
+public String getPoster() {
+	return poster;
+}
+
+public void setPoster(String poster) {
+	this.poster = poster;
+}
+
 public int get가을() {
 	return 가을;
 }

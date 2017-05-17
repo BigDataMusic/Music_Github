@@ -1,6 +1,7 @@
 package com.aclass.music;
 
 import java.text.SimpleDateFormat;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -137,31 +138,24 @@ public class MainController{
 				}
 				dir.delete();
 			}
-			File dir1=new File("/home/sist/feel-data/emotion");
+			/*File dir1=new File("/home/sist/feel-data/emotion");
 			if(dir1.exists()){
 				File[] lists1=dir1.listFiles();
 				for(File f:lists1){
 					f.delete();
 				}
 				dir1.delete();
-			}
+			}*/
 		swgr.execute();
-		segr.execute();
+		//segr.execute();
 		} catch (Exception ex) {
 			System.out.println("파일 만들기 : "+ex.getMessage());
 		}
+		System.out.println(song+ " "+singer);
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);
-		songwhether.SongWhether(song,title);
-		//songwhether.songData(song);
-		//songwhether.SongWhether(song,singer);
-		//rmanager.rGraph(song);
-		//rmanager.rGraph2(song);
 		songwhether.SongWhether(song,singer);
-		songwhether.feelData(song);
-		rmanager.rGraph(song);
-		rmanager.rGraph2(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")
@@ -203,53 +197,8 @@ public class MainController{
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
-	public String main_recommand(Model model,String feel,String rno)
+	public String main_recommand(Model model)
 	{
-		//List<SongVO> list = reviewmanager.songData();
-		//rno="봄";
-		if(rno==null) rno="1";
-		List<String> weatherList=recomdao.songGetWeather();
-		if(feel!=null)
-		{
-			List<SongVO> weatherRecommandList=recomdao.weatherRecommandData(feel);
-			model.addAttribute("weatherRecommandList", weatherRecommandList);
-		}
-		List<SongVO> weatherFeelList=null;
-		//음악인
-		if(rno.equals("1")) weatherFeelList=recomdao.getMongoFeelData(rno);
-		//멜론
-		/*else if(no.equals("2")) bList=dao.getMongoMusicData("melon");
-		//벅스
-		else if(no.equals("3")) bList=dao.getMongoMusicData("bugs");
-		//지니
-		else if(no.equals("4")) bList=gmgr.genieRankData();
-		//엠넷
-		else if(no.equals("5")) bList=mnetmgr.mnetRankData();
-		//네이버
-		else if(no.equals("6")) bList=dao.getMongoMusicData("naver");
-		else if(no.equals("7")) bList=dao.getMongoMusicData("bugs");
-		//지니
-		else if(no.equals("8")) bList=gmgr.genieRankData();
-		//엠넷
-		else if(no.equals("9")) bList=mnetmgr.mnetRankData();
-		//네이버
-		else if(no.equals("10")) bList=dao.getMongoMusicData("naver");
-		else if(no.equals("11")) bList=dao.getMongoMusicData("bugs");
-		//지니
-		else if(no.equals("12")) bList=gmgr.genieRankData();*/
-		List<SongVO> mList=
-				new ArrayList<SongVO>();
-		List<String> sList=new ArrayList<String>();
-		
-		for(String s:sList)
-		{
-			List<SongVO> vo=recomdao.getWeather();
-			mList.addAll(vo);
-		}
-		model.addAttribute("mList", mList);
-		model.addAttribute("rno", rno);
-		model.addAttribute("weatherFeelList", weatherFeelList);
-		model.addAttribute("weatherList", weatherList);
 	 	model.addAttribute("main_jsp", "recommand.jsp");	 	
 		return "recommand";
 	}
@@ -605,10 +554,10 @@ public class MainController{
     	return "main";
     }*/
 	
-	@PostConstruct
+	/*@PostConstruct
 	public void init(){		
 		dao.dropTop100();
 		dao.insertTop100("melon");
 		dao.insertTop100("newMusic");
-	}
+	}*/
 }

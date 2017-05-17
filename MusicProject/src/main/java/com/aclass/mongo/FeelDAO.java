@@ -20,14 +20,12 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 @Repository
 public class FeelDAO {
-	@Autowired
-	
 	
 	private DB db2;
 	private MongoClient mc;
 	private DBCollection wdbc;
-	@Resource(name="mongoTemplate")
-	private MongoTemplate mt;
+//	@Resource(name="mongoTemplate")
+//	private MongoTemplate mt;
 	
 	public FeelDAO(){
 		try {
@@ -66,7 +64,6 @@ public class FeelDAO {
 				vo.set크리스마스(obj.getInt("크리스마스"));
 				vo.set눈오는날(obj.getInt("눈오는날"));
 				list.add(vo);
-				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception\

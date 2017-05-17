@@ -9,6 +9,7 @@ import javax.xml.bind.Unmarshaller;
 
 import org.springframework.stereotype.Component;
 
+import com.aclass.mgr.MusicVO;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -36,11 +37,44 @@ public class SongWhether implements Serializable{
 	 //실행기 
 	public static void main(String[] args){
 		
-		String song = "맞지?";
+		//String song = "맞지?";
 		SongWhether rm = new SongWhether();
-		rm.feelData(song);
+		List<MusicVO> list=rm.songAllData();
+		int i=0;
+		for(MusicVO vo:list)
+		{
+			rm.SongWhether(vo.getTitle(), vo.getArtist());
+			System.out.println("i="+i);
+			i++;
+		}
+		//rm.feelData(song);
+		System.out.println("End..");
 	}
 	
+	public List<MusicVO> songAllData()
+	{
+		List<MusicVO> list=new ArrayList<MusicVO>();
+		try
+		{
+			mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
+			db=mc.getDB("mydb");
+			dbc=db.getCollection("Top100_Bugs");  
+			DBCursor cursor=dbc.find();
+			while(cursor.hasNext())
+			{
+				BasicDBObject obj=(BasicDBObject)cursor.next();
+				MusicVO vo=new MusicVO();
+				vo.setTitle(obj.getString("title"));
+				vo.setArtist(obj.getString("artist"));
+				list.add(vo);
+			}
+			cursor.close();
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+		return list;
+	}
 	 public List<SongVO> songData(String song)
 	    {
 	    	List<SongVO> list = new ArrayList<SongVO>();
@@ -99,7 +133,7 @@ public class SongWhether implements Serializable{
 				}
 				
 				//날씨사전 불러오기 (홈 레커멘드데이타에 날씨사전 있어야댐)
-				FileReader fr=new FileReader("/home/sist/recommend-data/weather_data");
+				FileReader fr=new FileReader("/home/sist/recommend-data/emotion_data");
 				String weatherdata="";
 				int i=0;
 				while((i=fr.read())!=-1)
@@ -207,19 +241,21 @@ public class SongWhether implements Serializable{
 			    			
 							obj.put("song", song.trim());
 							obj.put("singer", singer.trim());
-							obj.put("feel", (taste[0]+":"+count[0]+","+taste[1]+":"+count[1]+","
+							/*obj.put("feel", (taste[0]+":"+count[0]+","+taste[1]+":"+count[1]+","
 										+taste[2]+":"+count[2]+","+taste[3]+":"+count[3]+","
 										+taste[4]+":"+count[4]+","+taste[5]+":"+count[5]+","+taste[6]+":"+count[6]+","
 										+taste[7]+":"+count[7]+","+taste[8]+":"+count[8]+","+taste[9]+":"+count[9]+","
 										+taste[10]+":"+count[10]+","+taste[11]+":"+count[11]).trim()
-									);
+									);*/
 
 
 		    				for(int ie=0;ie<12;ie++)
 		    				{
 		    					
-		    					
-		    					obj.put(taste[ie], count[ie]);
+		    					if(count[ie]>0)
+		    					{
+		    						obj.put(taste[ie], count[ie]);
+		    					}
 		    				}
 		    				
 		    				
