@@ -117,7 +117,7 @@ public class MainController{
 		return "main";
 	}
 	@RequestMapping("content.do")
-	public String main_content_page(String song,String singer,String title,Model model)
+	public String main_content_page(String song,String singer,String poster,String title,Model model)
 	{
 		msmgr.reviewData(title);
 		try {
@@ -144,9 +144,6 @@ public class MainController{
 		}
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
-		songwhether.songData(song);
-		songwhether.SongWhether(song,singer);
-		songwhether.feelData(song);
 		rmanager.rGraph(song);
 		rmanager.rGraph2(song);
 		return "content";
