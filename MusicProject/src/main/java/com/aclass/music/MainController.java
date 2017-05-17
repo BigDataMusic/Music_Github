@@ -1,6 +1,7 @@
 package com.aclass.music;
 
 import java.text.SimpleDateFormat;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +26,6 @@ import com.aclass.mgr.AlbumVO;
 import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
-import com.aclass.mongo.FeelDAO;
 import com.aclass.mongo.MusicManager;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
@@ -68,8 +68,6 @@ public class MainController{
 	private SparkEmotionManager segr;
 	@Autowired
 	private MusicManager msmgr;
-	@Autowired
-	private FeelDAO fdao;
 	@Autowired
 	private BoardDAO bdao;
 	@Autowired
@@ -137,28 +135,24 @@ public class MainController{
 				}
 				dir.delete();
 			}
-			File dir1=new File("/home/sist/feel-data/emotion");
+			/*File dir1=new File("/home/sist/feel-data/emotion");
 			if(dir1.exists()){
 				File[] lists1=dir1.listFiles();
 				for(File f:lists1){
 					f.delete();
 				}
 				dir1.delete();
-			}
+			}*/
 		swgr.execute();
-		segr.execute();
+		//segr.execute();
 		} catch (Exception ex) {
 			System.out.println("파일 만들기 : "+ex.getMessage());
 		}
+		System.out.println(song+ " "+singer);
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);
-		//songwhether.SongWhether(song,title);
-		//songwhether.songData(song);
-		//songwhether.SongWhether(song,singer);
-		//rmanager.rGraph(song);
-		//rmanager.rGraph2(song);
-		//songwhether.SongWhether(song,singer);
+		songwhether.SongWhether(song,singer);
 		songwhether.feelData(song);
 		rmanager.rGraph(song);
 		rmanager.rGraph2(song);
@@ -203,53 +197,8 @@ public class MainController{
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
-	public String main_recommand(Model model,String feel,String rno)
+	public String main_recommand(Model model)
 	{
-		//List<SongVO> list = reviewmanager.songData();
-		//rno="봄";
-		if(rno==null) rno="1";
-		List<String> weatherList=recomdao.songGetWeather();
-		if(feel!=null)
-		{
-			List<SongVO> weatherRecommandList=recomdao.weatherRecommandData(feel);
-			model.addAttribute("weatherRecommandList", weatherRecommandList);
-		}
-		List<SongVO> weatherFeelList=null;
-		//음악인
-		if(rno.equals("1")) weatherFeelList=recomdao.getMongoFeelData(rno);
-		//멜론
-		/*else if(no.equals("2")) bList=dao.getMongoMusicData("melon");
-		//벅스
-		else if(no.equals("3")) bList=dao.getMongoMusicData("bugs");
-		//지니
-		else if(no.equals("4")) bList=gmgr.genieRankData();
-		//엠넷
-		else if(no.equals("5")) bList=mnetmgr.mnetRankData();
-		//네이버
-		else if(no.equals("6")) bList=dao.getMongoMusicData("naver");
-		else if(no.equals("7")) bList=dao.getMongoMusicData("bugs");
-		//지니
-		else if(no.equals("8")) bList=gmgr.genieRankData();
-		//엠넷
-		else if(no.equals("9")) bList=mnetmgr.mnetRankData();
-		//네이버
-		else if(no.equals("10")) bList=dao.getMongoMusicData("naver");
-		else if(no.equals("11")) bList=dao.getMongoMusicData("bugs");
-		//지니
-		else if(no.equals("12")) bList=gmgr.genieRankData();*/
-		List<SongVO> mList=
-				new ArrayList<SongVO>();
-		List<String> sList=new ArrayList<String>();
-		
-		for(String s:sList)
-		{
-			List<SongVO> vo=recomdao.getWeather();
-			mList.addAll(vo);
-		}
-		model.addAttribute("mList", mList);
-		model.addAttribute("rno", rno);
-		model.addAttribute("weatherFeelList", weatherFeelList);
-		model.addAttribute("weatherList", weatherList);
 	 	model.addAttribute("main_jsp", "recommand.jsp");	 	
 		return "recommand";
 	}
@@ -507,108 +456,23 @@ public class MainController{
 		model.addAttribute("rList", rList);
 		return "issue";
 	}
+
 	@RequestMapping("lyric.do")
-	public String lyrics(MusicVO vo,Model model){
-		
-		
+	public String lyrics(String no,Model model){
+		List<MusicVO> list = dao.getMongoMusicData("newMusic");
+		int n= Integer.parseInt(no);
+		MusicVO vo = new MusicVO();
+		vo.setPoster(list.get(n).getPoster());
+		vo.setTitle(list.get(n).getTitle());
+		vo.setArtist(list.get(n).getArtist());
+		System.out.println(list.get(n).getLyrics());
+		vo.setLyrics(list.get(n).getLyrics().replace("\n", "</br>"));
+		System.out.println(list.get(n).getLyrics());
+		model.addAttribute("vo",vo);
 		return "lyric.empty";
 	}
-	/*
-	 * <li><a href="recommand.do?no=1">봄</a></li>
-						<li><a href="recommand.do?no=2">여름</a></li>
-						<li><a href="recommand.do?no=3">가을</a></li>
-						<li><a href="recommand.do?no=4">겨울</a></li>
-						<li><a href="recommand.do?no=5">화창한날</a></li>
-						<li><a href="recommand.do?no=6">아침</a></li>
-						<li><a href="recommand.do?no=7">오후</a></li>
-						<li><a href="recommand.do?no=8">저녁</a></li>
-						<li><a href="recommand.do?no=9">밤/새벽</a></li>
-						<li><a href="recommand.do?no=10">비/흐림</a></li>
-						<!-- <li><a href="#">크리스마스</a></li> -->
-						<li><a href="recommand.do?no=11">눈오는 날</a></li>
-	 * 
-	 */
-/*	@RequestMapping("main/recommand.do")
-	public String naver_recommand(String recommand,Model model)
-    {
-    	String[] reday={"봄","여름","가을","겨울","화창한날","아침","오후","저녁","밤/새벽","비/흐림","크리스마스","눈오는 날"};
-    	if(recommand==null)
-    		recommand="1";
-    	String redata=reday[Integer.parseInt(recommand)-1];
-    	sparkweather.execute();
-    	//nmr.naverReviewData2(redata+" 영화추천");
-    	//nmr.naverReviewSave2();
-    	List<String> tList=dao.musicTitleAllData();
-    	try
-    	{
-    		//File file=new File("/home/sist/review/naver_recommand.txt");
-    		File file=new File("/home/sist/feel-data/review.txt");
-    		FileReader fr=new FileReader(file);
-    		String data="";
-    		int i=0;
-    		while((i=fr.read())!=-1)
-    		{
-    			data+=String.valueOf((char)i);
-    		}
-    		fr.close();
-    		String temp[]=data.split("\n");
-    		for(String s:temp)
-    		{
-    			System.out.println(s);
-    		}
-    		Pattern[] p=new Pattern[tList.size()];
-    		for(i=0;i<p.length;i++)
-    		{
-    			//if(tList.get(i).length()>1)
-    			//{
-    			  p[i]=Pattern.compile(tList.get(i));
-    			//}
-    		}
-    		Matcher[] m=new Matcher[tList.size()];
-    		List<String> sList=new ArrayList<String>();
-    		int[] count=new int[tList.size()];
-    		
-    		for(String s:temp)
-    		{
-    			
-	    			for(i=0;i<m.length;i++)
-	    			{
-	    				m[i]=p[i].matcher(s);
-	    				if(m[i].find())
-	    				{
-	    					
-	    					
-	    					System.out.println(m[i].group());
-	    					count[i]++;
-	    					if(count[i]==1)
-	    					{
-	    						sList.add(m[i].group());
-	    					}
-	    				}
-	    				
-	    			}
-    			
-    		}
-    		
-    		List<MusicVO> mmList=new ArrayList<MusicVO>();
-    		
-    		for(String s:sList)
-    		{
-    			MusicVO vo=dao.musicGetData(s);
-    			mmList.add(vo);
-    		}
-    		
-    		model.addAttribute("kList", mmList);
-    	}catch(Exception ex)
-    	{
-    		System.out.println(ex.getMessage());
-    	}
-    	model.addAttribute("main_jsp", "recommand.jsp");
-    	// commonData(model);
-    	return "main";
-    }*/
-	
-/*	@PostConstruct
+
+	/*@PostConstruct
 	public void init(){		
 		dao.dropTop100();
 		dao.insertTop100("melon");

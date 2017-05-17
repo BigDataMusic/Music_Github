@@ -43,7 +43,7 @@ public class SongWhether implements Serializable{
 		int i=0;
 		for(MusicVO vo:list)
 		{
-			rm.SongWhether(vo.getTitle(), vo.getArtist(), vo.getPoster());
+			rm.SongWhether(vo.getTitle(), vo.getArtist());
 			System.out.println("i="+i);
 			i++;
 		}
@@ -66,7 +66,6 @@ public class SongWhether implements Serializable{
 				MusicVO vo=new MusicVO();
 				vo.setTitle(obj.getString("title"));
 				vo.setArtist(obj.getString("artist"));
-				vo.setPoster(obj.getString("poster"));
 				list.add(vo);
 			}
 			cursor.close();
@@ -115,7 +114,7 @@ public class SongWhether implements Serializable{
 	   	 return list;
 	    }
 	 
-	 public void SongWhether(String song,String singer,String poster)
+	 public void SongWhether(String song,String singer)
 	 {
 			try
 			{
@@ -134,7 +133,7 @@ public class SongWhether implements Serializable{
 				}
 				
 				//날씨사전 불러오기 (홈 레커멘드데이타에 날씨사전 있어야댐)
-				FileReader fr=new FileReader("/home/sist/recommend-data/weather_data");
+				FileReader fr=new FileReader("/home/sist/recommend-data/emotion_data");
 				String weatherdata="";
 				int i=0;
 				while((i=fr.read())!=-1)
@@ -236,13 +235,12 @@ public class SongWhether implements Serializable{
 							//몽고몽고
 							mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
 							db=mc.getDB("project3");
-							dbc=db.getCollection("weather");  
+							dbc=db.getCollection("whether");  
 							
 							BasicDBObject obj=new BasicDBObject();
 			    			
 							obj.put("song", song.trim());
 							obj.put("singer", singer.trim());
-							obj.put("poster", poster.trim());
 							/*obj.put("feel", (taste[0]+":"+count[0]+","+taste[1]+":"+count[1]+","
 										+taste[2]+":"+count[2]+","+taste[3]+":"+count[3]+","
 										+taste[4]+":"+count[4]+","+taste[5]+":"+count[5]+","+taste[6]+":"+count[6]+","
@@ -275,7 +273,7 @@ public class SongWhether implements Serializable{
 		   {
 				mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
 				db=mc.getDB("project3");
-				dbc=db.getCollection("weather");  
+				dbc=db.getCollection("whether");  
 				
 				
 				//노래에 대한 리뷰커서들 가져옴 
