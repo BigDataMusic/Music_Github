@@ -16,6 +16,7 @@ import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
 import com.mongodb.*;
 
+
 @Repository
 public class MusicDAO {
 	@Autowired
@@ -171,6 +172,82 @@ public class MusicDAO {
 		}
 		return rlist;
 	}
+	
+	
+	public List<String> musicTitleAllData()
+	   {
+		   List<String> list=new ArrayList<String>();
+		   try
+		   {
+			   DBCursor cursor=bdbc.find();
+			   while(cursor.hasNext())
+			   {
+				   BasicDBObject obj=
+						   (BasicDBObject)cursor.next();
+				   String title=obj.getString("title");
+				   if(title.length()>1)
+				   {
+				     list.add(title);
+				   }
+				   
+			   }
+			   cursor.close();
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   return list;
+	   }
+	/*
+	 * private int n;
+	private int no;
+	private int rank;
+	private String increment;
+	private String poster;
+	private String title;
+	private String artist;
+	private String albumname;
+	private int like;
+	private String lyrics;
+	private boolean tit_music;
+	private String alno;
+	 * 
+	 * 
+	 */
+	
+	
+	/*public List<MusicVO> songData()
+    {
+    	List<SongVO> list = new ArrayList<SongVO>();
+    	try
+    	{
+    		DBCursor cursor =dbc.find(); //송테이블에서 가져오기 
+    		//db.getCollection('song').find({singer:'\t거미\t'})
+    		
+		 	//커서가 끝나는만큼 반복 
+    		int i=1;
+		 	while(cursor.hasNext())
+		 	{
+		 		BasicDBObject obj = (BasicDBObject)cursor.next();
+		 		
+		 		SongVO vo = new SongVO();
+		 		vo.setSong(obj.getString("song"));
+		 		vo.setSinger(obj.getString("singer"));
+		 		vo.setNaverReview(obj.getString("review"));
+		 		list.add(vo);
+		 		
+		 		System.out.println(i+" : "+vo.getNaverReview());
+		 		i++;
+		 	}
+			  cursor.close();
+    	
+    	}catch(Exception ex)
+    	{
+    		System.out.println(ex.getMessage());
+    	}
+    	
+   	 return list;
+    }*/
 	
 	public void dropTop100(){
 		mt.dropCollection("Top100_Melon");

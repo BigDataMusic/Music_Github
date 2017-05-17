@@ -34,18 +34,18 @@
 				<li class="active">
 				<h3>날씨별 추천</h3>
 					<ul>
-						<li><a href="recommand.do?no=1">봄</a></li>
-						<li><a href="recommand.do?no=2">여름</a></li>
-						<li><a href="recommand.do?no=3">가을</a></li>
-						<li><a href="recommand.do?no=4">겨울</a></li>
-						<li><a href="recommand.do?no=5">화창한날</a></li>
-						<li><a href="recommand.do?no=6">아침</a></li>
-						<li><a href="recommand.do?no=7">오후</a></li>
-						<li><a href="recommand.do?no=8">저녁</a></li>
-						<li><a href="recommand.do?no=9">밤/새벽</a></li>
-						<li><a href="recommand.do?no=10">비/흐림</a></li>
-						<!-- <li><a href="#">크리스마스</a></li> -->
-						<li><a href="recommand.do?no=11">눈오는 날</a></li>
+						<li><a href="recommand.do?rno=1">봄</a></li>
+						<li><a href="recommand.do?rno=2">여름</a></li>
+						<li><a href="recommand.do?rno=3">가을</a></li>
+						<li><a href="recommand.do?rno=4">겨울</a></li>
+						<li><a href="recommand.do?rno=5">화창한날</a></li>
+						<li><a href="recommand.do?rno=6">아침</a></li>
+						<li><a href="recommand.do?rno=7">오후</a></li>
+						<li><a href="recommand.do?rno=8">저녁</a></li>
+						<li><a href="recommand.do?rno=9">밤/새벽</a></li>
+						<li><a href="recommand.do?rno=10">비/흐림</a></li>
+						<li><a href="recommand.do?rno=11">크리스마스</a></li>
+						<li><a href="recommand.do?rno=12">눈오는 날</a></li>
 					</ul>
 				</li>
 				<li>
