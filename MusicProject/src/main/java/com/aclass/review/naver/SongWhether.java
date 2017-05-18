@@ -235,7 +235,7 @@ public class SongWhether implements Serializable{
 							//몽고몽고
 							mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
 							db=mc.getDB("project3");
-							dbc=db.getCollection("weatherPie");  
+							dbc=db.getCollection("weather");  
 							
 							BasicDBObject obj=new BasicDBObject();
 			    			
@@ -260,7 +260,7 @@ public class SongWhether implements Serializable{
 	 }
 	
 
-	 //몽고디비에서 feel가져와서 csv만들기 
+	 //몽고디비에서 feel가져와서 csv만들기 - 잠정 중단 
 	 public void feelData(String song)
 	   {
 		   
