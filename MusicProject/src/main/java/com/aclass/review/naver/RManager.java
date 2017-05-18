@@ -13,7 +13,7 @@ public void rGraph(String song)
 	   try
 	   {
 		   //String song = "오늘 취하면 (Feat.창모) (Prod. SUGA)";
-		   
+		   System.out.println(song);
 		   RConnection rc=new RConnection();
 		   rc.voidEval("library(wordcloud)");
 		   rc.voidEval("library(KoNLP)");
@@ -21,7 +21,7 @@ public void rGraph(String song)
 		  
 		   rc.voidEval("library(RMongo)");
 		   rc.voidEval("library(stringr)");
-		   
+		   //                  home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/ 
 		   rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 		
 		   rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
@@ -59,6 +59,7 @@ public void rGraph(String song)
 	   }catch(Exception ex)
 	   {
 		   System.out.println(ex.getMessage());
+		   ex.printStackTrace();
 	   }
 }
 

@@ -12,6 +12,7 @@
 <center><h1 style="margin-bottom: 10px">[음악인] TOP 100</h1></center>
 <!-- <p id="title_ex" style="margin: 0px;padding: 10px 0;">[음악인] TOP 100</p> -->
 <div id="content_top100">
+<%=application.getRealPath("/") %>
 	<table id="table1" width="735">
 		<tr>
 			<th width="5%">순위</th>
@@ -26,7 +27,7 @@
 			<td>${vo.rank}</td>
 			<td>${vo.increment}</td>
 			<td><a href="content.do?song=${vo.title }&singer=${vo.artist}"><img src="${vo.poster }" class="jacket_thumb100" /></a></td>
-			<td class="song"><a href="content.do?title=${vo.title}" style="text-decoration: none;color:#555">${vo.title }</a></td>
+			<td class="song"><a href="content.do?song=${vo.title }&singer=${vo.artist}" style="text-decoration: none;color:#555">${vo.title }</a></td>
 			<td>${vo.artist }</td>
 			<td>${vo.albumname }</td>
 		</tr>
