@@ -136,18 +136,10 @@ public class MainController{
 		return "main";
 	}
 	@RequestMapping("content.do")
-	public String main_content_page(String song,String singer,String title,Model model)
+	public String main_content_page(String song,String singer,Model model)
 	{
-		msmgr.reviewData(title);
+		msmgr.reviewData(song);
 		try {
-			File dir=new File("/home/sist/feel-data/weather");
-			if(dir.exists()){
-				File[] lists=dir.listFiles();
-				for(File f:lists){
-					f.delete();
-				}
-				dir.delete();
-			}
 			File dir1=new File("/home/sist/feel-data/emotion");
 			if(dir1.exists()){
 				File[] lists1=dir1.listFiles();
@@ -156,7 +148,6 @@ public class MainController{
 				}
 				dir1.delete();
 			}
-		swgr.execute();
 		segr.execute();
 		} catch (Exception ex) {
 			System.out.println("파일 만들기 : "+ex.getMessage());

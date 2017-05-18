@@ -62,7 +62,7 @@ public void rGraph(String song)
 	   }
 }
 
-//느려서 잠정 중단됌 
+
 public void rGraph2(String song)
 {
 	  try
@@ -70,11 +70,11 @@ public void rGraph2(String song)
 		  //rc.voidEval("png(\"/home/sist/GithubDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
 		  RConnection rc=new RConnection();
 		  rc.voidEval("data<-read.csv(\"/home/sist/feel-data/emotion.csv\",header=T,sep=\",\")");
-			rc.voidEval("library(plotrix)");
+//			rc.voidEval("library(plotrix)");
 			rc.voidEval("png(\"/home/sist/GithubDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
 			rc.voidEval("pct<-round(data$count/sum(data$count)*100,1)");
 			rc.voidEval("lab<-paste(data$emotion,\"\n\",\"(\",pct,\"%)\")");
-			rc.voidEval("pie3D(data$count,col=rainbow(10),cex=0.3,explode=0.05,labels=lab)");
+			rc.voidEval("pie(data$count,labels=lab,col=rainbow(10),main=\"날씨감성\")");
 			rc.voidEval("dev.off()");
 		  rc.close();
 	  }catch(Exception ex)
