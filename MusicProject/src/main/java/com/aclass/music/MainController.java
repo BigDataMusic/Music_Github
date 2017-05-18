@@ -472,8 +472,8 @@ public class MainController{
 		model.addAttribute("vo",vo);
 		return "lyric.empty";
 	}
-
-	/*@PostConstruct
+/*
+	@PostConstruct
 	public void init(){		
 		dao.dropTop100();
 		dao.insertTop100("melon");
