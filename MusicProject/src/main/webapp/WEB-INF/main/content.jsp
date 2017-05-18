@@ -26,22 +26,13 @@
 				<div>
 					<a href="#" class="arrow"><img src="resources/images/arrow_l.gif" alt="" width="10" height="96" /></a>
 					<div>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
-						<a href="#"><img src="resources/images/photo1.jpg" alt="" width="78" height="78" /></a>
+						
 					</div>
 					<a href="#" class="arrow"><img src="resources/images/arrow_r.gif" alt="" width="10" height="96" /></a>
 				</div>
 				
-				<p id="title_ex" style="margin-top: 0;padding: 10px 0;">순위 변동</p>
-				<img src="resources/images/graph1.jpg" alt="" width="480" height="270" />
+				<p id="title_ex" style="margin-top: 0;padding: 10px 0;">감정 분석</p>
+				
 			</div>			
 		</div>
 		<div class="column_dc2">
@@ -56,7 +47,7 @@
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
 			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" />
 			<div style="height: 10px"></div>
-			<img src="resources/images/susubar.png" alt="" width="200" height="200" />
+			<img src="resources/images/emotion.png" alt="" width="200" height="200" />
 		</div>
 	</div>
 </body>

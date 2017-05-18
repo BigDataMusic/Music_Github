@@ -22,7 +22,7 @@ public void rGraph(String song)
 		   rc.voidEval("library(RMongo)");
 		   rc.voidEval("library(stringr)");
 		   
-		   rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
+		   rc.voidEval("png(\"/home/sist/GithubDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 		
 		   rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
 
@@ -67,13 +67,15 @@ public void rGraph2(String song)
 {
 	  try
 	  {
+		  //rc.voidEval("png(\"/home/sist/GithubDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
 		  RConnection rc=new RConnection();
-		  rc.voidEval("naver<-read.csv(\"/home/sist/recommend-data/susubar.csv\",header=F,sep=\",\")");
-		  rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/susubar.png\")");
-		  rc.voidEval("pct<-round((naver$V2/sum(naver$V2))*100,1)");
-		  rc.voidEval("lab<-paste(naver$V1,\"\n\",\"(\",pct,\"%)\")");
-		  rc.voidEval("pie(naver$V2,labels=lab,col=rainbow(10),main=\"날씨감성\")");
-		  rc.voidEval("dev.off()");
+		  rc.voidEval("data<-read.csv(\"/home/sist/feel-data/emotion.csv\",header=T,sep=\",\")");
+			rc.voidEval("library(plotrix)");
+			rc.voidEval("png(\"/home/sist/GithubDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
+			rc.voidEval("pct<-round(data$count/sum(data$count)*100,1)");
+			rc.voidEval("lab<-paste(data$emotion,\"\n\",\"(\",pct,\"%)\")");
+			rc.voidEval("pie3D(data$count,col=rainbow(10),cex=0.3,explode=0.05,labels=lab)");
+			rc.voidEval("dev.off()");
 		  rc.close();
 	  }catch(Exception ex)
 	  {
