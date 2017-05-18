@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+ a:link { color: black; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: black; text-decoration: underline;}
+</style>
 <link rel="stylesheet" type="text/css" href="resources/css/top100_table.css" />
 <link rel="stylesheet" href="resources/css/r_style.css">
 <!-- <link rel='stylesheet prefetch'	href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'> -->
@@ -78,14 +83,25 @@
 							<c:forEach  var="vo" items="${list }" varStatus="s">
 							<c:if test="${s.index<10 }">
 							<tr>
-								<td><img src="${vo.poster }"></td>
-								<td>${vo.song } / ${vo.singer }</td>
+								<td><a href="content.do?song=${vo.song }&singer=${vo.singer}"><img src="${vo.poster }"></a></td>
+								<td><a href="content.do?song=${vo.song }&singer=${vo.singer}">${vo.song } / ${vo.singer }</a></td>
 								<td>55</td>
 								<td>40</td>
 								<td>15</td>
 							</tr>
 							</c:if>
 							</c:forEach>
+							<c:forEach var="vo" items="${elist }" varStatus="s">
+			 	 <c:if test="${s.index<10 }">
+					<tr>
+						<td><a href="content.do?song=${vo.song }&singer=${vo.singer}"><img src="${vo.poster }"></a></td>
+						<td><a href="content.do?song=${vo.song }&singer=${vo.singer}">${vo.song } / ${vo.singer }</a></td>
+						<td>55</td>
+						<td>40</td>
+						<td>15</td>	
+					</tr>
+					</c:if>
+				</c:forEach>
 						</tbody>
 					</table>
 					<p class="reveal-footer">Worst 10</p>
