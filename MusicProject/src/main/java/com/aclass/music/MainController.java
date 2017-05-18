@@ -16,8 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.codehaus.jettison.json.JSONObject;
-import org.json.simple.JSONArray;
+
+import org.json.simple.*;
 
 import java.io.*;
 
@@ -38,6 +38,7 @@ import com.aclass.review.naver.SongVO;
 import com.aclass.review.naver.SongWhether;
 import com.aclass.spark.SparkEmotionManager;
 import com.aclass.spark.SparkWeatherManager;
+
 import com.aclass.mongodb.*;
 
 @Controller
@@ -199,6 +200,105 @@ public class MainController{
 	{
 		List<SongVO> list=recomdao.songRecommandData(feel);
 		List<SongVO> elist=recomdao.emotionRecommandData(feel);
+		/*
+		 *  [{
+		      "category": "가나다라마바사아자차카타파/가나다",
+		      "column-1": "1.278"
+		    },
+		    
+		    봄:35,여름:23,화창한날:5,밤/새벽:10
+		 */
+		List<RecommandFeelVO> fList=
+				  new ArrayList<RecommandFeelVO>();
+		//System.out.println("list.size():"+list.size());
+		try
+		{
+			int m=0;
+			for(SongVO vo:elist)
+			{
+				if(m>14)break;
+				String strFeel=vo.getFeel();
+				String[] data=strFeel.split(",");
+				for(String s:data)
+				{
+					StringTokenizer st=new StringTokenizer(s, ":");
+					RecommandFeelVO rvo=new RecommandFeelVO();
+					rvo.setTitle(vo.getSong());
+					rvo.setFeel(st.nextToken());
+					rvo.setCount(st.nextToken());
+					fList.add(rvo);
+				}
+				
+				m++;
+			}
+			
+		try
+		{
+			int k=0;
+			for(SongVO vo:list)
+			{
+				if(k>14)break;
+				String strFeel=vo.getFeel();
+				String[] data=strFeel.split(",");
+				for(String s:data)
+				{
+					StringTokenizer st=new StringTokenizer(s, ":");
+					RecommandFeelVO rvo=new RecommandFeelVO();
+					rvo.setTitle(vo.getSong());
+					rvo.setFeel(st.nextToken());
+					rvo.setCount(st.nextToken());
+					fList.add(rvo);
+				}
+				
+				k++;
+			}
+			System.out.println("fList.size():"+fList.size());
+			for(RecommandFeelVO ivo:fList)
+			{
+				for(RecommandFeelVO jvo:fList)
+				{
+					if(Integer.parseInt(ivo.getCount())>Integer.parseInt(jvo.getCount()))
+					{
+						String s=jvo.getTitle();
+						String f=jvo.getFeel();
+						String c=jvo.getCount();
+						
+						jvo.setTitle(ivo.getTitle());
+						jvo.setFeel(ivo.getFeel());
+						jvo.setCount(ivo.getCount());
+						
+						ivo.setTitle(s);
+						ivo.setFeel(f);
+						ivo.setCount(c);
+					}
+				}
+			}
+			
+			JSONArray arr=new JSONArray();
+			
+			for(int i=0;i<fList.size();i++)
+			{
+				RecommandFeelVO rvo=fList.get(i);
+				if(feel.equals(rvo.getFeel()))
+				{
+					JSONObject obj=new JSONObject();
+					obj.put("category", rvo.getTitle());
+					obj.put("column-1", rvo.getCount());
+					arr.add(obj);
+					
+				}
+			}
+		
+			
+			model.addAttribute("json", arr.toJSONString());
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("elist", elist);
 	 	model.addAttribute("main_jsp", "recommand.jsp");	 	
