@@ -83,7 +83,7 @@ public class MainController{
 	private SparkWeatherManager sparkweather;
 
 	@RequestMapping("main.do")
-	public String main_page(String data,Model model)
+	public String main_page(String feel, String data,Model model)
 	{
 		// 음악인차트
 		/*List<MusicVO> bList = bmgr.bugsRankData();
@@ -120,6 +120,13 @@ public class MainController{
     	model.addAttribute("niList", niList);
     	model.addAttribute("nList", nList);
 		model.addAttribute("bList", bList);
+		
+		// nav추천
+    	if(feel==null)
+    	feel="봄";
+		List<SongVO> list=recomdao.songRecommandData(feel);
+		model.addAttribute("list", list);
+		
 		return "main";
 	}
 	@RequestMapping("content.do")
