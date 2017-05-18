@@ -168,7 +168,7 @@ public class MainController{
 		
 		List<MusicVO> bList=null;
 		//음악인
-		if(cate.equals("1")) bList=bmgr.bugsRankData();
+		if(cate.equals("1")) bList=dao.getMongoMusicData("bugs");
 		//멜론
 		else if(cate.equals("2")) bList=dao.getMongoMusicData("melon");
 		//벅스
