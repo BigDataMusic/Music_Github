@@ -13,7 +13,7 @@ public class MusicVO {
 	private String lyrics;
 	private boolean tit_music;
 	private String alno;
-	private int score;
+	private double score;
 	
 	public int getN() {
 		return n;
@@ -87,10 +87,10 @@ public class MusicVO {
 	public void setLyrics(String lyrics) {
 		this.lyrics = lyrics;
 	}
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 	
