@@ -63,7 +63,7 @@ function popupOpen(no){
 			<!-- <a href="#" target="_blank"></a> -->
 			<td>
 			<!-- <a href="lyric.do" target="_blank"> -->
-				 <a href="javascript:popupOpen(${vo.n });">
+				 <a href="javascript:popupOpen(${vo.n-1 });">
 					<img src="resources/images/ly.png" title="${vo.lyrics }">
 				</a>
 			</td>
