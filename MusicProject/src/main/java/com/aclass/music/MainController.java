@@ -26,6 +26,7 @@ import com.aclass.mgr.AlbumVO;
 import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
+import com.aclass.mongo.FeelDAO;
 import com.aclass.mongo.MusicManager;
 import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
@@ -52,6 +53,8 @@ public class MainController{
 	@Autowired
 	private BugsManager bmgr;
 	@Autowired
+	private FeelDAO fdao;
+	@Autowired
 	private MelonManager mmgr;
 	@Autowired
 	private MnetManager mnetmgr;
@@ -77,6 +80,8 @@ public class MainController{
 	private ReviewDAO reviewdao;
 	@Autowired
 	private SongWhether songwhether;
+	@Autowired
+	private SongWhether songweather;
 	@Autowired
 	private RecommandDAO recomdao;
 	
@@ -131,28 +136,19 @@ public class MainController{
 		return "main";
 	}
 	@RequestMapping("content.do")
-	public String main_content_page(String song,String singer,String title,Model model)
+	public String main_content_page(String song,String singer,Model model)
 	{
-		msmgr.reviewData(title);
+		msmgr.reviewData(song);
 		try {
-			File dir=new File("/home/sist/feel-data/weather");
-			if(dir.exists()){
-				File[] lists=dir.listFiles();
-				for(File f:lists){
-					f.delete();
-				}
-				dir.delete();
-			}
-			/*File dir1=new File("/home/sist/feel-data/emotion");
+			File dir1=new File("/home/sist/feel-data/emotion");
 			if(dir1.exists()){
 				File[] lists1=dir1.listFiles();
 				for(File f:lists1){
 					f.delete();
 				}
 				dir1.delete();
-			}*/
-		swgr.execute();
-		//segr.execute();
+			}
+		segr.execute();
 		} catch (Exception ex) {
 			System.out.println("파일 만들기 : "+ex.getMessage());
 		}
@@ -167,6 +163,7 @@ public class MainController{
 		songwhether.songData(song);
 		songwhether.SongWhether(song,singer);
 		rmanager.rGraph(song);
+		rmanager.rGraph2(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")
@@ -208,8 +205,33 @@ public class MainController{
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
-	public String main_recommand(String feel,Model model)
+	public String main_recommand(String title,String feel,Model model)
 	{
+		/*MusicVO vo=fdao.musicDetailData(title);
+		
+		msmgr.reviewData(vo.getTitle());*/
+		try {
+			File dir=new File("/home/sist/feel-data/weather");
+			if(dir.exists()){
+				File[] lists=dir.listFiles();
+				for(File f:lists){
+					f.delete();
+				}
+				dir.delete();
+			}
+			File dir1=new File("/home/sist/feel-data/emotion");
+			if(dir1.exists()){
+				File[] lists1=dir1.listFiles();
+				for(File f:lists1){
+					f.delete();
+				}
+				dir1.delete();
+			}
+		swgr.execute();
+		segr.execute();
+		} catch (Exception ex) {
+			System.out.println("파일 만들기 : "+ex.getMessage());
+		}
 		List<SongVO> list=recomdao.songRecommandData(feel);
 		List<SongVO> elist=recomdao.emotionRecommandData(feel);
 		/*

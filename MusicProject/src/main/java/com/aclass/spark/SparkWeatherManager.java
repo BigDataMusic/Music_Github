@@ -158,7 +158,7 @@ public class SparkWeatherManager implements Serializable{
 			counts.saveAsTextFile("/home/sist/feel-data/weather");
 			File file1=new File("/home/sist/feel-data/weather/part-00000");
 			FileReader fr1=new FileReader(file1);
-			String data1="";
+			String data1="weather,count\n";
 			int i=0;
 			while((i=fr1.read())!=-1){
 				data1+=String.valueOf((char)i);
@@ -166,7 +166,7 @@ public class SparkWeatherManager implements Serializable{
 			fr1.close();
 			data1=data1.replace("(", "");
 			data1=data1.replace(")", "");
-			data1=data1.replace(",", " ");
+			data=data.substring(0, data.lastIndexOf("\n"));
 			FileWriter fw1=new FileWriter("/home/sist/feel-data/weather.csv");
 			fw1.write(data1);
 			fw1.close();
