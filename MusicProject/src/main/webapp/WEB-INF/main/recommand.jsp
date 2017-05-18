@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+ a:link { color: black; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: black; text-decoration: underline;}
+</style>
 <link rel="stylesheet" type="text/css" href="resources/css/top100_table.css" />
 </head>
 <body>
@@ -22,12 +27,10 @@
 			 	 <c:forEach var="vo" items="${list }" varStatus="s">
 			 	 <c:if test="${s.index<10 }">
 					<tr>
-						<td><img
-								src="${vo.poster }"
-								class="jacket_thumb100" /></td>
-						<td class="song">${vo.song }</td>
-						<td>${vo.singer }</td>
-						
+						<td><a href="content.do?song=${vo.song }&singer=${vo.singer}"><img src="${vo.poster }"
+								class="jacket_thumb100" /></a></td>
+						<td class="song"><a href="content.do?song=${vo.song }&singer=${vo.singer}">${vo.song }</a></td>
+						<td><a href="content.do?song=${vo.song }&singer=${vo.singer}">${vo.singer }</a></td>
 					</tr>
 					</c:if>
 				</c:forEach>
