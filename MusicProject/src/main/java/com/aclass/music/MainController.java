@@ -94,7 +94,7 @@ public class MainController{
         		b.setTitle(mTitle);
 			}
 		}*/
-		List<MusicVO> bList = dao.musicInRank();
+		List<MusicVO> bList =  dao.getMongoMusicData("musicin");
 		String mTitle="";
 		for(MusicVO b:bList){
 			if(b.getTitle().length()>15){
@@ -173,7 +173,7 @@ public class MainController{
 		
 		List<MusicVO> bList=null;
 		//음악인
-		if(cate.equals("1")) bList=dao.getMongoMusicData("bugs");
+		if(cate.equals("1")) bList= dao.getMongoMusicData("musicin");
 		//멜론
 		else if(cate.equals("2")) bList=dao.getMongoMusicData("melon");
 		//벅스
