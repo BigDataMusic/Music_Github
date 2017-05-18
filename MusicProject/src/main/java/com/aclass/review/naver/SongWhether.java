@@ -301,7 +301,6 @@ public class SongWhether implements Serializable{
 						   String[] ss={temp2,temp3};
 						   list.add(ss);
 					   
-					   
 				   }
 				   cw.writeAll(list);
 				   fw.close();
