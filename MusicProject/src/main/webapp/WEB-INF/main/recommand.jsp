@@ -30,10 +30,10 @@
 				<div class="card-move-up waves-effect waves-block waves-light">
 					<div class="move-up material-blue darken-1">
 						<div>
-							<span class="chart-title white-text">날씨별 추천곡</span>
+							<span class="chart-title white-text"></span>
 
 							<div class="chart-revenue material-blue darken-2 white-text">
-								<p class="chart-revenue-total">맑은날</p>
+								<p class="chart-revenue-total"></p>
 							</div>
 							<!--
 								<div class="switch chart-revenue-switch right">
@@ -73,10 +73,8 @@
 						<thead>
 							<tr>
 								<th data-field="position">추천순위</th>
-								<th data-field="host">곡명/가수</th>
-								<th data-field="mac">종합추천수</th>
-								<th data-field="seconds">추천수-네이버</th>
-								<th data-field="gt-1s">추천수-다음</th>
+								<th data-field="host">곡명</th>
+								<th data-field="mac">가수</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -84,22 +82,18 @@
 							<c:if test="${s.index<10 }">
 							<tr>
 								<td><a href="content.do?song=${vo.song }&singer=${vo.singer}"><img src="${vo.poster }"></a></td>
-								<td><a href="content.do?song=${vo.song }&singer=${vo.singer}">${vo.song } / ${vo.singer }</a></td>
-								<td>55</td>
-								<td>40</td>
-								<td>15</td>
+								<td><a href="content.do?song=${vo.song }&singer=${vo.singer}">${vo.song }</a></td>
+								<td>${vo.singer }</td>
 							</tr>
 							</c:if>
 							</c:forEach>
 							<c:forEach var="vo" items="${elist }" varStatus="s">
 			 	 <c:if test="${s.index<10 }">
-					<tr>
-						<td><a href="content.do?song=${vo.song }&singer=${vo.singer}"><img src="${vo.poster }"></a></td>
-						<td><a href="content.do?song=${vo.song }&singer=${vo.singer}">${vo.song } / ${vo.singer }</a></td>
-						<td>55</td>
-						<td>40</td>
-						<td>15</td>	
-					</tr>
+							<tr>
+								<td><a href="content.do?song=${vo.song }&singer=${vo.singer}"><img src="${vo.poster }"></a></td>
+								<td><a href="content.do?song=${vo.song }&singer=${vo.singer}">${vo.song }</a></td>
+								<td>${vo.singer }</td>
+							</tr>
 					</c:if>
 				</c:forEach>
 						</tbody>
@@ -149,52 +143,9 @@ $(function() {
 		    "responsive": {
 		      "enabled": true
 		    },
-		    "dataProvider": [{
-		      "category": "가나다라마바사아자차카타파/가나다",
-		      "column-1": "1.278"
-		    }, {
-		      "category": "가나다라마바사아/가나다",
-		      "column-1": "1.171"
-		    }, {
-		      "category": "가나다라마바사아/가나다",
-		      "column-1": "1.05"
-		    }, {
-		      "category": "가나다라/가나다",
-		      "column-1": "0.917"
-		    }, {
-		      "category": "가나다라/가나다",
-		      "column-1": "0.911"
-		    }, {
-		      "category": "가나다라/가나다",
-		      "column-1": "0.854"
-		    }, {
-		      "category": "가나다라/가나다",
-		      "column-1": "0.762"
-		    }, {
-		      "category": "가나다라/가나다",
-		      "column-1": "0.713"
-		    }, {
-		      "category": "가나다라/가나다",
-		      "column-1": "0.525"
-		    }, {
-		      "category": "가나다라/가나다",
-		      "column-1": "0.379"
-		    }]
+		    "dataProvider": <%=request.getAttribute("json")%>
 		  });
 		};
-
-		/*if (window.matchMedia("(min-width:320px)").matches) { // mobile
-			if (Math.abs(window.orientation) - 90 != 0) { // portrait
-				setupAmChart("");
-			} else { // landscape
-				setupAmChart("[[title]]");
-			}
-		}
-
-		if (window.matchMedia("(min-width:641px)").matches) { // tablet
-			setupAmChart("[[title]]");
-		}
-		*/
 		if (window.matchMedia("(min-width:1025px)").matches) { // desktop
 			setupAmChart("[[title]]");
 		}
@@ -204,41 +155,6 @@ $(function() {
 		});
 });
 </script>
-
-		<%-- <div id="content_top100">
-			<table id="table1" width="735">
-				<tr>
-					<th width="20%">앨범자켓</th>
-					<th width="45%">곡명</th>
-					<th width="35%">아티스트</th>
-					
-				</tr>
-			 	 <c:forEach var="vo" items="${list }" varStatus="s">
-			 	 <c:if test="${s.index<10 }">
-					<tr>
-						<td><img
-								src="${vo.poster }"
-								class="jacket_thumb100" /></td>
-						<td class="song">${vo.song }</td>
-						<td>${vo.singer }</td>
-						
-					</tr>
-					</c:if>
-				</c:forEach>
-				<c:forEach var="vo" items="${elist }" varStatus="s">
-			 	 <c:if test="${s.index<10 }">
-					<tr>
-						<td><img
-								src="${vo.poster }"
-								class="jacket_thumb100" /></td>
-						<td class="song">${vo.song }</td>
-						<td>${vo.singer }</td>
-					</tr>
-					</c:if>
-				</c:forEach>
-						
-			</table>
-		</div> --%>
 	</div>
 </body>
 </html>

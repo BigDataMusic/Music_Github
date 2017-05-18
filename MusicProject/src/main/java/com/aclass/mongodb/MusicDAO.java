@@ -28,7 +28,7 @@ public class MusicDAO {
 	
 	private MongoClient mc;
 	private DB db;
-	private DBCollection mdbc,bdbc,navdbc,newMusicDBC,AlbumDBC;
+	private DBCollection mdbc,bdbc,navdbc,midbc,newMusicDBC,AlbumDBC;
 	public MusicDAO(){
 		try
     	{
@@ -38,6 +38,7 @@ public class MusicDAO {
 			mdbc=db.getCollection("Top100_Melon");
 			navdbc=db.getCollection("Top100_Naver");
 			newMusicDBC=db.getCollection("NewMusic");
+			midbc=db.getCollection("Top100_MusicIn");
 			AlbumDBC=db.getCollection("MusicAlbum");
 		}catch(Exception ex){}
 	}
@@ -49,6 +50,7 @@ public class MusicDAO {
 			else if(musicSite.equals("bugs")) cursor=bdbc.find();
 			else if(musicSite.equals("newMusic")) cursor=newMusicDBC.find();
 			else if(musicSite.equals("naver"))cursor=navdbc.find();
+			else if(musicSite.equals("musicin"))cursor=midbc.find().sort(new BasicDBObject("rank",1));
 			while(cursor.hasNext()){
 				//System.out.println("확인");
 				BasicDBObject obj=(BasicDBObject)cursor.next();
@@ -101,7 +103,6 @@ public class MusicDAO {
 					mvo.setTitle(obj.getString("mTitle"+k));
 					mvo.setTitle(obj.getString("mLyrics"+k));
 					mvolist.add(mvo);
-					
 				}
 				vo.setmList(mvolist);
 				list.add(vo);
@@ -147,74 +148,26 @@ public class MusicDAO {
 			System.out.println("albumInsert "+e.getMessage());
 		}
 		return vo;
-	}
-	public List<MusicVO> AllMusicRank(){
-		/*
-			bdbc=db.getCollection("Top100_Bugs");
-			newMusicDBC=db.getCollection("NewMusic");
-			AlbumDBC=db.getCollection("MusicAlbum");
-		 */
-		List<MusicVO> rlist = new ArrayList<MusicVO>();
-		List<MusicVO> buglist=getMongoMusicData("bugs");
-		int cnt=0;
-		System.out.println("==============================");
-		for(MusicVO bvo : buglist){
-			cnt++;
-			System.out.println(cnt+" "+bvo.getTitle());
-			if(cnt==100) break;
+	}	
+	
+	public List<String> musicTitleAllData() {
+		List<String> list = new ArrayList<String>();
+		try {
+			DBCursor cursor = bdbc.find();
+			while (cursor.hasNext()) {
+				BasicDBObject obj = (BasicDBObject) cursor.next();
+				String title = obj.getString("title");
+				if (title.length() > 1) {
+					list.add(title);
+				}
+
+			}
+			cursor.close();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
 		}
-		cnt=0;
-		System.out.println("==============================");
-		List<MusicVO> mellist=getMongoMusicData("melon");
-		for(MusicVO mvo : mellist){
-			cnt++;
-			System.out.println(cnt+" "+mvo.getTitle());
-		}
-		return rlist;
+		return list;
 	}
-	
-	
-	public List<String> musicTitleAllData()
-	   {
-		   List<String> list=new ArrayList<String>();
-		   try
-		   {
-			   DBCursor cursor=bdbc.find();
-			   while(cursor.hasNext())
-			   {
-				   BasicDBObject obj=
-						   (BasicDBObject)cursor.next();
-				   String title=obj.getString("title");
-				   if(title.length()>1)
-				   {
-				     list.add(title);
-				   }
-				   
-			   }
-			   cursor.close();
-		   }catch(Exception ex)
-		   {
-			   System.out.println(ex.getMessage());
-		   }
-		   return list;
-	   }
-	/*
-	 * private int n;
-	private int no;
-	private int rank;
-	private String increment;
-	private String poster;
-	private String title;
-	private String artist;
-	private String albumname;
-	private int like;
-	private String lyrics;
-	private boolean tit_music;
-	private String alno;
-	 * 
-	 * 
-	 */
-	
 	
 	/*public List<MusicVO> songData()
     {
@@ -297,36 +250,10 @@ public class MusicDAO {
 		}
 	}
 	
-	public List<MusicVO> musicInRank(){
-		/*
-			bdbc=db.getCollection("Top100_Bugs");
-			newMusicDBC=db.getCollection("NewMusic");
-			AlbumDBC=db.getCollection("MusicAlbum");
-		
-		List<MusicVO> rlist = new ArrayList<MusicVO>();
-		List<MusicVO> buglist=getMongoMusicData("bugs");
-		int cnt=0;
-		System.out.println("==============================");
-		for(MusicVO bvo : buglist){
-			cnt++;
-			System.out.println(cnt+" "+bvo.getTitle());
-			if(cnt==100) break;
-		}
-		cnt=0;
-
-				
-		System.out.println("==============================");
-		List<MusicVO> mellist=getMongoMusicData("melon");
-		for(MusicVO mvo : mellist){
-			cnt++;
-			System.out.println(cnt+" "+mvo.getTitl
-
-				e());
-		}
-		 */
-		
+	/*public List<MusicVO> musicInRank(){		
 		List<MusicVO> sList=new ArrayList<MusicVO>();
 		try {
+			
 			String[] data=new String[3];
 			String temp="";
 			for(String d:data){
@@ -346,24 +273,6 @@ public class MusicDAO {
 					vo.setIncrement(obj.getString("increment"));
 					vo.setScore((100 - obj.getInt("rank")));
 					
-					/*else if(i==1){
-						for(int k=0;k<j1;j1++){
-							if(obj.getString("title")!=tit[k]){
-								int temp=(int) vo.getScore();
-								vo.setScore(temp+101-obj.getInt("rank")*1);
-							}else if(obj.getString("title")==tit[k]){
-								vo.setRank(obj.getInt("rank"));
-								vo.setTitle(obj.getString("title"));
-								vo.setPoster(obj.getString("poster"));
-								vo.setArtist(obj.getString("artist"));
-								
-						vo.setAlbumname(obj.getString("album"));
-								vo.setIncrement(obj.getString("increment"));
-								vo.setScore((101-obj.getInt("rank"))*1);
-								System.out.println("벅스: "+obj.getString("title"));
-							}
-						}
-					}*/
 					if(temp.contains(",")){
 						temp=temp.replace(",", "@@");
 					}
@@ -384,35 +293,13 @@ public class MusicDAO {
 				fw.write(data[i]);
 				fw.close();
 				cursor[i].close();
-				/*System.out.println(sList.size());
-				String tit[]=new String[300];
-				int num=0;
-				for(MusicVO s:sList){
-					tit[num]=s.getTitle();
-					for(MusicVO ss:sList){
-						if(s.getTitle().equals(ss.getTitle())){
-							s.setScore(s.getScore()+ss.getScore());
-							System.out.println(ss.getTitle()+" "+ss.getScore());
-						}
-					}
-				}*/
+				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("musicInRank "+e.getMessage());
 		}
 		
-		/*String tit[]=new String[300];
-		int num=0;
-		for(MusicVO s:sList){
-			tit[num]=s.getTitle();
-			for(MusicVO ss:sList){
-				if(s.getTitle().equals(ss.getTitle())){
-					s.setScore(s.getScore()+ss.getScore());
-					System.out.println(ss.getTitle()+" "+ss.getScore());
-				}
-			}
-		}*/
 		return sList;
-	}
+	}*/
 }
