@@ -62,6 +62,7 @@ public void rGraph(String song)
 	   }
 }
 
+//느려서 잠정 중단됌 
 public void rGraph2(String song)
 {
 	  try
