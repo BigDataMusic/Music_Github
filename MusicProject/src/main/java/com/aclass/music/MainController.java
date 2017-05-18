@@ -84,7 +84,7 @@ public class MainController{
 	private SparkWeatherManager sparkweather;
 
 	@RequestMapping("main.do")
-	public String main_page(String data,Model model)
+	public String main_page(String feel, String data,Model model)
 	{
 		// 음악인차트
 		/*List<MusicVO> bList = bmgr.bugsRankData();
@@ -95,7 +95,7 @@ public class MainController{
         		b.setTitle(mTitle);
 			}
 		}*/
-		List<MusicVO> bList = dao.musicInRank();
+		List<MusicVO> bList =  dao.getMongoMusicData("musicin");
 		String mTitle="";
 		for(MusicVO b:bList){
 			if(b.getTitle().length()>15){
@@ -121,6 +121,13 @@ public class MainController{
     	model.addAttribute("niList", niList);
     	model.addAttribute("nList", nList);
 		model.addAttribute("bList", bList);
+		
+		// nav추천
+    	if(feel==null)
+    	feel="봄";
+		List<SongVO> list=recomdao.songRecommandData(feel);
+		model.addAttribute("list", list);
+		
 		return "main";
 	}
 	@RequestMapping("content.do")
@@ -167,7 +174,7 @@ public class MainController{
 		
 		List<MusicVO> bList=null;
 		//음악인
-		if(cate.equals("1")) bList=dao.getMongoMusicData("bugs");
+		if(cate.equals("1")) bList= dao.getMongoMusicData("musicin");
 		//멜론
 		else if(cate.equals("2")) bList=dao.getMongoMusicData("melon");
 		//벅스
