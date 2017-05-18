@@ -2,6 +2,7 @@ package com.aclass.mongodb;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,6 @@ import com.aclass.mgr.BugsManager;
 import com.aclass.mgr.MelonManager;
 import com.aclass.mgr.MusicVO;
 import com.mongodb.*;
-
 
 @Repository
 public class MusicDAO {
@@ -295,5 +295,124 @@ public class MusicDAO {
 			// TODO: handle exception
 			System.out.println("insertTop100 "+e.getMessage());
 		}
+	}
+	
+	public List<MusicVO> musicInRank(){
+		/*
+			bdbc=db.getCollection("Top100_Bugs");
+			newMusicDBC=db.getCollection("NewMusic");
+			AlbumDBC=db.getCollection("MusicAlbum");
+		
+		List<MusicVO> rlist = new ArrayList<MusicVO>();
+		List<MusicVO> buglist=getMongoMusicData("bugs");
+		int cnt=0;
+		System.out.println("==============================");
+		for(MusicVO bvo : buglist){
+			cnt++;
+			System.out.println(cnt+" "+bvo.getTitle());
+			if(cnt==100) break;
+		}
+		cnt=0;
+
+				
+		System.out.println("==============================");
+		List<MusicVO> mellist=getMongoMusicData("melon");
+		for(MusicVO mvo : mellist){
+			cnt++;
+			System.out.println(cnt+" "+mvo.getTitl
+
+				e());
+		}
+		 */
+		
+		List<MusicVO> sList=new ArrayList<MusicVO>();
+		try {
+			String[] data=new String[3];
+			String temp="";
+			for(String d:data){
+				d="";
+			}
+			DBCursor[] cursor={mdbc.find(), bdbc.find(), navdbc.find()};
+			for(int i=0;i<3;i++){
+				while (cursor[i].hasNext()) {
+					BasicDBObject obj = (BasicDBObject) cursor[i].next();
+					MusicVO vo = new MusicVO();
+					vo.setRank(obj.getInt("rank"));
+					vo.setTitle(obj.getString("title"));
+					temp=vo.getTitle();
+					vo.setPoster(obj.getString("poster"));
+					vo.setArtist(obj.getString("artist"));
+					vo.setAlbumname(obj.getString("album"));
+					vo.setIncrement(obj.getString("increment"));
+					vo.setScore((100 - obj.getInt("rank")));
+					
+					/*else if(i==1){
+						for(int k=0;k<j1;j1++){
+							if(obj.getString("title")!=tit[k]){
+								int temp=(int) vo.getScore();
+								vo.setScore(temp+101-obj.getInt("rank")*1);
+							}else if(obj.getString("title")==tit[k]){
+								vo.setRank(obj.getInt("rank"));
+								vo.setTitle(obj.getString("title"));
+								vo.setPoster(obj.getString("poster"));
+								vo.setArtist(obj.getString("artist"));
+								
+						vo.setAlbumname(obj.getString("album"));
+								vo.setIncrement(obj.getString("increment"));
+								vo.setScore((101-obj.getInt("rank"))*1);
+								System.out.println("벅스: "+obj.getString("title"));
+							}
+						}
+					}*/
+					if(temp.contains(",")){
+						temp=temp.replace(",", "@@");
+					}
+					if(i==0){
+						data[i]+=temp+","+vo.getScore()+"\n";
+					}else if(i==1){
+						data[i]+=temp+","+vo.getScore()+"\n";
+					}else if(i==2){
+						data[i]+=temp+","+vo.getScore()+"\n";
+					}
+					sList.add(vo);
+				}
+				
+				FileWriter fw=new FileWriter("/home/sist/top100/top100_"+i+".csv");
+				if(data[i].contains("null")){
+					data[i]=data[i].replace("null", "");
+				}
+				fw.write(data[i]);
+				fw.close();
+				cursor[i].close();
+				/*System.out.println(sList.size());
+				String tit[]=new String[300];
+				int num=0;
+				for(MusicVO s:sList){
+					tit[num]=s.getTitle();
+					for(MusicVO ss:sList){
+						if(s.getTitle().equals(ss.getTitle())){
+							s.setScore(s.getScore()+ss.getScore());
+							System.out.println(ss.getTitle()+" "+ss.getScore());
+						}
+					}
+				}*/
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("musicInRank "+e.getMessage());
+		}
+		
+		/*String tit[]=new String[300];
+		int num=0;
+		for(MusicVO s:sList){
+			tit[num]=s.getTitle();
+			for(MusicVO ss:sList){
+				if(s.getTitle().equals(ss.getTitle())){
+					s.setScore(s.getScore()+ss.getScore());
+					System.out.println(ss.getTitle()+" "+ss.getScore());
+				}
+			}
+		}*/
+		return sList;
 	}
 }

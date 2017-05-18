@@ -94,7 +94,7 @@ public class MainController{
         		b.setTitle(mTitle);
 			}
 		}*/
-		List<MusicVO> bList = dao.getMongoMusicData("bugs");
+		List<MusicVO> bList = dao.musicInRank();
 		String mTitle="";
 		for(MusicVO b:bList){
 			if(b.getTitle().length()>15){
