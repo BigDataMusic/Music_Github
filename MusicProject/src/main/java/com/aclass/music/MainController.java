@@ -153,11 +153,8 @@ public class MainController{
 			System.out.println("파일 만들기 : "+ex.getMessage());
 		}
 		System.out.println(song+ " "+singer);
-		
 		SongVO vo=recomdao.songDetailData(song);
 		model.addAttribute("vo", vo);
-		
-		
 		reviewdao.naverReviewData(song,singer);
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);

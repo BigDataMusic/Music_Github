@@ -22,7 +22,7 @@ public void rGraph(String song)
 		   rc.voidEval("library(RMongo)");
 		   rc.voidEval("library(stringr)");
 		   
-		   rc.voidEval("png(\"/home/sist/GithubDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
+		   rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 		
 		   rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
 
@@ -68,7 +68,7 @@ public void rGraph2(String song)
 	  {
 		  RConnection rc=new RConnection();
 		  rc.voidEval("naver<-read.csv(\"/home/sist/recommend-data/susubar.csv\",header=F,sep=\",\")");
-		  rc.voidEval("png(\"/home/sist/GithubDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/susubar.png\")");
+		  rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
 		  rc.voidEval("pct<-round((naver$V2/sum(naver$V2))*100,1)");
 		  rc.voidEval("lab<-paste(naver$V1,\"\n\",\"(\",pct,\"%)\")");
 		  rc.voidEval("pie(naver$V2,labels=lab,col=rainbow(10),main=\"날씨감성\")");
