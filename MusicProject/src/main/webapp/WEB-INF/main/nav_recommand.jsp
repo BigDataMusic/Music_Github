@@ -48,6 +48,8 @@
 						<li><a href="recommand.do?feel=크리스마스">크리스마스</a></li>
 						<li><a href="recommand.do?feel=눈오는날">눈오는 날</a></li>
 					</ul>
+				</li>
+				<li>
 					<h3>감정별 추천</h3>
 					<ul>
 						<li><a href="recommand.do?feel=사랑/기쁨">사랑/기쁨</a></li>
@@ -58,17 +60,6 @@
 						<li><a href="recommand.do?feel=외로울때">외로울때</a></li>
 					</ul>
 				</li>
-				<!-- <li>
-					<h3>감정별 추천</h3>
-					<ul>
-						<li><a href="recommand.do?feel=사랑/기쁨">사랑/기쁨</a></li>
-						<li><a href="recommand.do?feel=이별/슬픔">이별/슬픔</a></li>
-						<li><a href="recommand.do?feel=스트레스/짜증">스트레스/짜증</a></li>
-						<li><a href="recommand.do?feel=우울할때">우울할때</a></li>
-						<li><a href="recommand.do?feel=멘붕/불안">멘붕/불안</a></li>
-						<li><a href="recommand.do?feel=외로울때">외로울때</a></li>
-					</ul>
-				</li> -->
 			</ul>
 		</div>
 	</div>	

@@ -56,7 +56,7 @@ $(function() {
 			<td><fmt:formatDate value="${dateFmt}" pattern="yyyy-MM-dd"/></td>
 		</tr>
 		<tr style="display: none;" id="m${s.index }">
-			<td align="left" colspan="4">
+			<td align="left" colspan="4" class="song" bgcolor="#97d5e0">
 				<a href="${vo.link}" target="_blank">${vo.description }</a>
 			</td>
 		</tr>
@@ -66,10 +66,12 @@ $(function() {
 <div id="content_top100" style="margin-top: 10px;margin-bottom:20px">
 	<table width="735">
 		<tr>
-			<td id="chart_rank">&lt;
-			  <a href="issue.do?page=${curpage>1?curpage-1:curpage}">prev</a>&nbsp;&nbsp;&nbsp;
-				${curpage }&nbsp;page&nbsp;/&nbsp;${total }&nbsp;pages&nbsp;&nbsp;&nbsp;
-			  <a href="issue.do?page=${curpage<totalpage?curpage+1:curpage}">next</a>&gt;
+			<td id="chart_rank" valign="middle">
+			  <a href="issue.do?page=${curpage>1?curpage-1:curpage}" style="vertical-align: middle;">
+			  <img alt="" src="resources/images/f-left.png" style="vertical-align: middle;">&nbsp;&nbsp;&nbsp;prev</a>&nbsp;&nbsp;&nbsp;
+				${curpage }&nbsp;page&nbsp;/&nbsp;4&nbsp;pages&nbsp;&nbsp;&nbsp;
+			  <a href="issue.do?page=${curpage<totalpage?curpage+1:curpage}" style="vertical-align: middle;">next&nbsp;&nbsp;&nbsp;
+			  <img alt="" src="resources/images/f-right.png" style="vertical-align: middle;"></a>
 			</td>
 		</tr>
 	</table>

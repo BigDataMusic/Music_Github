@@ -10,7 +10,7 @@
 <script type="text/javascript" src="resources/smarteditor2/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
-<!-- <script type="text/javascript" src="resources/smarteditor2/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script> -->
+<script type="text/javascript" src="resources/smarteditor2/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 </head>
 <body ng-app="">
@@ -33,11 +33,11 @@
       </tr>
       <tr>
        <th width="20%" style="border-radius: 15px;">제목</th>
-       <td colspan="3" align="left">{{data[2]}}</td>
+       <td colspan="3" class="song">{{data[2]}}</td>
       </tr>
       <tr>
        <td colspan="4" style="border-radius: 15px;" align="left" valign="top" height="200">
-       <textarea style="width: 728px;height: 580px;" readonly>{{data[5]}}</textarea>
+       <textarea id="content" style="width: 728px;height: 580px;" >{{data[5]}}</textarea>
        </td>
       </tr>
      </table>
@@ -53,5 +53,16 @@
 			</tr>
 		</table>
      </div>
+     
+     <script type="text/javascript">
+		var oEditors = [];
+		nhn.husky.EZCreator
+				.createInIFrame({
+					oAppRef : oEditors,
+					elPlaceHolder : "content", //textarea에서 지정한 id와 일치해야 합니다.
+					sSkinURI : "resources/smarteditor2/workspace/SmartEditor2Skin.html",
+					fCreator : "createSEditor2"
+				});
+	</script>
 </body>
 </html>

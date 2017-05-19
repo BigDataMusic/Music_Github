@@ -42,12 +42,35 @@
 							href="board_content.do?no={{data.no}}">{{data.subject}}</a> <sup
 							ng-if="data.regdate==data.today"> <font color="red">new</font>
 						</sup></td>
-						<td width="45%" ng-if="data.group_tab!=0" class="song">
+						
+						<td width="45%" ng-if="data.group_tab==1" class="song">
 							<%-- for(int i:4) --%> 
-							<span ng-repeat="i in data.group_tab">	&nbsp;&nbsp;</span>☞<a href="board_content.do?no={{data.no}}">{{data.subject}}</a>
+							<span ng-repeat="i in data.group_tab">	&nbsp;&nbsp;</span>&nbsp;&nbsp;☞&nbsp;<a href="board_content.do?no={{data.no}}">{{data.subject}}</a>
 							<sup ng-if="data.regdate==data.today"> <font color="red">new</font>
 						</sup>
 						</td>
+						
+						<td width="45%" ng-if="data.group_tab==2" class="song">
+							<%-- for(int i:4) --%> 
+							<span ng-repeat="i in data.group_tab">	&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;☞&nbsp;<a href="board_content.do?no={{data.no}}">{{data.subject}}</a>
+							<sup ng-if="data.regdate==data.today"> <font color="red">new</font>
+						</sup>
+						</td>
+						
+						<td width="45%" ng-if="data.group_tab==3" class="song">
+							<%-- for(int i:4) --%> 
+							<span ng-repeat="i in data.group_tab">	&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;☞&nbsp;<a href="board_content.do?no={{data.no}}">{{data.subject}}</a>
+							<sup ng-if="data.regdate==data.today"> <font color="red">new</font>
+						</sup>
+						</td>
+						
+						<td width="45%" ng-if="data.group_tab>4" class="song">
+							<%-- for(int i:4) --%> 
+							<span ng-repeat="i in data.group_tab">	&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;☞&nbsp;<a href="board_content.do?no={{data.no}}">{{data.subject}}</a>
+							<sup ng-if="data.regdate==data.today"> <font color="red">new</font>
+						</sup>
+						</td>
+						
 						<td width="15%">{{data.name}}</td>
 						<td width="20%">{{data.regdate}}</td>
 						<td width="10%">{{data.hit}}</td>
@@ -55,7 +78,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div id="content_top100" align="center" style="margin-top: 15px">
+		<div id="content_top100" style="margin-top: 15px;padding-left:200px">
 			<a href="board.do?page=${curpage>1?curpage-1:curpage}"
 				style="text-decoration: none"><img alt="" src="resources/images/f-left.png"  style="vertical-align: middle;"></a>
 			<span style="margin: 0 40px;vertical-align: middle;">${curpage } page / ${totalpage } pages</span>

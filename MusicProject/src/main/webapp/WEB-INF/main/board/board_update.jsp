@@ -11,7 +11,7 @@
 </head>
 <body ng-app="">
 	<center>
-		<h1 style="margin-bottom: 10px">Free Board Modify</h1>
+		<h1 style="margin-bottom: 10px">글 수 정</h1>
 		<div ng-init="data=${json }">
 	<form action="board_update_ok.do" method="post">
 	<div id="content_top100" style="margin-top: 10px">
@@ -36,7 +36,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" style="padding: 10px 0">
-					<textarea name="content" style="width: 728px; height: 540px">{{data[5]}}</textarea>
+					<textarea name="content" id="content" style="width: 728px; height: 540px">{{data[5]}}</textarea>
 				</td>
 			</tr>
 		</table>

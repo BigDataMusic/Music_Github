@@ -20,33 +20,33 @@
 		<p id="title_ex">공지사항</p>
 		<br />
 		<ul id="navigation" style="padding-top: 0px">
-			<li class="color"><a href="#">첫번째 노래</a></li>
-			<li><a href="#">두번째 노래</a></li>
-			<li class="color"><a href="#">세번째 노래</a></li>
-			<li><a href="#">네번째 노래</a></li>
-			<li class="color"><a href="#">다섯번째 노래</a></li>
-			<li><a href="#">여섯번째 노래</a></li>
-			<li class="color"><a href="#">일곱번째 노래</a></li>
-			<li><a href="#">여덟첫번째 노래</a></li>
-			<li class="color"><a href="#">아홉번째 노래</a></li>
-			<li><a href="#">열번째 노래</a></li>
+			<li class="color"><a href="#">[공지] 정기 서버점검</a></li>
+			<li><a href="#">[공지] 정기 서버점검</a></li>
+			<li class="color"><a href="#">[공지] 정기 서버점검</a></li>
+			<li><a href="#">[공지] 정기 서버점검</a></li>
+			<li class="color"><a href="#">[공지] 정기 서버점검</a></li>
+			<li><a href="#">[공지] 정기 서버점검</a></li>
+			<li class="color"><a href="#">[공지] 정기 서버점검</a></li>
+			<li><a href="#">[공지] 정기 서버점검</a></li>
+			<li class="color"><a href="#">[공지] 정기 서버점검</a></li>
+			<li><a href="#">[공지] 정기 서버점검</a></li>
 		</ul>
 		<br />
 		<br />
 		<br />
-		<p id="title_ex">QnA</p>
+		<p id="title_ex">FAQ</p>
 		<br />
 		<ul id="navigation" style="padding-top: 0px">
-			<li class="color"><a href="#">첫번째 노래</a></li>
-			<li><a href="#">두번째 노래</a></li>
-			<li class="color"><a href="#">세번째 노래</a></li>
-			<li><a href="#">네번째 노래</a></li>
-			<li class="color"><a href="#">다섯번째 노래</a></li>
-			<li><a href="#">여섯번째 노래</a></li>
-			<li class="color"><a href="#">일곱번째 노래</a></li>
-			<li><a href="#">여덟첫번째 노래</a></li>
-			<li class="color"><a href="#">아홉번째 노래</a></li>
-			<li><a href="#">열번째 노래</a></li>
+			<li class="color"><a href="#">자주묻는 질문</a></li>
+			<li><a href="#">자주묻는 질문</a></li>
+			<li class="color"><a href="#">자주묻는 질문</a></li>
+			<li><a href="#">자주묻는 질문</a></li>
+			<li class="color"><a href="#">자주묻는 질문</a></li>
+			<li><a href="#">자주묻는 질문</a></li>
+			<li class="color"><a href="#">자주묻는 질문</a></li>
+			<li><a href="#">자주묻는 질문</a></li>
+			<li class="color"><a href="#">자주묻는 질문</a></li>
+			<li><a href="#">자주묻는 질문</a></li>
 		</ul>		
 	</div>
 </body>
