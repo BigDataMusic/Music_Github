@@ -19,7 +19,7 @@
 				<a href="#">Tours</a> &raquo; Maldives
 			</div> -->
 			<!-- <img src="resources/images/title5.gif" alt="" width="255" height="19" /><br /> -->
-			<p id="title_ex" style="margin: 0px;padding: 10px 0;">노래제목 / 가수명</p>
+			<p id="title_ex" style="margin: 0px;padding: 10px 0;">${vo.song } / ${vo.singer }</p>
 			<div class="gallery">
 				<iframe id="mv" src="https://www.youtube.com/embed/dMn509ddAkc" frameborder="0" allowfullscreen></iframe>
 				<p id="title_ex" style="margin: 0px;padding: 10px 0;">가수의 다른곡</p>
@@ -36,13 +36,21 @@
 			</div>			
 		</div>
 		<div class="column_dc2">
-			<p id="title_ex" style="margin: 0px;padding: 10px 0;">가수 프로필</p>
-			<img src="http://sstatic.naver.net/people/portrait/201704/20170417141627678.jpg" alt="" width="200" height="270"/>			
+			<p id="title_ex" style="margin: 0px;padding: 10px 0;">곡 정보</p>
+			<!-- <img src="http://sstatic.naver.net/people/portrait/201704/20170417141627678.jpg" alt="" width="200" height="270"/>	 -->
+			
+			
+			<img src="${vo.poster }" width="80" height="80">
+			<img src="${vo.poster }" width="80" height="80"><br>
+			<img src="${vo.poster }" width="80" height="80">
+			<img src="${vo.poster }" width="80" height="80"><br>
+			
 			<p class="info">
-			아이유 (이지은)<br>
-			소속사 : <br> 
-			로엔엔터테인먼트, 페이브엔터테인먼트<br> 
-			데뷔 : 2008년 미니 앨범 [Lost and Found]</p>
+			<br>
+			${vo.singer }<br>
+			${vo.song } <br> 
+			${vo.album } <br> 
+			</p>
 			<a href="#" class="button">more info</a>
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
 			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" />

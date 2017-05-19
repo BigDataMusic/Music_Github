@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div id="content">
-		<center><h3 style="margin-bottom: 10px">추천음악 Best10</h3></center>
+		<center><h3 style="margin-bottom: 10px">추천음악 Best</h3></center>
 		<div class="row">
 		<div
 			class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
