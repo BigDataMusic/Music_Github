@@ -13,6 +13,7 @@
 </style>
 <link rel="stylesheet" type="text/css" href="resources/css/top100_table.css" />
 <link rel="stylesheet" href="resources/css/r_style.css">
+<link rel="stylesheet" href="resources/css/style.css">
 <!-- <link rel='stylesheet prefetch'	href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'> -->
 <link rel='stylesheet prefetch'	href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link rel='stylesheet'	href='resources/css/Materialize.css'>

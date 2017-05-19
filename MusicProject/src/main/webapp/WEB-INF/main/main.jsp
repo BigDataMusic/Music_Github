@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<%= application.getRealPath("/main") %>
+<%-- <%= application.getRealPath("/main") %> --%>
 <div>
 	<tiles:insertAttribute name="header"/>
 </div>
