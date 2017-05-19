@@ -37,8 +37,13 @@ function popupOpen(no){
 <div id="content_top100" style="margin: 10px auto;">			
 	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 앨범 BEST 5</p>
 	<div class="section01 section_nav">
-		<c:forEach var="vo" items="${malist }">
-			<div class="cont on">					
+		<c:forEach var="vo" items="${malist }" varStatus="s">
+			<c:if test="${s.index==0 }">
+			<div class="cont on">
+			</c:if>					
+			<c:if test="${s.index!=0 }">
+			<div class="cont">
+			</c:if>
 				<span class="bg"><a href="content.do"><img src="${vo.alPoster }" alt=""/></a></span>															
 				<span class="layer"></span>
 			</div>
@@ -73,16 +78,16 @@ function popupOpen(no){
 	<table width="746">
 		<tr>
 			<td align="center">
-				<input type="button" value="1" id="btn01" onclick="javascript:location.href='newtracks.do?page=1'">
-				<input type="button" value="2" id="btn01" onclick="javascript:location.href='newtracks.do?page=2'">
-				<input type="button" value="3" id="btn01" onclick="javascript:location.href='newtracks.do?page=3'">
-				<input type="button" value="4" id="btn01" onclick="javascript:location.href='newtracks.do?page=4'">
-				<input type="button" value="5" id="btn01" onclick="javascript:location.href='newtracks.do?page=5'">
-				<input type="button" value="6" id="btn01" onclick="javascript:location.href='newtracks.do?page=6'">
+				<input type="button" value="[1-10]" id="btn01" onclick="javascript:location.href='newtracks.do?page=1'">
+				<input type="button" value="[11-20]" id="btn01" onclick="javascript:location.href='newtracks.do?page=2'">
+				<input type="button" value="[21-30]" id="btn01" onclick="javascript:location.href='newtracks.do?page=3'">
+				<input type="button" value="[31-40]" id="btn01" onclick="javascript:location.href='newtracks.do?page=4'">
+				<input type="button" value="[41-50]" id="btn01" onclick="javascript:location.href='newtracks.do?page=5'">
+				<!-- <input type="button" value="6" id="btn01" onclick="javascript:location.href='newtracks.do?page=6'">
 				<input type="button" value="7" id="btn01" onclick="javascript:location.href='newtracks.do?page=7'">
 				<input type="button" value="8" id="btn01" onclick="javascript:location.href='newtracks.do?page=8'">
 				<input type="button" value="9" id="btn01" onclick="javascript:location.href='newtracks.do?page=9'">
-				<input type="button" value="10" id="btn01" onclick="javascript:location.href='newtracks.do?page=10'">
+				<input type="button" value="10" id="btn01" onclick="javascript:location.href='newtracks.do?page=10'"> -->
 			</td>
 		</tr>
 	</table>

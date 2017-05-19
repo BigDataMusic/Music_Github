@@ -25,8 +25,9 @@
 	background:#777; filter:alpha(opacity=90); opacity:0.7;} */
 
 #btn01{
-	margin: 10px 10px 0 10px;
-	width: 32px; height: 32px;
+	margin: 10px 15px 0 15px;
+	padding : 0 15px;
+	height: 32px;
 	background-color: #c5e1a5;
 	border: 0px;
 	border-radius : 12px

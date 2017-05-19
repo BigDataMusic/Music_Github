@@ -32,7 +32,7 @@ import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
 import com.aclass.rank.*;
 import com.aclass.recom.RecommandDAO;
-import com.aclass.review.naver.RManager;
+//import com.aclass.review.naver.RManager;
 import com.aclass.review.naver.ReviewDAO;
 import com.aclass.review.naver.ReviewManager;
 import com.aclass.review.naver.SongVO;
@@ -64,8 +64,8 @@ public class MainController{
 	private Configuration conf;
 	@Autowired
 	private JobRunner jr;
-	@Autowired
-	private RManager rmanager;	
+//	@Autowired
+//	private RManager rmanager;	
 	@Autowired
 	private SparkWeatherManager swgr;
 	@Autowired
@@ -162,8 +162,8 @@ public class MainController{
 		reviewdao.naverReviewData2(song,singer);
 		songwhether.songData(song);
 		songwhether.SongWhether(song,singer);
-		rmanager.rGraph(song);
-		rmanager.rGraph2(song);
+//		rmanager.rGraph(song);
+//		rmanager.rGraph2(song);
 		return "content";
 	}
 	@RequestMapping("top100.do")
