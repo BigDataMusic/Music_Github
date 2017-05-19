@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/css/top100_table.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/section.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -22,17 +23,22 @@ function popupOpen(no){
 	
     var popUrl = "lyric.do?no="+no;    //팝업창에 출력될 페이지 URL
 
-    var popOption = "width=400, height=550, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+    var popOption = "width=420, height=600, resizable=no, scrollbars=no, status=no, left=150, top=150;";    //팝업창 옵션(optoin)
 
         window.open(popUrl,"",popOption);
 
 };
 </script>
+<script type="text/javascript">
+$(function() {
+	$('#tooltip').tooltip();
+});
+</script>
 </head>
 <body>
 <center>
 	<h1 style="margin-bottom: 0px;padding:0px auto">금주의 신곡</h1>
-	<p id="title_ex" style="margin: 0px;padding: 10px 0;">[2017.04.30. ~ 2017.05.06.]</p>
+	<p id="title_ex" style="margin: 0px;padding: 10px 0;">[2017.05.13. ~ 2017.05.19.]</p>
 </center>
 <div id="content_top100" style="margin: 10px auto;">			
 	<p id="title_ex1" style="margin: 0px;padding: 10px 0;">신규 앨범 BEST 5</p>
@@ -59,7 +65,7 @@ function popupOpen(no){
 			<th width="15%">아티스트</th>
 			<th width="15%">가사보기</th>
 		</tr>	
-		<c:forEach var="vo" items="${vList }" varStatus="i">
+		<c:forEach var="vo" items="${vList }">
 		<tr class="dataTr">
 			<td>${vo.n }</td>	
 			<td><img src="${vo.poster }"></td>
@@ -68,8 +74,8 @@ function popupOpen(no){
 			<!-- <a href="#" target="_blank"></a> -->
 			<td>
 			<!-- <a href="lyric.do" target="_blank"> -->
-				 <a href="javascript:popupOpen(${vo.n-1 });">
-					<img src="resources/images/ly.png" title="${vo.lyrics }">
+				 <a href="javascript:popupOpen(${vo.n });" id="tooltip" title="${vo.lyrics }">
+					<img src="resources/images/ly.png">
 				</a>
 			</td>
 		</tr>

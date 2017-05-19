@@ -11,9 +11,9 @@
 </head>
 <body>
 	<center>
-		<h1 style="margin-bottom: 10px">Free Board Delete</h1>
+		<h1 style="margin-top: 300px;margin-bottom: 30px">Free Board Delete</h1>
 	<form method=post action="board_delete_ok.do">
-     <table id="table2" width=300>
+     <table id="table2" width=300 style="margin-bottom: 30px">
        <tr>
           <th width=30% style="border-radius: 15px;">비밀번호</th>
           <td align=left width=70%>
@@ -30,6 +30,10 @@
        </tr>
      </table>
      </form>
+     <div>
+     	<p><font color="red" size="4pt">주의! 삭제된 내용은 복구되지 않습니다. <br>
+     	삭제전 다시 생각해보시고 삭제하시기 바랍니다.</font> </p>
+     </div>
 	</center>
 </body>
 </html>

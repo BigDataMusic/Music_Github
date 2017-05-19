@@ -11,7 +11,7 @@
 </head>
 <body>
 	<center>
-		<h1 style="margin-bottom: 10px">Free Board Reply</h1>
+		<h1 style="margin-bottom: 10px">답 변 쓰 기</h1>
 		<form action="board_reply_ok.do" method="post">
 	<div id="content_top100" style="margin-top: 10px">
 		<table width="735" id="table2">
@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" style="padding: 10px 0">
-					<textarea name="content" style="width: 728px; height: 540px"></textarea>
+					<textarea name="content" id="content" style="width: 728px; height: 540px"></textarea>
 				</td>
 			</tr>
 		</table>
