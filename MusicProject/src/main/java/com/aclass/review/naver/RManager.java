@@ -84,6 +84,8 @@ public void rGraph(String song)
 }
 
 
+
+
 public void rGraph2(String song)
 {
 	  try
@@ -92,24 +94,19 @@ public void rGraph2(String song)
 		  RConnection rc=new RConnection();
 		  rc.voidEval("data<-read.csv(\"/home/sist/feel-data/emotion.csv\",header=T,sep=\",\")");
 //			rc.voidEval("library(plotrix)");
+		  rc.voidEval("library(wordcloud)");
 			rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
 			rc.voidEval("pct<-round(data$count/sum(data$count)*100,1)");
 			rc.voidEval("lab<-paste(data$emotion,\"\n\",\"(\",pct,\"%)\")");
-			rc.voidEval("pie(data$count,labels=lab,col=rainbow(10),main=\"감성\")");
+			rc.voidEval("pal <- brewer.pal(9,\"Paired\")"); //색상코드
+			rc.voidEval("pie(data$count,labels=lab,col=pal,main=\"기분감성\")");
 			rc.voidEval("dev.off()");
-			
-		  rc.voidEval("naver<-read.csv(\"/home/sist/recommend-data/susubar.csv\",header=F,sep=\",\")");
-		  rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
-		  rc.voidEval("pct<-round((naver$V2/sum(naver$V2))*100,1)");
-		  rc.voidEval("lab<-paste(naver$V1,\"\n\",\"(\",pct,\"%)\")");
-		  rc.voidEval("pie(naver$V2,labels=lab,col=rainbow(10),main=\"날씨감성\")");
-		  rc.voidEval("dev.off()");
 		  rc.close();
 	  }catch(Exception ex)
 	  {
 		  System.out.println(ex.getMessage());
 	  }
-}
+} 
    
 //하이차트 바그래프
 public String createJSON2(String song)
