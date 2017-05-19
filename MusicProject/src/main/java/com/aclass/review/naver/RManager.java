@@ -1,13 +1,33 @@
 package com.aclass.review.naver;
 
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.rosuda.REngine.Rserve.RConnection;
 import org.springframework.stereotype.Component;
+
+import com.aclass.mgr.MusicVO;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
 
 //네이버 블로그 리뷰 워드클라우드 
 // /home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/main
 
 @Component
 public class RManager {
+	
+	private MongoClient mc;
+	private DB db;
+	private DBCollection dbc;
+	
 public void rGraph(String song)
 {
 	   try
@@ -22,6 +42,7 @@ public void rGraph(String song)
 		   rc.voidEval("library(RMongo)");
 		   rc.voidEval("library(stringr)");
 		   
+		   rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 		   rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 		
 		   rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
@@ -62,11 +83,21 @@ public void rGraph(String song)
 	   }
 }
 
+
 public void rGraph2(String song)
 {
 	  try
 	  {
+		  //rc.voidEval("png(\"/home/sist/GithubDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
 		  RConnection rc=new RConnection();
+		  rc.voidEval("data<-read.csv(\"/home/sist/feel-data/emotion.csv\",header=T,sep=\",\")");
+//			rc.voidEval("library(plotrix)");
+			rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
+			rc.voidEval("pct<-round(data$count/sum(data$count)*100,1)");
+			rc.voidEval("lab<-paste(data$emotion,\"\n\",\"(\",pct,\"%)\")");
+			rc.voidEval("pie(data$count,labels=lab,col=rainbow(10),main=\"감성\")");
+			rc.voidEval("dev.off()");
+			
 		  rc.voidEval("naver<-read.csv(\"/home/sist/recommend-data/susubar.csv\",header=F,sep=\",\")");
 		  rc.voidEval("png(\"/home/sist/bigdataDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
 		  rc.voidEval("pct<-round((naver$V2/sum(naver$V2))*100,1)");
@@ -80,8 +111,52 @@ public void rGraph2(String song)
 	  }
 }
    
-   
-   
-   
+//하이차트 바그래프
+public String createJSON2(String song)
+{
+	String result="";
+	try
+	{
+		//JSONArray arr=new JSONArray();
+		/*
+		 *   {} ==> JSONObject => key:value
+		 *   [10,20,30] ==> (X)
+		 *   [{},{},{}] => JSONArray==>JSONObject
+		 */
+		
+		mc=new MongoClient(new ServerAddress(new InetSocketAddress("211.238.142.38",27017)));
+		db=mc.getDB("project3");
+		dbc=db.getCollection("weather");  
+		
+		//노래에 대한 리뷰커서들 가져옴 
+		BasicDBObject where=new BasicDBObject();
+		where.put("song", song);
+		BasicDBObject obj =(BasicDBObject)dbc.findOne(where); 
+		
+		String db_feel=obj.getString("feel");
+		//봄:35,여름:23,화창한날:5,밤/새벽:10
+		System.out.println(db_feel);
+		String[] data=db_feel.split(",");
+		JSONArray arr=new JSONArray();
+		for(String s:data)
+		{
+			StringTokenizer ss=new StringTokenizer(s, ":");
+			JSONObject jo=new JSONObject();
+			jo.put("name", ss.nextToken());
+			jo.put("y", Integer.parseInt(ss.nextToken()));
+			arr.add(jo);
+			
+		}
+		result=arr.toJSONString();//제이순에 적용되도록 형변환
+		System.out.println("result:"+result);
+		
+	}catch(Exception ex)
+	{
+		System.out.println(ex.getMessage());
+	}
+	return result;
+}
+
+
    
 }

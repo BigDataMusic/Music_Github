@@ -67,7 +67,6 @@ public class MusicDAO {
 				vo.setArtist(obj.getString("artist"));
 				vo.setAlbumname(obj.getString("album"));
 				vo.setIncrement(obj.getString("increment"));
-				//System.out.println(obj.getString("title"));
 				list.add(vo);
 			}
 			cursor.close();
@@ -169,39 +168,6 @@ public class MusicDAO {
 		return list;
 	}
 	
-	/*public List<MusicVO> songData()
-    {
-    	List<SongVO> list = new ArrayList<SongVO>();
-    	try
-    	{
-    		DBCursor cursor =dbc.find(); //송테이블에서 가져오기 
-    		//db.getCollection('song').find({singer:'\t거미\t'})
-    		
-		 	//커서가 끝나는만큼 반복 
-    		int i=1;
-		 	while(cursor.hasNext())
-		 	{
-		 		BasicDBObject obj = (BasicDBObject)cursor.next();
-		 		
-		 		SongVO vo = new SongVO();
-		 		vo.setSong(obj.getString("song"));
-		 		vo.setSinger(obj.getString("singer"));
-		 		vo.setNaverReview(obj.getString("review"));
-		 		list.add(vo);
-		 		
-		 		System.out.println(i+" : "+vo.getNaverReview());
-		 		i++;
-		 	}
-			  cursor.close();
-    	
-    	}catch(Exception ex)
-    	{
-    		System.out.println(ex.getMessage());
-    	}
-    	
-   	 return list;
-    }*/
-	
 	public void dropTop100(){
 		mt.dropCollection("Top100_Melon");
 		mt.dropCollection("NewMusic");
@@ -249,57 +215,4 @@ public class MusicDAO {
 			System.out.println("insertTop100 "+e.getMessage());
 		}
 	}
-	
-	/*public List<MusicVO> musicInRank(){		
-		List<MusicVO> sList=new ArrayList<MusicVO>();
-		try {
-			
-			String[] data=new String[3];
-			String temp="";
-			for(String d:data){
-				d="";
-			}
-			DBCursor[] cursor={mdbc.find(), bdbc.find(), navdbc.find()};
-			for(int i=0;i<3;i++){
-				while (cursor[i].hasNext()) {
-					BasicDBObject obj = (BasicDBObject) cursor[i].next();
-					MusicVO vo = new MusicVO();
-					vo.setRank(obj.getInt("rank"));
-					vo.setTitle(obj.getString("title"));
-					temp=vo.getTitle();
-					vo.setPoster(obj.getString("poster"));
-					vo.setArtist(obj.getString("artist"));
-					vo.setAlbumname(obj.getString("album"));
-					vo.setIncrement(obj.getString("increment"));
-					vo.setScore((100 - obj.getInt("rank")));
-					
-					if(temp.contains(",")){
-						temp=temp.replace(",", "@@");
-					}
-					if(i==0){
-						data[i]+=temp+","+vo.getScore()+"\n";
-					}else if(i==1){
-						data[i]+=temp+","+vo.getScore()+"\n";
-					}else if(i==2){
-						data[i]+=temp+","+vo.getScore()+"\n";
-					}
-					sList.add(vo);
-				}
-				
-				FileWriter fw=new FileWriter("/home/sist/top100/top100_"+i+".csv");
-				if(data[i].contains("null")){
-					data[i]=data[i].replace("null", "");
-				}
-				fw.write(data[i]);
-				fw.close();
-				cursor[i].close();
-				
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("musicInRank "+e.getMessage());
-		}
-		
-		return sList;
-	}*/
 }
