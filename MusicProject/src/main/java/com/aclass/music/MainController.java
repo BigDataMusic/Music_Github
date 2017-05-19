@@ -162,6 +162,8 @@ public class MainController{
 		songwhether.SongWhether(song,singer);
 		rmanager.rGraph(song);
 		rmanager.rGraph2(song);
+		String json = rmanager.createJSON2(song);
+		model.addAttribute("json",json); 
 		return "content";
 	}
 	@RequestMapping("top100.do")
