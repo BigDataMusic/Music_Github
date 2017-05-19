@@ -32,6 +32,7 @@ import com.aclass.mongodb.MusicDAO;
 import com.aclass.news.*;
 import com.aclass.rank.*;
 import com.aclass.recom.RecommandDAO;
+import com.aclass.recom.RecommandFeelVO;
 import com.aclass.review.naver.RManager;
 import com.aclass.review.naver.ReviewDAO;
 import com.aclass.review.naver.ReviewManager;
