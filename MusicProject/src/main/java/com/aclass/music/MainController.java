@@ -212,7 +212,7 @@ public class MainController{
 		//songwhether.songData(song);
 		//songwhether.SongWhether(song,singer);
 		rmanager.rGraph(song);
-		//rmanager.rGraph2(song);
+		rmanager.rGraph2(song);
 		String json = rmanager.createJSON2(song);
 		
 		model.addAttribute("json",json); 
