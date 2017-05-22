@@ -56,7 +56,7 @@ public class NewsManager {
 			Unmarshaller un = jc.createUnmarshaller();
 			Rss rss = (Rss) un.unmarshal(url);
 			List<Item> temp = rss.getChannel().getItem();
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 11; i++) {
 				Item item = temp.get(i);
 				list.add(item);
 			}

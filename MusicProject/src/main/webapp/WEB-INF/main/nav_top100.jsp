@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,16 +34,16 @@
 		<br />
 		<p id="title_ex">오늘의 추천음악</p>
 		<br />
-		<p class="color" align="right" style="padding-right: 25px;'">오늘의 날씨 : ㅋㅋㅋ</p>
+		<p class="color" align="right" style="padding-right: 40px;'">봄과 어울리는 추천음악</p>
 		<br />
 		<ul id="nav">		
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
-			<li><a href="#">Illum secundum</a></li>
+		<c:forEach var="vo" items="${list }" varStatus="s">
+			<c:if test="${s.index<5 }">
+				<li><a href="recommand.do?feel=봄">${vo.song } <br>
+				&nbsp;&nbsp;-&nbsp;&nbsp; ${vo.singer }</a></li>
+			</c:if>
+		</c:forEach>
 		</ul>
-		
 	</div>
 </body>
 </html>

@@ -165,7 +165,7 @@ public class MainController{
 		return "content";
 	}
 	@RequestMapping("top100.do")
-	public String main_top100(String cate,String page,Model model)
+	public String main_top100(String feel,String cate,String page,Model model)
 	{
 		if(page==null) page="1";
 		if(cate==null) cate="1";
@@ -173,7 +173,7 @@ public class MainController{
 		int end=Integer.parseInt(page)*10;
 		
 		List<MusicVO> bList=null;
-		//음악인
+		//음악인 
 		if(cate.equals("1")) bList= dao.getMongoMusicData("musicin");
 		//멜론
 		else if(cate.equals("2")) bList=dao.getMongoMusicData("melon");
@@ -200,6 +200,13 @@ public class MainController{
 		}
 		model.addAttribute("cate",cate);
 		model.addAttribute("vList", vList);
+
+		// nav추천
+    	if(feel==null)
+    	feel="봄";
+		List<SongVO> list=recomdao.songRecommandData(feel);
+		model.addAttribute("list", list);	
+		
 		return "top100";
 	}
 	@RequestMapping("recommand.do")
@@ -331,6 +338,11 @@ public class MainController{
 		{
 			System.out.println(ex.getMessage());
 		}
+		
+		String feels = recomFeelsText(feel); 
+		
+		model.addAttribute("feels", feels);
+		model.addAttribute("feel", feel);
 		model.addAttribute("list", list);
 		model.addAttribute("elist", elist);
 	 	model.addAttribute("main_jsp", "recommand.jsp");	 	
@@ -611,5 +623,32 @@ public class MainController{
 		dao.dropTop100();
 		dao.insertTop100("melon");
 		dao.insertTop100("newMusic");
-	}*/	
+	}*/
+	
+	public String recomFeelsText(String feel)
+	{
+		String[] weather = {"봄","여름","가을","겨울","화창한날","아침","오후","저녁","밤/새벽","비/흐림","크리스마스","눈오는 날"};
+		String[] emotion = {"사랑/기쁨","이별/슬픔","스트레스/짜증","우울할때","멘붕/불안","외로울때"};
+		
+		String feels = "";
+		
+		for(int i=0;i<weather.length;i++)
+		{
+			if(feel.equals(weather[i]))
+			{
+				feels = "날씨별 추천곡";
+			}
+		}
+		
+		
+		for(int i=0;i<emotion.length;i++)
+		{
+			if(feel.equals(emotion[i]))
+			{
+				feels = "감정별 추천곡";
+			}
+		}
+		           
+		return feels;
+	}
 }

@@ -9,13 +9,37 @@
 <title>Insert title here</title>
 </head>
 <body>
-<center><h1 style="margin-bottom: 10px">[음악인] TOP 100</h1></center>
+<center>
+	<c:if test="${cate==1 }">
+	<h1 style="margin-bottom: 10px">[음악인] TOP 100</h1>
+	</c:if>
+	<c:if test="${cate==2 }">
+	<h1 style="margin-bottom: 10px">[멜론] TOP 100</h1>
+	</c:if>
+	<c:if test="${cate==3 }">
+	<h1 style="margin-bottom: 10px">[벅스] TOP 100</h1>
+	</c:if>
+	<c:if test="${cate==4 }">
+	<h1 style="margin-bottom: 10px">[지니] TOP 100</h1>
+	</c:if>
+	<c:if test="${cate==5 }">
+	<h1 style="margin-bottom: 10px">[엠넷] TOP 100</h1>
+	</c:if>
+	<c:if test="${cate==6 }">
+	<h1 style="margin-bottom: 10px">[네이버 뮤직] TOP 100</h1>
+	</c:if>
+</center>
 <!-- <p id="title_ex" style="margin: 0px;padding: 10px 0;">[음악인] TOP 100</p> -->
 <div id="content_top100">
 	<table id="table1" width="735">
 		<tr>
 			<th width="5%">순위</th>
+			<c:if test="${cate==1 }">
+			<th width="10%">음악인pt</th>
+			</c:if>
+			<c:if test="${cate!=1 }">
 			<th width="10%">순위변동</th>
+			</c:if>
 			<th width="10%">앨범자켓</th>
 			<th width="45%">곡명</th>
 			<th width="15%">아티스트</th>
