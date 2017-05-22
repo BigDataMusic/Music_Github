@@ -75,7 +75,7 @@ $(function(){
 			<!-- <img src="resources/images/title5.gif" alt="" width="255" height="19" /><br /> -->
 			<p id="title_ex" style="margin: 0px;padding: 10px 0;">${vo.song } / ${vo.singer }</p>
 			<div class="gallery">
-				<iframe id="mv" src="https://www.youtube.com/embed/dMn509ddAkc" frameborder="0" allowfullscreen></iframe>
+				<iframe id="mv" src="https://www.youtube.com/embed/${vid }" frameborder="0" allowfullscreen></iframe>
 				<p id="title_ex" style="margin: 0px;padding: 10px 0;">수록곡</p>
 				<!-- <div>
 					<a href="#" class="arrow"><img src="resources/images/arrow_l.gif" alt="" width="10" height="96" /></a>
@@ -120,9 +120,10 @@ $(function(){
 			</p>
 			<a href="#" class="button">more info</a>
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
-			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" />
+			
 			<div style="height: 10px"></div>
 			<img src="resources/images/emotion.png" alt="" width="270" height="270" />
+			<img src="resources/images/wordcloud.png" alt="" width="200" height="200"/>
 		</div>
 	</div>
 </body>

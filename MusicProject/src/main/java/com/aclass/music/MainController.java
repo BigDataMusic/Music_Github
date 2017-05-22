@@ -90,15 +90,6 @@ public class MainController{
 	@RequestMapping("main.do")
 	public String main_page(String feel, String data, Model model)
 	{
-		// 음악인차트
-		/*List<MusicVO> bList = bmgr.bugsRankData();
-		String mTitle="";
-		for(MusicVO b:bList){
-			if(b.getTitle().length()>15){
-				mTitle=b.getTitle().substring(0,15)+"..";
-        		b.setTitle(mTitle);
-			}
-		}*/
 		List<MusicVO> bList =  dao.getMongoMusicData("musicin");
 		String mTitle="";
 		for(MusicVO b:bList){
@@ -209,6 +200,10 @@ public class MainController{
 			list.add(mvo);
 			num++;
 		}
+		List<VideoVO> vlist = vmgr.getVideo(song);
+		String vid = vlist.get(0).getVid();
+		model.addAttribute("vid",vid);
+		model.addAttribute("song",song);
 		model.addAttribute("list", list);
 		SongVO vo=recomdao.songDetailData(song);
 		model.addAttribute("vo", vo);
@@ -216,9 +211,10 @@ public class MainController{
 		//reviewdao.naverReviewData2(song,singer);
 		//songwhether.songData(song);
 		//songwhether.SongWhether(song,singer);
-		//rmanager.rGraph(song);
+		rmanager.rGraph(song);
 		//rmanager.rGraph2(song);
 		String json = rmanager.createJSON2(song);
+		
 		model.addAttribute("json",json); 
 		return "content";
 	}

@@ -42,7 +42,7 @@ public void rGraph(String song)
 		   rc.voidEval("library(RMongo)");
 		   rc.voidEval("library(stringr)");
 		   
-		   rc.voidEval("png(\"/home/sist/BigdataDev2/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
+		   rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 //		   rc.voidEval("png(\"/home/sist/BigdataDev2/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/wordcloud.png\")");
 		
 		   rc.voidEval("mongo<-mongoDbConnect(\"project3\",\"211.238.142.38\",27017)");
@@ -95,7 +95,7 @@ public void rGraph2(String song)
 		  rc.voidEval("data<-read.csv(\"/home/sist/feel-data/emotion.csv\",header=T,sep=\",\")");
 //			rc.voidEval("library(plotrix)");
 		  rc.voidEval("library(wordcloud)");
-			rc.voidEval("png(\"/home/sist/BigdataDev2/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
+			rc.voidEval("png(\"/home/sist/sparkDev/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/MusicProject/resources/images/emotion.png\")");
 			rc.voidEval("pct<-round(data$count/sum(data$count)*100,1)");
 			rc.voidEval("lab<-paste(data$emotion,\"\n\",\"(\",pct,\"%)\")");
 			rc.voidEval("pal <- brewer.pal(9,\"Paired\")"); //색상코드
