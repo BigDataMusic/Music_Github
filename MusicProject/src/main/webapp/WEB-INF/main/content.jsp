@@ -13,21 +13,28 @@
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 <style> 
-    #nchart {position:relative;} 
+    .nchart {position:relative;} 
 
-    #popup {
-    	display:none; position:absolute; top:-100px; left:-400px; 
+    #popup1 {
+    	display:none; position:absolute; top:-100px; left:-700px; 
        z-index : 1000; background-color:#fff; 
        padding:20px; border:2px solid #ff0000; 
     } 
+    #popup2 {
+    	display:none; position:absolute; top:-300px; left:-250px; 
+       z-index : 1000; background-color:#fff; 
+       padding:20px; border:2px solid #ff0000;
 </style>
 <script type="text/javascript">
 function show() {
-	document.getElementById("popup").style.display = "block";
+	document.getElementById("popup1").style.display = "block";
+	document.getElementById("popup2").style.display = "block";
 }
 function closepop() {
-	document.getElementById("popup").style.display = "none";
+	document.getElementById("popup1").style.display = "none";
+	document.getElementById("popup2").style.display = "none";
 }
+
 </script> 
 <script type="text/javascript">
 $(function(){
@@ -138,16 +145,16 @@ $(function(){
 			<a href="#" class="button">more info</a>
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
 			<div style="height: 10px"></div>
-			<div id="nchart">
-			<img src="resources/images/emotion.png" alt="" width="270" height="270"  onmouseover="show()"/>
-				<div id="popup">
-				<img src="resources/images/emotion.png" alt="" onmouseout="closepop()" />
+			<div class="nchart">
+			<img src="resources/images/emotion.png" alt="" width="200" height="200"  onclick="show()"/>
+				<div id="popup1">
+				<img src="resources/images/emotion.png" alt="" width="400" height="400" onmouseout="closepop()" />
 				</div>
 			</div>
-			<div id="nchart">
-			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" onmouseover="show()"/>
-				<div id="popup">
-				<img src="resources/images/wordcloud.png" alt="" onmouseout="closepop()"/>	
+			<div class="nchart">
+			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" onclick="show()"/>
+				<div id="popup2">
+				<img src="resources/images/wordcloud.png" alt="" width="400" height="400" onmouseout="closepop()"/>	
 				</div>
 			</div>
 		</div>
