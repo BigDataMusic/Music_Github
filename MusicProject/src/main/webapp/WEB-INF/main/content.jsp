@@ -90,7 +90,7 @@ $(function(){
 						<th width="65%">곡명</th>
 						<th width="20%">아티스트</th>
 					</tr>	
-					<c:forEach var="vo" items="${mList }">
+					<c:forEach var="vo" items="${list }">
 					<tr class="dataTr">
 						<td align=center>${vo.rank }</td>
 						<td>${vo.title }</td>
@@ -98,9 +98,10 @@ $(function(){
 					</tr>
 					</c:forEach>
 				</table>
+			</div>	
 				<p id="title_ex" style="margin-top: 0;padding: 10px 0;">감정 분석</p>
 				<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
-			</div>			
+				
 		</div>
 		<div class="column_dc2">
 			<p id="title_ex" style="margin: 0px;padding: 10px 0;">곡 정보</p>
@@ -121,7 +122,7 @@ $(function(){
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
 			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" />
 			<div style="height: 10px"></div>
-			<img src="resources/images/emotion.png" alt="" width="200" height="200" />
+			<img src="resources/images/emotion.png" alt="" width="270" height="270" />
 		</div>
 	</div>
 </body>
