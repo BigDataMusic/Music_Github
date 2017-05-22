@@ -88,7 +88,7 @@ public class MainController{
 	private SparkWeatherManager sparkweather;
 
 	@RequestMapping("main.do")
-	public String main_page(String feel, String data,Model model)
+	public String main_page(String feel, String data, Model model)
 	{
 		// 음악인차트
 		/*List<MusicVO> bList = bmgr.bugsRankData();
