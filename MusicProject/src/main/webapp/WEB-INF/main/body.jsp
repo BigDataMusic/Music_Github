@@ -32,36 +32,26 @@
 			<div class="column1">
 				<p id="title_ex" style="margin: 0px;padding: 10px 0;">HOT TRACKS - Album</p>			
 				<div id="items">
-					<div class="item">
-						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg" class="jacket_thumb" /></a>
-					</div>
-					<div class="item">
-						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/53/651/10053651_500.jpg" class="jacket_thumb" /></a>
-					</div>
-					<div class="item">
-						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/51/659/10051659_500.jpg" class="jacket_thumb" /></a>
-					</div>
-					<div class="item">
-						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/47/890/10047890_500.jpg" class="jacket_thumb" /></a>
-					</div>
+					<c:forEach var="vo" items="${elist }" varStatus="i">
+						<c:if test="${i.index<4 }">
+							<div class="item">
+								<a href="#"><img src="${vo.alPoster }" class="jacket_thumb" /></a>
+							</div>
+						</c:if>
+					</c:forEach>
 				</div>
 				<p id="title_ex" style="margin: 0px;padding: 10px 0;">HOT TRACKS - Single</p>
 				<div id="items">
-					<div class="item">
-						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg" class="jacket_thumb" /></a>
-					</div>
-					<div class="item">
-						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/53/651/10053651_500.jpg" class="jacket_thumb" /></a>
-					</div>
-					<div class="item">
-						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/51/659/10051659_500.jpg" class="jacket_thumb" /></a>
-					</div>
-					<div class="item">
-						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/47/890/10047890_500.jpg" class="jacket_thumb" /></a>
-					</div>
+					<c:forEach var="vo" items="${slist }" varStatus="i">
+						<c:if test="${i.index<4 }">
+							<div class="item">
+								<a href="#"><img src="${vo.alPoster }" class="jacket_thumb" /></a>
+							</div>
+						</c:if>
+					</c:forEach>
 				</div>
 				<p id="title_ex" style="margin: 0px;padding: 10px 0;">HOT M/V</p>
-				<iframe id="mv" src="https://www.youtube.com/embed/dMn509ddAkc" frameborder="0" allowfullscreen></iframe>
+				<iframe id="mv" src="https://www.youtube.com/embed/${vid }" frameborder="0" allowfullscreen></iframe>
 			</div>
 			<div class="column2">
 				<p id="title_ex" style="margin: 0px;padding: 0;">HOT ISSUE</p>

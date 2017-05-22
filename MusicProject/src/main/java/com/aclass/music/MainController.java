@@ -127,6 +127,17 @@ public class MainController{
     	model.addAttribute("nList", nList);
 		model.addAttribute("bList", bList);
 		
+		//album
+		List<AlbumVO> alist= dao.AlbumData();
+		List<AlbumVO> singlelist= new ArrayList<AlbumVO>();
+		List<AlbumVO>	etclist = new ArrayList<AlbumVO>();
+		for(AlbumVO avo : alist){
+			if(avo.getAlType().equals("[싱글]")){
+				singlelist.add(avo);
+			}
+			else
+				etclist.add(avo);
+		}
 		// nav추천
     	if(feel==null)
     	feel="봄";
@@ -135,8 +146,9 @@ public class MainController{
 		String tt = bList.get(0).getTitle();
 		List<VideoVO> vlist = vmgr.getVideo(tt);
 		String vid = vlist.get(0).getVid();
-		System.out.println("=========");
-		System.out.println(vid);
+		
+		model.addAttribute("slist",singlelist);
+		model.addAttribute("elist",etclist);
 		model.addAttribute("vid",vid);
 		model.addAttribute("list", list);
 		
