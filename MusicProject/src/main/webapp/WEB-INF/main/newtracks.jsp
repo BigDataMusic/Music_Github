@@ -74,7 +74,7 @@ $(function() {
 			<!-- <a href="#" target="_blank"></a> -->
 			<td>
 			<!-- <a href="lyric.do" target="_blank"> -->
-				 <a href="javascript:popupOpen(${vo.n });" id="tooltip" title="${vo.lyrics }">
+				 <a href="javascript:popupOpen(${vo.n-1 });" id="tooltip" title="${vo.lyrics }">
 					<img src="resources/images/ly.png">
 				</a>
 			</td>

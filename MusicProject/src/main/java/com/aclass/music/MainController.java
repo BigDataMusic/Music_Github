@@ -22,10 +22,6 @@ import org.json.simple.*;
 import java.io.*;
 
 import com.aclass.mgr.*;
-import com.aclass.mgr.AlbumVO;
-import com.aclass.mgr.BugsManager;
-import com.aclass.mgr.MelonManager;
-import com.aclass.mgr.MusicVO;
 import com.aclass.mongo.FeelDAO;
 import com.aclass.mongo.MusicManager;
 import com.aclass.mongodb.MusicDAO;
@@ -85,6 +81,8 @@ public class MainController{
 	private SongWhether songweather;
 	@Autowired
 	private RecommandDAO recomdao;
+	@Autowired
+	private VideoManager vmgr;
 	
 
 	private SparkWeatherManager sparkweather;
@@ -114,6 +112,7 @@ public class MainController{
     		data="오늘 음악";
     	List<Item> nList=nmgr.naverNewsData(data);
     	
+    	
     	String title="";
     	for(Item n:nList){
         	if(n.getTitle().length()>20){
@@ -132,6 +131,13 @@ public class MainController{
     	if(feel==null)
     	feel="봄";
 		List<SongVO> list=recomdao.songRecommandData(feel);
+		
+		String tt = bList.get(0).getTitle();
+		List<VideoVO> vlist = vmgr.getVideo(tt);
+		String vid = vlist.get(0).getVid();
+		System.out.println("=========");
+		System.out.println(vid);
+		model.addAttribute("vid",vid);
 		model.addAttribute("list", list);
 		
 		return "main";
