@@ -88,17 +88,8 @@ public class MainController{
 	private SparkWeatherManager sparkweather;
 
 	@RequestMapping("main.do")
-	public String main_page(String feel, String data,Model model)
+	public String main_page(String feel, String data, Model model)
 	{
-		// 음악인차트
-		/*List<MusicVO> bList = bmgr.bugsRankData();
-		String mTitle="";
-		for(MusicVO b:bList){
-			if(b.getTitle().length()>15){
-				mTitle=b.getTitle().substring(0,15)+"..";
-        		b.setTitle(mTitle);
-			}
-		}*/
 		List<MusicVO> bList =  dao.getMongoMusicData("musicin");
 		String mTitle="";
 		for(MusicVO b:bList){
@@ -171,16 +162,59 @@ public class MainController{
 		} catch (Exception ex) {
 			System.out.println("파일 만들기 : "+ex.getMessage());
 		}
-		System.out.println(song+ " "+singer);
+		
+		// List
+		List<MusicVO> mList=dao.getMongoMusicData("melon");
+		List<AlbumVO> aList=dao.AlbumData();
+		List<MusicVO> list=new ArrayList<MusicVO>();
+		String album="";
+		int num=1;
+		for(MusicVO vo:mList){
+			if(vo.getArtist().equals(singer) && vo.getTitle().equals(song)){
+				album=vo.getAlbumname();
+			}
+		}
+		for(MusicVO vo:mList){
+			if(album==vo.getAlbumname()){
+				vo.setRank(num);
+				vo.setTitle(vo.getTitle());
+				vo.setArtist(vo.getArtist());
+				list.add(vo);
+				num++;
+			}
+		}
+		System.out.println(album);
+		List<AlbumVO> alist = dao.AlbumData();
+		
+		AlbumVO cvo = new AlbumVO();
+		for(AlbumVO avo : alist){
+			if(avo.getAlTitle().equals(album)){
+				cvo=avo;
+				break;
+			}
+		}
+		for(MusicVO mvo : cvo.getmList()){
+			mvo.setRank(num);
+			mvo.setTitle(mvo.getTitle());
+			mvo.setArtist(mvo.getArtist());
+			list.add(mvo);
+			num++;
+		}
+		List<VideoVO> vlist = vmgr.getVideo(song);
+		String vid = vlist.get(0).getVid();
+		model.addAttribute("vid",vid);
+		model.addAttribute("song",song);
+		model.addAttribute("list", list);
 		SongVO vo=recomdao.songDetailData(song);
 		model.addAttribute("vo", vo);
-		reviewdao.naverReviewData(song,singer);
-		reviewdao.naverReviewData2(song,singer);
-		songwhether.songData(song);
-		songwhether.SongWhether(song,singer);
+		//reviewdao.naverReviewData(song,singer);
+		//reviewdao.naverReviewData2(song,singer);
+		//songwhether.songData(song);
+		//songwhether.SongWhether(song,singer);
 		rmanager.rGraph(song);
-		rmanager.rGraph2(song);
+		//rmanager.rGraph2(song);
 		String json = rmanager.createJSON2(song);
+		
 		model.addAttribute("json",json); 
 		return "content";
 	}

@@ -97,10 +97,10 @@ public class MusicDAO {
 				vo.setAlLike(obj.getInt("alLike"));
 				vo.setAlInfo(obj.getString("alInfo"));
 				List<MusicVO> mvolist = new ArrayList<MusicVO>();
-				MusicVO mvo = new MusicVO();
 				for(int k=1; obj.getString("mTitle"+k)!=null; k++){
+					MusicVO mvo = new MusicVO();
 					mvo.setTitle(obj.getString("mTitle"+k));
-					mvo.setTitle(obj.getString("mLyrics"+k));
+					mvo.setLyrics(obj.getString("mLyrics"+k));
 					mvolist.add(mvo);
 				}
 				vo.setmList(mvolist);

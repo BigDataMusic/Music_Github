@@ -16,7 +16,7 @@
     #nchart {position:relative;} 
 
     #popup {
-    	display:none; position:absolute; top:10px; left:-400px; 
+    	display:none; position:absolute; top:-100px; left:-400px; 
        z-index : 1000; background-color:#fff; 
        padding:20px; border:2px solid #ff0000; 
     } 
@@ -92,7 +92,7 @@ $(function(){
 			<!-- <img src="resources/images/title5.gif" alt="" width="255" height="19" /><br /> -->
 			<p id="title_ex" style="margin: 0px;padding: 10px 0;">${vo.song } / ${vo.singer }</p>
 			<div class="gallery">
-				<iframe id="mv" src="https://www.youtube.com/embed/dMn509ddAkc" frameborder="0" allowfullscreen></iframe>
+				<iframe id="mv" src="https://www.youtube.com/embed/${vid }" frameborder="0" allowfullscreen></iframe>
 				<p id="title_ex" style="margin: 0px;padding: 10px 0;">수록곡</p>
 				<!-- <div>
 					<a href="#" class="arrow"><img src="resources/images/arrow_l.gif" alt="" width="10" height="96" /></a>
@@ -107,7 +107,7 @@ $(function(){
 						<th width="65%">곡명</th>
 						<th width="20%">아티스트</th>
 					</tr>	
-					<c:forEach var="vo" items="${mList }">
+					<c:forEach var="vo" items="${list }">
 					<tr class="dataTr">
 						<td align=center>${vo.rank }</td>
 						<td>${vo.title }</td>
@@ -115,9 +115,10 @@ $(function(){
 					</tr>
 					</c:forEach>
 				</table>
+			</div>	
 				<p id="title_ex" style="margin-top: 0;padding: 10px 0;">감정 분석</p>
 				<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
-			</div>			
+				
 		</div>
 		<div class="column_dc2">
 			<p id="title_ex" style="margin: 0px;padding: 10px 0;">곡 정보</p>
@@ -136,14 +137,17 @@ $(function(){
 			</p>
 			<a href="#" class="button">more info</a>
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
-			<div>
-			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" />
-			</div>
 			<div style="height: 10px"></div>
 			<div id="nchart">
-			<img src="resources/images/emotion.png" alt="" width="200" height="200" onmouseover="show()"/>
+			<img src="resources/images/emotion.png" alt="" width="270" height="270"  onmouseover="show()"/>
 				<div id="popup">
 				<img src="resources/images/emotion.png" alt="" onmouseout="closepop()" />
+				</div>
+			</div>
+			<div id="nchart">
+			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" onmouseover="show()"/>
+				<div id="popup">
+				<img src="resources/images/wordcloud.png" alt="" onmouseout="closepop()"/>	
 				</div>
 			</div>
 		</div>
