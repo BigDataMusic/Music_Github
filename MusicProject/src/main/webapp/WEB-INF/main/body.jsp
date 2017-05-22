@@ -30,7 +30,22 @@
 		</div>
 		<div class="bg">
 			<div class="column1">
-				<p id="title_ex" style="margin: 0px;padding: 10px 0;">HOT TRACKS</p>			
+				<p id="title_ex" style="margin: 0px;padding: 10px 0;">HOT TRACKS - Album</p>			
+				<div id="items">
+					<div class="item">
+						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg" class="jacket_thumb" /></a>
+					</div>
+					<div class="item">
+						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/53/651/10053651_500.jpg" class="jacket_thumb" /></a>
+					</div>
+					<div class="item">
+						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/51/659/10051659_500.jpg" class="jacket_thumb" /></a>
+					</div>
+					<div class="item">
+						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/47/890/10047890_500.jpg" class="jacket_thumb" /></a>
+					</div>
+				</div>
+				<p id="title_ex" style="margin: 0px;padding: 10px 0;">HOT TRACKS - Single</p>
 				<div id="items">
 					<div class="item">
 						<a href="#"><img src="http://cdnimg.melon.co.kr/cm/album/images/100/52/968/10052968_500.jpg" class="jacket_thumb" /></a>

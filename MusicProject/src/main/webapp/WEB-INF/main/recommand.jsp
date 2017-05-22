@@ -31,21 +31,14 @@
 				<div class="card-move-up waves-effect waves-block waves-light">
 					<div class="move-up material-blue darken-1">
 						<div>
-							<span class="chart-title white-text"></span>
+							<div style="height: 15px"></div>
+							<span class="chart-title white-text">${feels }</span>
 
 							<div class="chart-revenue material-blue darken-2 white-text">
-								<p class="chart-revenue-total"></p>
+								<p class="chart-revenue-total">${feel }</p>
 							</div>
-							<!--
-								<div class="switch chart-revenue-switch right">
-									<label class="material-blue-text text-lighten-5">
-									  TOP 10
-									  <input type="checkbox" checked>
-									  <span class="lever"></span> WORST 10
-									</label>
-								</div>
-							-->
 						</div>
+						<div style="height: 15px"></div>
 						<div id="chart-ping-10" style="width: 100%; height: 350px;"
 							class="trending-line-chart-wrapper"></div>
 					</div>
@@ -57,11 +50,6 @@
 					<div
 						class="col-sx-10 col-sx-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
 						<div id="chart-ping-10-legend">
-							<p>Lorem</p>
-							<p>Ipsum</p>
-							<p>Dolorem</p>
-							<p>Sit</p>
-							<p>Amet</p>
 						</div>
 					</div>
 				</div>
