@@ -32,8 +32,8 @@
 			<li><a href="http://211.238.142.20:3000" target="_blank" style="color: #f6d155">라이브챗</a></li>
 		</ul>
 		<ul id="menu1">
-			<input type="text" id="searchbox" align="middle"/>
-			<input type="submit" id="searchicon" value="검색" onclick="main.do" align="middle"/>
+			<!-- <input type="text" id="searchbox" align="middle"/>
+			<input type="submit" id="searchicon" value="검색" onclick="main.do" align="middle"/> -->
 		</ul>
 	</div>
 </body>

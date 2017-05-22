@@ -7,33 +7,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<style> 
+    #nchart {position:relative;} 
+
+    #popup {
+    	display:none; position:absolute; top:10px; left:10px; 
+       z-index : 1000; background-color:#fff; 
+       padding:20px; border:2px solid #ff0000; 
+    } 
+</style>
 <script type="text/javascript">
-		$(function() {
-			$("#accordian h3").click(function() {
-				$("#accordian ul ul").slideUp();
-				if (!$(this).next().is(":visible")) {
-					$(this).next().slideDown();
-				}
-			});
-		});
-</script>
+function show() {
+	document.getElementById("popup").style.display = "block";
+}
+function closepop() {
+	document.getElementById("popup").style.display = "none";
+}
+</script> 
+    
 </head>
 <body>
 	<div id="sidebar">
 		<div class="logo_block">
-			<a href="#"><img src="resources/images/nav_newtracks.png" alt="setalpm"
-				width="190" height="156" /></a><br /> <span class="slogan">음악의
-				모든건<br>음악인으로 통한다!
-			</span>
+			<a href="#"><img src="resources/images/nav_newtracks.png" alt="setalpm" width="190" height="156" /></a><br />
+			 <span class="slogan">음악의	모든건<br>음악인으로 통한다!</span>
 			<p class="text1">음악이 멈추었다...<br>
 			 그러자 세상이 멈추었다...<br>
 			 <br>
 			나를 움직이게 하는 힘 !<br>
 			Music makes me high !</p>
 		</div>
-		<p id="title_ex">신곡(장르별)</p>
+		<p id="title_ex">날짜별 앨범발매수</p>
 		<br />
-		<img src="resources/images/chart.jpg" alt="" width="180" height="200" />
+		<div id="nchart">
+			<input type="image" src="resources/images/chart_new.jpg" alt="" width="180" height="200" onmouseover="show()"/>
+			<div id="popup">
+				<img src="resources/images/chart_new.jpg" alt="" onmouseout="closepop()"/>
+			</div>
+		</div>
 		<br />
 		<br />
 		<br />
