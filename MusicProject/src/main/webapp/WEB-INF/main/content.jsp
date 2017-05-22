@@ -12,6 +12,23 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<style> 
+    #nchart {position:relative;} 
+
+    #popup {
+    	display:none; position:absolute; top:10px; left:-400px; 
+       z-index : 1000; background-color:#fff; 
+       padding:20px; border:2px solid #ff0000; 
+    } 
+</style>
+<script type="text/javascript">
+function show() {
+	document.getElementById("popup").style.display = "block";
+}
+function closepop() {
+	document.getElementById("popup").style.display = "none";
+}
+</script> 
 <script type="text/javascript">
 $(function(){
 	Highcharts.chart('container', {
@@ -119,9 +136,16 @@ $(function(){
 			</p>
 			<a href="#" class="button">more info</a>
 			<p id="title_ex" style="margin: 0px; padding: 10px 0;">이럴때 추천</p>
+			<div>
 			<img src="resources/images/wordcloud.png" alt="" width="200" height="200" />
+			</div>
 			<div style="height: 10px"></div>
-			<img src="resources/images/emotion.png" alt="" width="200" height="200" />
+			<div id="nchart">
+			<img src="resources/images/emotion.png" alt="" width="200" height="200" onmouseover="show()"/>
+				<div id="popup">
+				<img src="resources/images/emotion.png" alt="" onmouseout="closepop()" />
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
