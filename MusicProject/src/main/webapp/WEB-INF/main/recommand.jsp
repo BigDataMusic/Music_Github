@@ -55,8 +55,7 @@
 				</div>
 
 				<div class="card-reveal">
-					<span class="card-title grey-text text-darken-4">Hosts
-						Latency Info <i class="material-icons right">clear</i>
+					<span class="card-title grey-text text-darken-4">${feels } - ${feel } <i class="material-icons right">clear</i>
 					</span>
 					<table class="">
 						<thead>
