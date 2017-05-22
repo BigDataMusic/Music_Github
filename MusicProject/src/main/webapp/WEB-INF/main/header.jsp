@@ -32,8 +32,8 @@
 			<li><a href="#" style="color: #f6d155">라이브챗</a></li>
 		</ul>
 		<ul id="menu1">
-			<input type="text" id="searchbox" align="middle"/>
-			<input type="submit" id="searchicon" value="검색" onclick="main.do" align="middle"/>
+			<!-- <input type="text" id="searchbox" align="middle"/>
+			<input type="submit" id="searchicon" value="검색" onclick="main.do" align="middle"/> -->
 		</ul>
 	</div>
 </body>
